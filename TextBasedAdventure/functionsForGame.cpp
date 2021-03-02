@@ -25,7 +25,7 @@ void mainMenu() {
 	int input = convertToInt(menuChoice);		//input validation
 	input = inputValidation(input, 0, 1);
 	if(input==1){
-		cout << " player choosen to start new game" << endl;
+		cout << "Player chosen to start new game" << endl;
 	}
 	else if (input == 0) {
 		cout << "\nGood Bye come again!!\n" << endl;		//end game
@@ -35,15 +35,15 @@ void mainMenu() {
 }
 void gameIntro(int startingMode) {
 	if (startingMode == 1) {		//intro
-		cout << "Greetings Survivor ";
+		cout << "Greetings Survivor, ";
 		Sleep(1000);
-		cout << " You are the only survivor of a plane crash and the environment around you is a jungle.\nYou managed to recover some items from the plane's wreckage.\n";
+		cout << "You are the only Survivor of a plane crash and the environment around you is a jungle.\nYou managed to recover some items from the plane's wreckage.\n";
 		Sleep(1000);
-		cout << "One of the items being a map showing the nearest settlement\nbeing about 500 miles fromyour location and a backpack to carry some items.\n";
+		cout << "One of the items being a map showing the nearest settlement\nbeing about 500 miles from your location and a backpack to carry some items.\n";
 		Sleep(1000);
-		cout << "Unfortunately, some important items to your survival were\nscattered across the jungle during the crash. The jungle is a dangerous place to travel\nbeware of day and night creatures lurking";
+		cout << "Unfortunately, some important items to your survival were\nscattered across the jungle during the crash. The jungle is a dangerous place to travel,\nbeware of day and night creatures lurking.";
 		Sleep(1000);
-		cout << " You need to recover most of the scattered items to make the journey to safety.\nApproximately 3 days to get to your destination.";
+		cout << " You need to recover most of the scattered items to make the journey to safety\nApproximately 3 days to get to your destination.";
 		Sleep(1000);
 		cout << "\nChoose your items and path wisely, Survivor, and good luck." << endl << endl;
 		system("pause");
