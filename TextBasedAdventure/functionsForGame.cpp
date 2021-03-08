@@ -29,7 +29,7 @@ void mainMenu() {
 	}
 	else if (input == 0) {
 		cout << "\nGood Bye come again!!\n" << endl;		//end game
-		system("pause");
+		Sleep(3000);
 		_Exit(10);
 	}
 }
