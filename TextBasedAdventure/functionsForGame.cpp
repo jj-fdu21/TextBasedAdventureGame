@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <Windows.h>
 #include <limits>
+#include <math.h>
 using namespace std;
 
 string version = "1.0.0";
@@ -22,7 +23,8 @@ void mainMenu() {
 
 	cin >> menuChoice;
 
-	int input = convertToInt(menuChoice);		//input validation
+	int input = convertToInt(menuChoice); //input validation
+	input = trunc(input);
 	input = inputValidation(input, 0, 1);
 	if(input==1){
 		cout << "Player chosen to start new game" << endl;
@@ -60,13 +62,13 @@ void gameIntro(int startingMode) {
 			stringCounter = 0;
 
 			for (int i = 0; i < input.length(); i++) {
-				if (!isdigit(input[i])) {
+				if (!isdigit(input[i]) && input[i] != '.') {
 					stringCounter++;
 				}
 			}
 
 			if (stringCounter != 0) {
-				cout << "This is not an valid input. Enter a numeric input." << endl;
+				cout << "Invalid Input. Please Re-Enter your Selection" << endl;
 				cin.ignore();
 				cin >> input;
 			}
@@ -88,7 +90,7 @@ void gameIntro(int startingMode) {
 		while (input < min || input > max) {
 			string menuChoice;
 
-			cout << "This is an invalid input" << endl;
+			cout << "Invalid Input." << endl;
 			cout << "Please enter a number between " << min << " and " << max << endl;
 
 			cin.ignore();
