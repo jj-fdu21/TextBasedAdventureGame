@@ -23,5 +23,8 @@ int inputValidation(int, int, int);
 void gameIntro(int);
 int convertToInt(string);
 void playerOne();
+void getHealth();
+void setDamage(int);
+void setHeal(int);
 
 

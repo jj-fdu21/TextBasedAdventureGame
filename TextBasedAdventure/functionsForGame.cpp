@@ -9,6 +9,7 @@
 using namespace std;
 
 string version = "1.0.0";
+int health = 90;
 
 void mainMenu() {
 	//starting menu of choices
@@ -98,4 +99,55 @@ void gameIntro(int startingMode) {
 			input = convertToInt(menuChoice);
 		}
 		return input;
+	}
+	void setDamage(int damage)
+	{
+		health = health - damage;
+	}
+	void setHeal(int heal)
+	{
+		health = health + heal;
+	}
+	bool checkDeath()
+	{
+		if (health <= 0)
+		{
+			return true;
+		}
+		return false;
+	}
+	void getHealth()
+	{
+		checkDeath();
+		if (100 >= health && health >= 76)
+		{
+			system("CLS");
+			system("Color 0A");
+			cout << "Health: Excellent || Current Percentage: " << health << "%" <<endl;
+			system("pause");
+			system("Color 0F");
+		}
+		if (56 <= health && health <= 75)
+		{
+			system("CLS");
+			system("Color 0E");
+			cout << "Health: Lethargic || Current Percentage: " << health << "%" << endl;	
+			system("pause");
+			system("Color 0F");
+		}
+		if (1 <= health && health <= 55)
+		{
+			system("CLS");
+			system("Color 0C");
+			cout << "Health: Critical || Current Percentage: " << health << "%" << endl;		
+			system("pause");
+			system("Color 0F");
+			
+		}
+		if (checkDeath())
+		{
+			system("CLS");
+			cout << "You have died! Please play again!" << endl;
+			system("pause");
+		}
 	}
