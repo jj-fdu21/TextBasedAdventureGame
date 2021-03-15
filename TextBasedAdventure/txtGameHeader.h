@@ -11,7 +11,6 @@ class Player
 {
 private:
 	int health;
-	int damageAmount;
 public:
 	Player()
 	{
