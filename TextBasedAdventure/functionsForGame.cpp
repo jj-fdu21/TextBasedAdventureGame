@@ -10,6 +10,8 @@ using namespace std;
 
 string version = "1.0.0";
 int health = 90;
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+int k;
 
 void mainMenu() {
 	//starting menu of choices
@@ -121,33 +123,30 @@ void gameIntro(int startingMode) {
 		checkDeath();
 		if (100 >= health && health >= 76)
 		{
-			system("CLS");
-			system("Color 0A");
+			SetConsoleTextAttribute(hConsole, 2);
 			cout << "Health: Excellent || Current Percentage: " << health << "%" <<endl;
+			SetConsoleTextAttribute(hConsole, 7);
 			system("pause");
-			system("Color 0F");
 		}
 		if (56 <= health && health <= 75)
 		{
-			system("CLS");
-			system("Color 0E");
+			SetConsoleTextAttribute(hConsole, 6);
 			cout << "Health: Lethargic || Current Percentage: " << health << "%" << endl;	
+			SetConsoleTextAttribute(hConsole, 7);
 			system("pause");
-			system("Color 0F");
 		}
 		if (1 <= health && health <= 55)
 		{
-			system("CLS");
-			system("Color 0C");
+			SetConsoleTextAttribute(hConsole, 4);
 			cout << "Health: Critical || Current Percentage: " << health << "%" << endl;		
+			SetConsoleTextAttribute(hConsole, 7);
 			system("pause");
-			system("Color 0F");
-			
 		}
 		if (checkDeath())
 		{
-			system("CLS");
+			SetConsoleTextAttribute(hConsole, 4);
 			cout << "You have died! Please play again!" << endl;
+			SetConsoleTextAttribute(hConsole, 7);
 			system("pause");
 		}
 	}
