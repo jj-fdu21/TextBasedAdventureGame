@@ -23,4 +23,4 @@ int main() {
 	//setHeal(99);
 	//getHealth();
 	return 0;
-}
+}1

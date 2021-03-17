@@ -24,7 +24,7 @@ void mainMenu() {
 	cout << "\t\t\t\t\t      (1) Start New Game" << endl;
 
 	cout << "\t\t\t\t\t      (0) Quit" << endl;
-
+	cout << "Enter choice here: ";
 	cin >> menuChoice;
 
 	int input = convertToInt(menuChoice); //input validation
@@ -43,13 +43,13 @@ void gameIntro(int startingMode) {
 	if (startingMode == 1) {		//intro
 		cout << "Greetings Survivor, ";
 		Sleep(1000);
-		cout << "You are the only Survivor of a plane crash and the environment around you is a jungle.\nYou managed to recover some items from the plane's wreckage.\n";
+		cout << "You are the only Survivor of a plane crash and \nthe environment around you is a jungle. You managed to recover some\nitems from the plane's wreckage. ";
 		Sleep(1000);
-		cout << "One of the items being a map showing the nearest settlement\nbeing about 500 miles from your location and a backpack to carry some items.\n";
+		cout << "One of the items being a map showing\nthe nearest settlement being about 500 miles from your location\nand a backpack to carry some items.";
 		Sleep(1000);
-		cout << "Unfortunately, some important items to your survival were\nscattered across the jungle during the crash. The jungle is a dangerous place to travel,\nbeware of day and night creatures lurking.";
+		cout << "Unfortunately, some important items\nto your survival were scattered across the jungle during the crash.\nThe jungle is a dangerous place to travel, beware of day and night\ncreatures lurking.";
 		Sleep(1000);
-		cout << " You need to recover most of the scattered items to make the journey to safety\nApproximately 3 days to get to your destination.";
+		cout << "You need to recover most of the scattered items\nto make the journey to safety. \nApproximately 3 days to get to your destination.";
 		Sleep(1000);
 		cout << "\nChoose your items and path wisely, Survivor, and good luck." << endl << endl;
 		system("pause");
@@ -57,7 +57,7 @@ void gameIntro(int startingMode) {
 }
 void gameScenarioSelections()
 {
-	cout << "Enter The Direction you would like to explore (N, S, E, W) or Input H to view Health or I to view Inventory: " << endl;
+	cout << "Enter The Direction you would like to explore (N, S, E, W), Input (H) to view Health, or (I) to view Inventory items: "<<endl;
 	cin >> input;
 	if (input == "S" || input == "s")
 	{
@@ -178,6 +178,10 @@ void gameScenarioNorth()
 		}
 		return false;
 	}
+	/*
+	* Functionality is to verify the users health bar and to 
+	later be used to tell if user is alive or not
+	*/
 	void getHealth()
 	{
 		checkDeath();
@@ -212,6 +216,6 @@ void gameScenarioNorth()
 	}
 	void getInventory()
 	{
-		cout << "Your Inventory: Flashlight , Pocket Knife , Water Canteen" << endl;
+		cout << "Your Inventory: (1) Flashlight , (2) Pocket Knife , (3) Water Canteen" << endl;
 		system("pause");
 	}
