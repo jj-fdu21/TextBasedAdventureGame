@@ -13,7 +13,7 @@ string version = "1.0.0", input, input1;
 int health = 90;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 int k;
-enum direction { N, S, E, W, I, H ,n,s,e,w,h,i};
+enum direction { N, S, E, W, I, H , Q,n,s,e,w,h,i,q};
 void mainMenu() {
 	//starting menu of choices
 	string menuChoice;
@@ -57,39 +57,49 @@ void gameIntro(int startingMode) {
 }
 void gameScenarioSelections()
 {
-	cout << "Enter The Direction you would like to explore (N, S, E, W), Input (H) to view Health, or (I) to view Inventory items: "<<endl;
+	cout << "Enter The Direction you would like to explore (N, S, E, W), \nInput (H) to view Health, or (I) to view Inventory items: "<<endl;
 	cin >> input;
 	if (input == "S" || input == "s")
 	{
 		cout << "You have selected South" << endl;
 		gameScenarioSouth();
+		gameScenarioSelections();
 	}
 	if (input == "W" || input == "w")
 	{
 		cout << "You have selected West" << endl;
 		gameScenarioSouth();
+		gameScenarioSelections();
 	}
 	if (input == "E" || input == "e")
 	{
 		cout << "You have selected East" << endl;
 		gameScenarioSouth();
+		gameScenarioSelections();
 	}
 	if (input == "N" || input == "n")
 	{
 		cout << "You have selected North" << endl;
 		gameScenarioSouth();
+		gameScenarioSelections();
 	}
 	if (input == "H" || input == "h")
 	{
 		getHealth();
+		gameScenarioSelections();
 	}
 	if (input == "I" || input == "i")
 	{
 		getInventory();
 	}
+	if (input == "Q"|| input =="q") {
+		cout << "\nGood Bye come again!!\n" << endl;		//end game
+		Sleep(3000);
+		_Exit(10);
+	}
 	else
 	{
-		cout << "You didn't enter a valid selection, please select again." << endl;
+		cout << "You didn't enter a valid selection, please select again. Or to quit game select (Q)" << endl;
 		gameScenarioSelections();
 	}
 }
