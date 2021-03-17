@@ -13,7 +13,7 @@ string version = "1.0.0", input, input1;
 int health = 90;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 int k;
-enum direction { N, S, E, W, I, H };
+enum direction { N, S, E, W, I, H ,n,s,e,w,h,i};
 void mainMenu() {
 	//starting menu of choices
 	string menuChoice;
@@ -59,21 +59,59 @@ void gameScenarioSelections()
 {
 	cout << "Enter The Direction you would like to explore (N, S, E, W) or Input H to view Health or I to view Inventory: " << endl;
 	cin >> input;
-	if (input == "S")
+	if (input == "S" || input == "s")
 	{
 		cout << "You have selected South" << endl;
 		gameScenarioSouth();
 	}
-	if (input == "H")
+	if (input == "W" || input == "w")
+	{
+		cout << "You have selected West" << endl;
+		gameScenarioSouth();
+	}
+	if (input == "E" || input == "e")
+	{
+		cout << "You have selected East" << endl;
+		gameScenarioSouth();
+	}
+	if (input == "N" || input == "n")
+	{
+		cout << "You have selected North" << endl;
+		gameScenarioSouth();
+	}
+	if (input == "H" || input == "h")
 	{
 		getHealth();
 	}
-	system("pause");
+	if (input == "I" || input == "i")
+	{
+		getInventory();
+	}
+	else
+	{
+		cout << "You didn't enter a valid selection, please select again." << endl;
+		gameScenarioSelections();
+	}
 }
 
 void gameScenarioSouth()
 {
-	cout << "You being to head South.... Things happen.... This is placeholder text." << endl;
+	cout << "This Function is further being worked on and isn't fully implemeted." << endl;
+	system("pause");
+}
+void gameScenarioWest()
+{
+	cout << "This Function is further being worked on and isn't fully implemeted." << endl;
+	system("pause");
+}
+void gameScenarioEast()
+{
+	cout << "This Function is further being worked on and isn't fully implemeted." << endl;
+	system("pause");
+}
+void gameScenarioNorth()
+{
+	cout << "This Function is further being worked on and isn't fully implemeted." << endl;
 	system("pause");
 }
 
@@ -171,4 +209,9 @@ void gameScenarioSouth()
 			SetConsoleTextAttribute(hConsole, 7);
 			system("pause");
 		}
+	}
+	void getInventory()
+	{
+		cout << "Your Inventory: Flashlight , Pocket Knife , Water Canteen" << endl;
+		system("pause");
 	}
