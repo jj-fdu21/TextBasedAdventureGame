@@ -216,6 +216,8 @@ void gameScenarioNorth()
 	}
 	void getInventory()
 	{
+		SetConsoleTextAttribute(hConsole, 9);
 		cout << "Your Inventory: (1) Flashlight , (2) Pocket Knife , (3) Water Canteen" << endl;
+		SetConsoleTextAttribute(hConsole, 7);
 		system("pause");
 	}
