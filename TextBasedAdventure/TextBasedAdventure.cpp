@@ -17,8 +17,9 @@ using namespace std;
 int main() {
 	mainMenu();
 	playerOne();
-	setDamage(30);
-	getHealth();
+	gameScenarioSelections();
+	//setDamage(30);
+	//getHealth();
 	//setHeal(99);
 	//getHealth();
 	return 0;

@@ -6,13 +6,14 @@
 #include <Windows.h>
 #include <limits>
 #include <math.h>
+#include <algorithm>
 using namespace std;
 
-string version = "1.0.0";
+string version = "1.0.0", input, input1;
 int health = 90;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 int k;
-
+enum direction { N, S, E, W, I, H };
 void mainMenu() {
 	//starting menu of choices
 	string menuChoice;
@@ -53,6 +54,27 @@ void gameIntro(int startingMode) {
 		cout << "\nChoose your items and path wisely, Survivor, and good luck." << endl << endl;
 		system("pause");
 	}
+}
+void gameScenarioSelections()
+{
+	cout << "Enter The Direction you would like to explore (N, S, E, W) or Input H to view Health or I to view Inventory: " << endl;
+	cin >> input;
+	if (input == "S")
+	{
+		cout << "You have selected South" << endl;
+		gameScenarioSouth();
+	}
+	if (input == "H")
+	{
+		getHealth();
+	}
+	system("pause");
+}
+
+void gameScenarioSouth()
+{
+	cout << "You being to head South.... Things happen.... This is placeholder text." << endl;
+	system("pause");
 }
 
 	int convertToInt(string input) 

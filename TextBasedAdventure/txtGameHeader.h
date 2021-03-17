@@ -25,5 +25,5 @@ void playerOne();
 void getHealth();
 void setDamage(int);
 void setHeal(int);
-
-
+void gameScenarioSelections();
+void gameScenarioSouth();
