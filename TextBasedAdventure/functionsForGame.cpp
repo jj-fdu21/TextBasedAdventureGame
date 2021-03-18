@@ -10,10 +10,10 @@
 using namespace std;
 
 string version = "1.0.0", input, input1;
-int health = 90;
+int health = 90, temp;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 int k;
-enum direction { N, S, E, W, I, H , Q,n,s,e,w,h,i,q};
+enum direction { N, S, E, W, I, H , Q,n,s,e,w,h,i,q,R,r,D,d};
 void mainMenu() {
 	//starting menu of choices
 	string menuChoice;
@@ -59,10 +59,31 @@ void gameScenarioSelections()
 {
 	cout << "Enter The Direction you would like to explore (N, S, E, W), \nInput (H) to view Health, or (I) to view Inventory items: "<<endl;
 	cin >> input;
+	if (input == "Q" || input == "q") {
+		cout << "\nGood Bye come again!!\n" << endl;		//end game
+		Sleep(3000);
+		_Exit(10);
+	}
 	if (input == "S" || input == "s")
 	{
 		cout << "You have selected South" << endl;
 		gameScenarioSouth();
+		gameScenarioSelections();
+	}
+	if (input == "R" || input == "r")
+	{
+		cout << "You have selected Restore Health" << endl;
+		cout << "Enter the amount of health you would like to restore: ";
+		cin >> temp;
+		setHeal(temp);
+		gameScenarioSelections();
+	}
+	if (input == "D" || input == "d")
+	{
+		cout << "You have selected Damage Health" << endl;
+		cout << "Enter the amount of health you would like to take away: ";
+		cin >> temp;
+		setDamage(temp);
 		gameScenarioSelections();
 	}
 	if (input == "W" || input == "w")
@@ -91,11 +112,7 @@ void gameScenarioSelections()
 	if (input == "I" || input == "i")
 	{
 		getInventory();
-	}
-	if (input == "Q"|| input =="q") {
-		cout << "\nGood Bye come again!!\n" << endl;		//end game
-		Sleep(3000);
-		_Exit(10);
+		gameScenarioSelections();
 	}
 	else
 	{
@@ -226,7 +243,7 @@ void gameScenarioNorth()
 	}
 	void getInventory()
 	{
-		SetConsoleTextAttribute(hConsole, 9);
+		SetConsoleTextAttribute(hConsole, 11);
 		cout << "Your Inventory: (1) Flashlight , (2) Pocket Knife , (3) Water Canteen" << endl;
 		SetConsoleTextAttribute(hConsole, 7);
 		system("pause");
