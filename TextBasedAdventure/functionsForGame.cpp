@@ -123,21 +123,25 @@ void gameScenarioSelections()
 
 void gameScenarioSouth()
 {
+	cout << "You have chosen to head South," << endl;
 	cout << "This Function is further being worked on and isn't fully implemeted." << endl;
 	system("pause");
 }
 void gameScenarioWest()
 {
+	cout << "You have chosen to head West," << endl;
 	cout << "This Function is further being worked on and isn't fully implemeted." << endl;
 	system("pause");
 }
 void gameScenarioEast()
 {
+	cout << "You have chosen to head East," << endl;
 	cout << "This Function is further being worked on and isn't fully implemeted." << endl;
 	system("pause");
 }
 void gameScenarioNorth()
 {
+	cout << "You have chosen to head North," << endl;
 	cout << "This Function is further being worked on and isn't fully implemeted." << endl;
 	system("pause");
 }
