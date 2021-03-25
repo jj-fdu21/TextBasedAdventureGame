@@ -2,7 +2,7 @@
 * Textbased Game Theme Jungle Escape
 * Version:1.0
 * Authors:JiraJocks
-* 
+*
 */
 
 #include "txtGameHeader.h"

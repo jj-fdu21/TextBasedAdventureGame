@@ -31,3 +31,5 @@ void gameScenarioSouth();
 void gameScenarioEast();
 void gameScenarioWest();
 void gameScenarioNorth();
+void enemyEncounter();
+void enemyDamage();

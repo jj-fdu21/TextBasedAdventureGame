@@ -6,6 +6,7 @@
 #include <Windows.h>
 #include <limits>
 #include <math.h>
+#include <time.h>
 #include <algorithm>
 using namespace std;
 
@@ -13,7 +14,7 @@ string version = "1.0.0", input, input1;
 int health = 90, temp;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 int k;
-enum direction { N, S, E, W, I, H , Q,n,s,e,w,h,i,q,R,r,D,d};
+enum direction { N, S, E, W, I, H, Q, n, s, e, w, h, i, q, R, r, D, d };
 void mainMenu() {
 	//starting menu of choices
 	string menuChoice;
@@ -30,7 +31,7 @@ void mainMenu() {
 	int input = convertToInt(menuChoice); //input validation
 	input = trunc(input);
 	input = inputValidation(input, 0, 1);
-	if(input==1){
+	if (input == 1) {
 		cout << "Player chosen to start new game" << endl;
 	}
 	else if (input == 0) {
@@ -57,7 +58,7 @@ void gameIntro(int startingMode) {
 }
 void gameScenarioSelections()
 {
-	cout << "Enter The Direction you would like to explore (N, S, E, W), \nInput (H) to view Health, or (I) to view Inventory items: "<<endl;
+	cout << "Enter The Direction you would like to explore (N, S, E, W), \nInput (H) to view Health, or (I) to view Inventory items: " << endl;
 	cin >> input;
 	if (input == "Q" || input == "q") {
 		cout << "\nGood Bye come again!!\n" << endl;		//end game
@@ -114,6 +115,11 @@ void gameScenarioSelections()
 		getInventory();
 		gameScenarioSelections();
 	}
+	if (input == "X" || input == "x")
+	{
+		enemyEncounter();
+		gameScenarioSelections();
+	}
 	else
 	{
 		cout << "You didn't enter a valid selection, please select again. Or to quit game select (Q)" << endl;
@@ -123,128 +129,145 @@ void gameScenarioSelections()
 
 void gameScenarioSouth()
 {
+	cout << "You have chosen to head South," << endl;
 	cout << "This Function is further being worked on and isn't fully implemeted." << endl;
 	system("pause");
 }
 void gameScenarioWest()
 {
+	cout << "You have chosen to head West," << endl;
 	cout << "This Function is further being worked on and isn't fully implemeted." << endl;
 	system("pause");
 }
 void gameScenarioEast()
 {
+	cout << "You have chosen to head East," << endl;
 	cout << "This Function is further being worked on and isn't fully implemeted." << endl;
 	system("pause");
 }
 void gameScenarioNorth()
 {
+	cout << "You have chosen to head North," << endl;
 	cout << "This Function is further being worked on and isn't fully implemeted." << endl;
 	system("pause");
 }
 
-	int convertToInt(string input) 
-	{
-		/* checks if input is a number, and converts it to an int */
+int convertToInt(string input)
+{
+	/* checks if input is a number, and converts it to an int */
 
-		int stringCounter = 1;
+	int stringCounter = 1;
 
-		while (stringCounter != 0) {
-			stringCounter = 0;
+	while (stringCounter != 0) {
+		stringCounter = 0;
 
-			for (int i = 0; i < input.length(); i++) {
-				if (!isdigit(input[i]) && input[i] != '.') {
-					stringCounter++;
-				}
-			}
-
-			if (stringCounter != 0) {
-				cout << "Invalid Input. Please Re-Enter your Selection" << endl;
-				cin.ignore();
-				cin >> input;
+		for (int i = 0; i < input.length(); i++) {
+			if (!isdigit(input[i]) && input[i] != '.') {
+				stringCounter++;
 			}
 		}
-		int choice = stoi(input);
-		return choice;
-	}
-	void playerOne() {
-		cout << "\n-----------------------------" << endl;
-		cout << " PLAYER ONE HAS STARTED GAME" << endl;
-		cout << "-----------------------------\n" << endl;
 
-		gameIntro(1);
-
-	}
-	int inputValidation(int input, int min, int max) {
-		/* checks if input is within valid range */
-
-		while (input < min || input > max) {
-			string menuChoice;
-
-			cout << "Invalid Input." << endl;
-			cout << "Please enter a number between " << min << " and " << max << endl;
-
+		if (stringCounter != 0) {
+			cout << "Invalid Input. Please Re-Enter your Selection" << endl;
 			cin.ignore();
-			cin >> menuChoice;
-			input = convertToInt(menuChoice);
-		}
-		return input;
-	}
-	void setDamage(int damage)
-	{
-		health = health - damage;
-	}
-	void setHeal(int heal)
-	{
-		health = health + heal;
-	}
-	bool checkDeath()
-	{
-		if (health <= 0)
-		{
-			return true;
-		}
-		return false;
-	}
-	/*
-	* Functionality is to verify the users health bar and to 
-	later be used to tell if user is alive or not
-	*/
-	void getHealth()
-	{
-		checkDeath();
-		if (100 >= health && health >= 76)
-		{
-			SetConsoleTextAttribute(hConsole, 2);
-			cout << "Health: Excellent || Current Percentage: " << health << "%" <<endl;
-			SetConsoleTextAttribute(hConsole, 7);
-			system("pause");
-		}
-		if (56 <= health && health <= 75)
-		{
-			SetConsoleTextAttribute(hConsole, 6);
-			cout << "Health: Lethargic || Current Percentage: " << health << "%" << endl;	
-			SetConsoleTextAttribute(hConsole, 7);
-			system("pause");
-		}
-		if (1 <= health && health <= 55)
-		{
-			SetConsoleTextAttribute(hConsole, 4);
-			cout << "Health: Critical || Current Percentage: " << health << "%" << endl;		
-			SetConsoleTextAttribute(hConsole, 7);
-			system("pause");
-		}
-		if (checkDeath())
-		{
-			SetConsoleTextAttribute(hConsole, 4);
-			cout << "You have died! Please play again!" << endl;
-			SetConsoleTextAttribute(hConsole, 7);
-			system("pause");
+			cin >> input;
 		}
 	}
-	void getInventory()
+	int choice = stoi(input);
+	return choice;
+}
+void playerOne() {
+	cout << "\n-----------------------------" << endl;
+	cout << " PLAYER ONE HAS STARTED GAME" << endl;
+	cout << "-----------------------------\n" << endl;
+
+	gameIntro(1);
+
+}
+int inputValidation(int input, int min, int max) {
+	/* checks if input is within valid range */
+
+	while (input < min || input > max) {
+		string menuChoice;
+
+		cout << "Invalid Input." << endl;
+		cout << "Please enter a number between " << min << " and " << max << endl;
+
+		cin.ignore();
+		cin >> menuChoice;
+		input = convertToInt(menuChoice);
+	}
+	return input;
+}
+void setDamage(int damage)
+{
+	health = health - damage;
+}
+void setHeal(int heal)
+{
+	health = health + heal;
+}
+bool checkDeath()
+{
+	if (health <= 0)
 	{
-		SetConsoleTextAttribute(hConsole, 11);
-		cout << "Your Inventory: (1) Flashlight , (2) Pocket Knife , (3) Water Canteen" << endl;
+		SetConsoleTextAttribute(hConsole, 4);
+		cout << "You have died! Please play again!" << endl;
+		SetConsoleTextAttribute(hConsole, 7);
+		Sleep(2000);
+		_Exit(0);
+	}
+	return false;
+}
+/*
+* Functionality is to verify the users health bar and to
+later be used to tell if user is alive or not
+*/
+void getHealth()
+{
+	if (100 >= health && health >= 76)
+	{
+		SetConsoleTextAttribute(hConsole, 2);
+		cout << "Health: Excellent || Current Percentage: " << health << "%" << endl;
 		SetConsoleTextAttribute(hConsole, 7);
 		system("pause");
 	}
+	if (56 <= health && health <= 75)
+	{
+		SetConsoleTextAttribute(hConsole, 6);
+		cout << "Health: Lethargic || Current Percentage: " << health << "%" << endl;
+		SetConsoleTextAttribute(hConsole, 7);
+		system("pause");
+	}
+	if (1 <= health && health <= 55)
+	{
+		SetConsoleTextAttribute(hConsole, 4);
+		cout << "Health: Critical || Current Percentage: " << health << "%" << endl;
+		SetConsoleTextAttribute(hConsole, 7);
+		system("pause");
+	}
+}
+void getInventory()
+{
+	SetConsoleTextAttribute(hConsole, 11);
+	cout << "Your Inventory: (1) Flashlight , (2) Pocket Knife , (3) Water Canteen" << endl;
+	SetConsoleTextAttribute(hConsole, 7);
+	system("pause");
+}
+void enemyEncounter()
+{
+	string enemies[] = { "Poison Frog", "Snake", "Monkey", "Gorilla", "Elephant" };
+	srand(time(0));
+	int enemySelected = rand() % 2;
+	cout << "You have encounted a " << enemies[enemySelected] << "!" << endl;
+	cout << "You don't defend yourself and it attacks you!" << endl;
+	enemyDamage();
+}
+void enemyDamage()
+{
+	srand(time(0));
+	int damageAmount = rand() % 25 + 1;
+	health = health - damageAmount;
+	cout << "You have taken " << damageAmount << " damage to your health" << endl << endl;
+	checkDeath();
+}
