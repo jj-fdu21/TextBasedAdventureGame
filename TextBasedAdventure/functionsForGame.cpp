@@ -56,6 +56,7 @@ void gameIntro(int startingMode) {
 		system("pause");
 	}
 }
+//intro game selction inquery to user
 void gameScenarioSelections()
 {
 	cout << "Enter The Direction you would like to explore (N, S, E, W), \nInput (H) to view Health, or (I) to view Inventory items: " << endl;
@@ -127,9 +128,9 @@ void gameScenarioSelections()
 	}
 }
 
+//these gameScenarios are to be implmented with scences upon the users selection of which direction to head for safety.
 void gameScenarioSouth()
 {
-	cout << "You have chosen to head South," << endl;
 	cout << "This Function is further being worked on and isn't fully implemeted." << endl;
 	system("pause");
 }
@@ -176,6 +177,7 @@ int convertToInt(string input)
 	int choice = stoi(input);
 	return choice;
 }
+//intro screen of game when user has selected to start game
 void playerOne() {
 	cout << "\n-----------------------------" << endl;
 	cout << " PLAYER ONE HAS STARTED GAME" << endl;
@@ -185,7 +187,7 @@ void playerOne() {
 
 }
 int inputValidation(int input, int min, int max) {
-	/* checks if input is within valid range */
+	/* checks if input is within valid range  for starting menu*/
 
 	while (input < min || input > max) {
 		string menuChoice;
@@ -199,14 +201,17 @@ int inputValidation(int input, int min, int max) {
 	}
 	return input;
 }
+//fcn seves to calculate th dammage to health inflicted by an enemy
 void setDamage(int damage)
 {
 	health = health - damage;
 }
+//fcn if user encounters some food or water their health will increase
 void setHeal(int heal)
 {
 	health = health + heal;
 }
+//fcn serves to show user dead or not
 bool checkDeath()
 {
 	if (health <= 0)
@@ -234,26 +239,28 @@ void getHealth()
 	}
 	if (56 <= health && health <= 75)
 	{
-		SetConsoleTextAttribute(hConsole, 6);
+		SetConsoleTextAttribute(hConsole, 6);//color changing 
 		cout << "Health: Lethargic || Current Percentage: " << health << "%" << endl;
 		SetConsoleTextAttribute(hConsole, 7);
 		system("pause");
 	}
 	if (1 <= health && health <= 55)
 	{
-		SetConsoleTextAttribute(hConsole, 4);
+		SetConsoleTextAttribute(hConsole, 4);//color changing 
 		cout << "Health: Critical || Current Percentage: " << health << "%" << endl;
 		SetConsoleTextAttribute(hConsole, 7);
 		system("pause");
 	}
 }
+//this function serves as a way to access the inventory 
 void getInventory()
 {
-	SetConsoleTextAttribute(hConsole, 11);
+	SetConsoleTextAttribute(hConsole, 11);//color changing 
 	cout << "Your Inventory: (1) Flashlight , (2) Pocket Knife , (3) Water Canteen" << endl;
 	SetConsoleTextAttribute(hConsole, 7);
 	system("pause");
 }
+//This fcn serves to randomly give a user an enemy to face after every game 
 void enemyEncounter()
 {
 	string enemies[] = { "Poison Frog", "Snake", "Monkey", "Gorilla", "Elephant" };
@@ -263,6 +270,7 @@ void enemyEncounter()
 	cout << "You don't defend yourself and it attacks you!" << endl;
 	enemyDamage();
 }
+// this funcion is used to determine the about of damage an enemy can inflict on health
 void enemyDamage()
 {
 	srand(time(0));
