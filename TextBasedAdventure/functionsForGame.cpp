@@ -264,6 +264,7 @@ void getHelp()
 	cout << "You can also use H and I to view your Health and Inventory respectively!" << endl;
 	cout << "To successfully progress, it may serve useful to collect some items you find throughout your adventure. " << endl << "You never know what might come in handy." << endl;
 	cout << "Be careful of your surroundings, there are many dangerous creatures in Jungle so you best be prepared to fight!" << endl;
+	cout << "Please remember to quit game is to enter Q and to summon the help section type in help." << endl;
 	cout << "Only a limited amount of movement can happen in one day, so be careful when retracing your steps. " << endl << "Nightime may come quicker than you think!" << endl;
 	cout << "Again, be aware that the night will come eventually. " << endl << "So be prepared for when that time comes so you don't have a terrible fate!" << endl;
 	cout << "Well, Good Luck out there Survivor!!!" << endl;
