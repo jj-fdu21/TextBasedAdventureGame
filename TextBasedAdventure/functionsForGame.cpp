@@ -13,8 +13,7 @@ using namespace std;
 string version = "1.0.0", input, input1;
 int health = 90, temp;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-int k;
-enum direction { N, S, E, W, I, H, Q, n, s, e, w, h, i, q, R, r, D, d };
+enum direction { N, S, E, W, I, H, Q, n, s, e, w, h, i, q, R, r, D, d , Help, help};
 void mainMenu() {
 	//starting menu of choices
 	string menuChoice;
@@ -120,6 +119,10 @@ void gameScenarioSelections()
 	{
 		enemyEncounter();
 		gameScenarioSelections();
+	}
+	if (input == "Help" || input == "help")
+	{
+		getHelp();
 	}
 	else
 	{
@@ -251,6 +254,22 @@ void getHealth()
 		SetConsoleTextAttribute(hConsole, 7);
 		system("pause");
 	}
+}
+//this function serves as a way to give a help section to the user.
+void getHelp()
+{
+	SetConsoleTextAttribute(hConsole, 5); //color changing
+	cout << "I see that you required some assistance player!" << endl;
+	cout << "To play the game, insert directions such as N,S,E,W (North,South,East,West) to control yourself and explore!" << endl;
+	cout << "You can also use H and I to view your Health and Inventory respectively!" << endl;
+	cout << "To successfully progress, it may serve useful to collect some items you find throughout your adventure. " << endl << "You never know what might come in handy." << endl;
+	cout << "Be careful of your surroundings, there are many dangerous creatures in Jungle so you best be prepared to fight!" << endl;
+	cout << "Only a limited amount of movement can happen in one day, so be careful when retracing your steps. " << endl << "Nightime may come quicker than you think!" << endl;
+	cout << "Again, be aware that the night will come eventually. " << endl << "So be prepared for when that time comes so you don't have a terrible fate!" << endl;
+	cout << "Well, Good Luck out there Survivor!!!" << endl;
+	SetConsoleTextAttribute(hConsole, 7); //color changes back to white
+	system("pause");
+	gameScenarioSelections(); //recalls the initial method for selections
 }
 //this function serves as a way to access the inventory 
 void getInventory()
