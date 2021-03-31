@@ -14,6 +14,10 @@ string version = "1.0.0", input, input1;
 int health = 90, temp;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 enum direction { N, S, E, W, I, H, Q, n, s, e, w, h, i, q, R, r, D, d , Help, help};
+
+int xmap = 2; int ymap = 2; int map[] = { x[xmap], y[ymap] };
+int x[] = { 1, 2, 3, 4, 5 }; int y[] = { 1, 2, 3, 4, 5 }; //map coordination creation
+
 void mainMenu() {
 	//starting menu of choices
 	string menuChoice;
@@ -134,25 +138,34 @@ void gameScenarioSelections()
 //these gameScenarios are to be implmented with scences upon the users selection of which direction to head for safety.
 void gameScenarioSouth()
 {
-	cout << "This Function is further being worked on and isn't fully implemeted." << endl;
+	ymap =- 1;
+	int map[] = { x[xmap], y[ymap] };
+	cout << "You have chosen to head South," << endl;
+	checkMap();
 	system("pause");
 }
 void gameScenarioWest()
 {
+	xmap =- 1;
+	int map[] = { x[xmap], y[ymap] };
 	cout << "You have chosen to head West," << endl;
-	cout << "This Function is further being worked on and isn't fully implemeted." << endl;
+	checkMap();
 	system("pause");
 }
 void gameScenarioEast()
 {
+	xmap =+ 1;
+	int map[] = { x[xmap], y[ymap] };
 	cout << "You have chosen to head East," << endl;
-	cout << "This Function is further being worked on and isn't fully implemeted." << endl;
+	checkMap();
 	system("pause");
 }
 void gameScenarioNorth()
 {
+	ymap =+ 1;
+	int map[] = { x[xmap], y[ymap] };
 	cout << "You have chosen to head North," << endl;
-	cout << "This Function is further being worked on and isn't fully implemeted." << endl;
+	checkMap();
 	system("pause");
 }
 
@@ -298,4 +311,60 @@ void enemyDamage()
 	health = health - damageAmount;
 	cout << "You have taken " << damageAmount << " damage to your health" << endl << endl;
 	checkDeath();
+}
+
+void checkMap()
+{
+	/*if (map[] = { x[1], y[1] })
+	{
+
+	}
+	else if ()
+	{
+
+	}
+	else if ()
+	{
+
+	}
+	else if ()
+	{
+
+	}
+	else if ()
+	{
+
+	}
+	else if ()
+	{
+
+	}
+	else if ()
+	{
+
+	}
+	else if ()
+	{
+
+	}
+	else if ()
+	{
+
+	}
+	else if ()
+	{
+
+	}
+	else if ()
+	{
+
+	}
+	else if ()
+	{
+
+	}
+	else if ()
+	{
+
+	}*/
 }
