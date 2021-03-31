@@ -14,8 +14,9 @@ string version = "1.0.0", input, input1;
 int health = 90, temp;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 enum direction { N, S, E, W, I, H, Q, n, s, e, w, h, i, q, R, r, D, d , Help, help};
+int selections = 0;
 
-int xmap = 2; int ymap = 2; int map[] = { x[xmap], y[ymap] };
+// int xmap = 2; int ymap = 2; int map[] = { x[xmap], y[ymap] };
 int x[] = { 1, 2, 3, 4, 5 }; int y[] = { 1, 2, 3, 4, 5 }; //map coordination creation
 
 void mainMenu() {
@@ -73,6 +74,8 @@ void gameScenarioSelections()
 	{
 		cout << "You have selected South" << endl;
 		gameScenarioSouth();
+		selections++;
+		timeProgress();
 		gameScenarioSelections();
 	}
 	if (input == "R" || input == "r")
@@ -94,19 +97,25 @@ void gameScenarioSelections()
 	if (input == "W" || input == "w")
 	{
 		cout << "You have selected West" << endl;
-		gameScenarioSouth();
+		gameScenarioWest();
+		selections++;
+		timeProgress();
 		gameScenarioSelections();
 	}
 	if (input == "E" || input == "e")
 	{
 		cout << "You have selected East" << endl;
-		gameScenarioSouth();
+		gameScenarioEast();
+		selections++;
+		timeProgress();
 		gameScenarioSelections();
 	}
 	if (input == "N" || input == "n")
 	{
 		cout << "You have selected North" << endl;
-		gameScenarioSouth();
+		gameScenarioNorth();
+		selections++;
+		timeProgress();
 		gameScenarioSelections();
 	}
 	if (input == "H" || input == "h")
@@ -138,34 +147,34 @@ void gameScenarioSelections()
 //these gameScenarios are to be implmented with scences upon the users selection of which direction to head for safety.
 void gameScenarioSouth()
 {
-	ymap =- 1;
-	int map[] = { x[xmap], y[ymap] };
+	//ymap =- 1;
+	//int map[] = { x[xmap], y[ymap] };
 	cout << "You have chosen to head South," << endl;
-	checkMap();
+	//checkMap();
 	system("pause");
 }
 void gameScenarioWest()
 {
-	xmap =- 1;
-	int map[] = { x[xmap], y[ymap] };
+	//xmap =- 1;
+	//int map[] = { x[xmap], y[ymap] };
 	cout << "You have chosen to head West," << endl;
-	checkMap();
+	//checkMap();
 	system("pause");
 }
 void gameScenarioEast()
 {
-	xmap =+ 1;
-	int map[] = { x[xmap], y[ymap] };
+	//xmap =+ 1;
+	//int map[] = { x[xmap], y[ymap] };
 	cout << "You have chosen to head East," << endl;
-	checkMap();
+	//checkMap();
 	system("pause");
 }
 void gameScenarioNorth()
 {
-	ymap =+ 1;
-	int map[] = { x[xmap], y[ymap] };
+	//ymap =+ 1;
+	//int map[] = { x[xmap], y[ymap] };
 	cout << "You have chosen to head North," << endl;
-	checkMap();
+	//checkMap();
 	system("pause");
 }
 
@@ -271,7 +280,7 @@ void getHealth()
 //this function serves as a way to give a help section to the user.
 void getHelp()
 {
-	SetConsoleTextAttribute(hConsole, 5); //color changing
+	SetConsoleTextAttribute(hConsole, 11); //color changing
 	cout << "I see that you required some assistance player!" << endl;
 	cout << "To play the game, insert directions such as N,S,E,W (North,South,East,West) to control yourself and explore!" << endl;
 	cout << "You can also use H and I to view your Health and Inventory respectively!" << endl;
@@ -311,6 +320,35 @@ void enemyDamage()
 	health = health - damageAmount;
 	cout << "You have taken " << damageAmount << " damage to your health" << endl << endl;
 	checkDeath();
+}
+
+void timeProgress()
+{
+	if (selections == 4)
+	{
+		cout << endl;
+		cout << "The sun is high in the sky..." << endl;
+		cout << endl;
+	}
+	else if (selections == 8)
+	{
+		cout << endl;
+		cout << "The sun is starting to set..." << endl;
+		cout << endl;
+	}
+	else if (selections == 12)
+	{
+		cout << endl;
+		cout << "It is nighttime..." << endl;
+		cout << endl;
+	}
+	else if (selections == 16)
+	{
+		cout << endl;
+		cout << "The sun is beginning to rise..." << endl;
+		cout << endl;
+		selections = 0;
+	}
 }
 
 void checkMap()

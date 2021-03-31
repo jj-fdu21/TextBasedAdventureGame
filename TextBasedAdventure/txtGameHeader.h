@@ -34,3 +34,4 @@ void gameScenarioNorth();
 void enemyEncounter();
 void enemyDamage();
 void getHelp();
+void timeProgress();
