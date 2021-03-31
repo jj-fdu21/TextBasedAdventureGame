@@ -298,7 +298,7 @@ void getHelp()
 void getInventory()
 {
 	SetConsoleTextAttribute(hConsole, 11);//color changing 
-	cout << "Your Inventory: (1) Flashlight , (2) Pocket Knife , (3) Water Canteen" << endl;
+	cout << "Your Inventory: (1) Pocket Knife , (2) Water Canteen" << endl;
 	SetConsoleTextAttribute(hConsole, 7);
 	system("pause");
 }
