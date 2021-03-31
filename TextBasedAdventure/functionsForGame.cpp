@@ -56,7 +56,7 @@ void gameIntro(int startingMode) {
 		Sleep(1000);
 		cout << "You need to recover most of the scattered items\nto make the journey to safety. \nApproximately 3 days to get to your destination.";
 		Sleep(1000);
-		cout << "\nChoose your items and path wisely, Survivor, and good luck." << endl << endl;
+		cout << "\nChoose your items and path wisely, Survivor, and good luck.\n(Type help for assistance)" << endl << endl;
 		system("pause");
 	}
 }
