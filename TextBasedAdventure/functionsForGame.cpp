@@ -73,7 +73,7 @@ void gameScenarioSelections()
 	if (input == "S" || input == "s")
 	{
 		cout << "You have selected South" << endl;
-		gameScenarioSouth();
+		//gameScenarioSouth();
 		selections++;
 		timeProgress();
 		gameScenarioSelections();
@@ -97,7 +97,7 @@ void gameScenarioSelections()
 	if (input == "W" || input == "w")
 	{
 		cout << "You have selected West" << endl;
-		gameScenarioWest();
+		//gameScenarioWest();
 		selections++;
 		timeProgress();
 		gameScenarioSelections();
@@ -105,7 +105,7 @@ void gameScenarioSelections()
 	if (input == "E" || input == "e")
 	{
 		cout << "You have selected East" << endl;
-		gameScenarioEast();
+		//gameScenarioEast();
 		selections++;
 		timeProgress();
 		gameScenarioSelections();
@@ -113,7 +113,7 @@ void gameScenarioSelections()
 	if (input == "N" || input == "n")
 	{
 		cout << "You have selected North" << endl;
-		gameScenarioNorth();
+		//gameScenarioNorth();
 		selections++;
 		timeProgress();
 		gameScenarioSelections();
