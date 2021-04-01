@@ -10,7 +10,7 @@
 #include <algorithm>
 using namespace std;
 
-string version = "1.0.0", input, input1;
+string version = "2.0.0", input, input1;
 int health = 90, temp;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 enum direction { N, S, E, W, I, H, Q, n, s, e, w, h, i, q, R, r, D, d , Help, help};
