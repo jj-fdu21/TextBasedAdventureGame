@@ -35,3 +35,4 @@ void enemyEncounter();
 void enemyDamage();
 void getHelp();
 void timeProgress();
+void checkMap();
