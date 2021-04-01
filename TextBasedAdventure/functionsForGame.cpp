@@ -72,7 +72,7 @@ void gameScenarioSelections()
 	}
 	if (input == "S" || input == "s")
 	{
-		cout << "You have selected South" << endl;
+		//cout << "You have selected South" << endl;
 		if (ymap <= 0)
 		{
 			cout << "Towards the South is a dense fog, whispers surrounding you pray that you don't head in," << endl << "taking this as a sign you choose to tread another direction." << endl;
@@ -104,7 +104,7 @@ void gameScenarioSelections()
 	}
 	if (input == "W" || input == "w")
 	{
-		cout << "You have selected West" << endl;
+		//cout << "You have selected West" << endl;
 		if (xmap <= 0)
 		{
 			cout << "Towards the West there is a very steep gigantic mountain," << endl << "it seems impossible to climb, you must choose another direction." << endl;
@@ -120,7 +120,7 @@ void gameScenarioSelections()
 	}
 	if (input == "E" || input == "e")
 	{
-		cout << "You have selected East" << endl;
+		//cout << "You have selected East" << endl;
 		if (xmap >= 4)
 		{
 			cout << "Towards the East there is what seems to be a never ending ocean," << endl << "not too far you can see shark's fins as they circle around the coast," << endl << "you have chosen to stay in one piece and choose another direction." << endl;
@@ -136,7 +136,7 @@ void gameScenarioSelections()
 	}
 	if (input == "N" || input == "n")
 	{
-		cout << "You have selected North" << endl;
+		//cout << "You have selected North" << endl;
 		if (ymap >= 4)
 		{
 			cout << "Towards the North there is a giant ravine that looks impossible to cross," << endl << "you have to choose another direction to head." << endl;
