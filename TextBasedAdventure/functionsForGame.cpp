@@ -327,25 +327,25 @@ void timeProgress()
 	if (selections == 4)
 	{
 		cout << endl;
-		cout << "The sun is high in the sky..." << endl;
+		cout << "The sun is high in the sky... Morning has arrived" << endl;
 		cout << endl;
 	}
 	else if (selections == 8)
 	{
 		cout << endl;
-		cout << "The sun is starting to set..." << endl;
+		cout << "The sun is starting to set... Nighttime will soon come" << endl;
 		cout << endl;
 	}
 	else if (selections == 12)
 	{
 		cout << endl;
-		cout << "It is nighttime..." << endl;
+		cout << "The darkness has covered the sky... It is Nighttime." << endl;
 		cout << endl;
 	}
 	else if (selections == 16)
 	{
 		cout << endl;
-		cout << "The sun is beginning to rise..." << endl;
+		cout << "The sun is beginning to rise... Morning will soon come" << endl;
 		cout << endl;
 		selections = 0;
 	}
