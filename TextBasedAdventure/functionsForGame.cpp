@@ -16,8 +16,8 @@ HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 enum direction { N, S, E, W, I, H, Q, n, s, e, w, h, i, q, R, r, D, d , Help, help};
 int selections = 0;
 
-// int xmap = 2; int ymap = 2; int map[] = { x[xmap], y[ymap] };
-int x[] = { 1, 2, 3, 4, 5 }; int y[] = { 1, 2, 3, 4, 5 }; //map coordination creation
+int a[5][5] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 };
+int xmap = 1; int ymap = 3; int maplocation = a[ymap][xmap];//map coordination creation
 
 void mainMenu() {
 	//starting menu of choices
@@ -73,10 +73,18 @@ void gameScenarioSelections()
 	if (input == "S" || input == "s")
 	{
 		cout << "You have selected South" << endl;
-		//gameScenarioSouth();
-		selections++;
-		timeProgress();
-		gameScenarioSelections();
+		if (ymap <= 0)
+		{
+			cout << "Towards the South is a dense fog, whispers surrounding you pray that you don't head in," << endl << "taking this as a sign you choose to tread another direction." << endl;
+			gameScenarioSelections();
+		}
+		else
+		{
+			gameScenarioSouth();
+			selections++;
+			timeProgress();
+			gameScenarioSelections();
+		}
 	}
 	if (input == "R" || input == "r")
 	{
@@ -97,26 +105,50 @@ void gameScenarioSelections()
 	if (input == "W" || input == "w")
 	{
 		cout << "You have selected West" << endl;
-		//gameScenarioWest();
-		selections++;
-		timeProgress();
-		gameScenarioSelections();
+		if (xmap <= 0)
+		{
+			cout << "Towards the West there is a very steep gigantic mountain," << endl << "it seems impossible to climb, you must choose another direction." << endl;
+			gameScenarioSelections();
+		}
+		else
+		{
+			gameScenarioWest();
+			selections++;
+			timeProgress();
+			gameScenarioSelections();
+		}
 	}
 	if (input == "E" || input == "e")
 	{
 		cout << "You have selected East" << endl;
-		//gameScenarioEast();
-		selections++;
-		timeProgress();
-		gameScenarioSelections();
+		if (xmap >= 4)
+		{
+			cout << "Towards the East there is what seems to be a never ending ocean," << endl << "not too far you can see shark's fins as they circle around the coast," << endl << "you have chosen to stay in one piece and choose another direction." << endl;
+			gameScenarioSelections();
+		}
+		else
+		{
+			gameScenarioEast();
+			selections++;
+			timeProgress();
+			gameScenarioSelections();
+		}
 	}
 	if (input == "N" || input == "n")
 	{
 		cout << "You have selected North" << endl;
-		//gameScenarioNorth();
-		selections++;
-		timeProgress();
-		gameScenarioSelections();
+		if (ymap >= 4)
+		{
+			cout << "Towards the North there is a giant ravine that looks impossible to cross," << endl << "you have to choose another direction to head." << endl;
+			gameScenarioSelections();
+		}
+		else
+		{
+			gameScenarioNorth();
+			selections++;
+			timeProgress();
+			gameScenarioSelections();
+		}
 	}
 	if (input == "H" || input == "h")
 	{
@@ -147,34 +179,30 @@ void gameScenarioSelections()
 //these gameScenarios are to be implmented with scences upon the users selection of which direction to head for safety.
 void gameScenarioSouth()
 {
-	//ymap =- 1;
-	//int map[] = { x[xmap], y[ymap] };
+	ymap--;
 	cout << "You have chosen to head South," << endl;
-	//checkMap();
+	checkMap();
 	system("pause");
 }
 void gameScenarioWest()
 {
-	//xmap =- 1;
-	//int map[] = { x[xmap], y[ymap] };
+	xmap--;
 	cout << "You have chosen to head West," << endl;
-	//checkMap();
+	checkMap();
 	system("pause");
 }
 void gameScenarioEast()
 {
-	//xmap =+ 1;
-	//int map[] = { x[xmap], y[ymap] };
+	xmap++;
 	cout << "You have chosen to head East," << endl;
-	//checkMap();
+	checkMap();
 	system("pause");
 }
 void gameScenarioNorth()
 {
-	//ymap =+ 1;
-	//int map[] = { x[xmap], y[ymap] };
+	ymap++;
 	cout << "You have chosen to head North," << endl;
-	//checkMap();
+	checkMap();
 	system("pause");
 }
 
@@ -353,56 +381,111 @@ void timeProgress()
 
 void checkMap()
 {
-	/*if (map[] = { x[1], y[1] })
+	int maplocation = a[ymap][xmap];
+	if (maplocation = 0)
 	{
-
+		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if ()
+	else if (maplocation = 1)
 	{
-
+		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if ()
+	else if (maplocation = 2)
 	{
-
+		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if ()
+	else if (maplocation = 3)
 	{
-
+		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if ()
+	else if (maplocation = 4)
 	{
-
+		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if ()
+	else if (maplocation = 5)
 	{
-
+		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if ()
+	else if (maplocation = 6)
 	{
-
+		cout << "You have arrived at the Camouflaged Cove," << "almost impossible to spot at first glance you distinguish" << endl << "the different fauna covering the opening from the cavern itself," << endl << "what will you do?" << endl;
 	}
-	else if ()
+	else if (maplocation = 7)
 	{
-
+		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if ()
+	else if (maplocation = 8)
 	{
-
+		cout << "You have arrived at the Soggy Sinkhole, what will you do?" << endl;
 	}
-	else if ()
+	else if (maplocation = 9)
 	{
-
+		cout << "You have arrived at the Rugged River, what will you do?" << endl;
 	}
-	else if ()
+	else if (maplocation = 10)
 	{
-
+		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if ()
+	else if (maplocation = 11)
 	{
-
+		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if ()
+	else if (maplocation = 12)
 	{
-
-	}*/
+		cout << "You have arrived at the _, what will you do?" << endl;
+	}
+	else if (maplocation = 13)
+	{
+		cout << "You have arrived at the Treasure Chest, what will you do?" << endl;
+	}
+	else if (maplocation = 14)
+	{
+		cout << "You have arrived at the _, what will you do?" << endl;
+	}
+	else if (maplocation = 15)
+	{
+		cout << "You have arrived at the _, what will you do?" << endl;
+	}
+	else if (maplocation = 16)
+	{
+		cout << "You have arrived at the Crash Site," << endl << "reminants of machines as well as the hole are laid before you," << endl << "what will you do?" << endl;
+	}
+	else if (maplocation = 17)
+	{
+		cout << "You have arrived at the _, what will you do?" << endl;
+	}
+	else if (maplocation = 18)
+	{
+		cout << "You have arrived at the _, what will you do?" << endl;
+	}
+	else if (maplocation = 19)
+	{
+		cout << "You have arrived at the _, what will you do?" << endl;
+	}
+	else if (maplocation = 20)
+	{
+		cout << "You have arrived at the Cosmic Cave, what will you do?" << endl;
+	}
+	else if (maplocation = 21)
+	{
+		cout << "You have arrived at the _, what will you do?" << endl;
+	}
+	else if (maplocation = 22)
+	{
+		cout << "You have arrived at the _, what will you do?" << endl;
+	}
+	else if (maplocation = 23)
+	{
+		cout << "You have arrived at the Fatal Forest, what will you do?" << endl;
+	}
+	else if (maplocation = 24)
+	{
+		cout << "You have arrived at the _, what will you do?" << endl;
+	}
+	else
+	{
+	    cout << "Location cannot be found, location reseting to crash site, please wait..." << endl;
+		xmap = 1; ymap = 3; maplocation = a[ymap][xmap];
+		checkMap();
+    }
 }
