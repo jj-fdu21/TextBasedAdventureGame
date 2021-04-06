@@ -3,11 +3,12 @@
 #include <string>
 #include <iomanip>
 #include <cstdlib>
-#include <Windows.h>
 #include <limits>
 #include <math.h>
 #include <time.h>
 #include <algorithm>
+#define NOMINMAX
+#include <Windows.h>
 using namespace std;
 
 string version = "2.0.0", input, input1;
@@ -44,6 +45,11 @@ void mainMenu() {
 		_Exit(10);
 	}
 }
+void gameStartInventory()
+{
+	cout << "You have in your backpack: A Pocket Knife , A Water Canteen." << endl;
+	system("pause");
+}
 void gameIntro(int startingMode) {
 	if (startingMode == 1) {		//intro
 		cout << "Greetings Survivor, ";
@@ -57,13 +63,13 @@ void gameIntro(int startingMode) {
 		cout << "You need to recover most of the scattered items\nto make the journey to safety. \nApproximately 3 days to get to your destination.";
 		Sleep(1000);
 		cout << "\nChoose your items and path wisely, Survivor, and good luck.\n(Type help for assistance)" << endl << endl;
-		system("pause");
+		gameStartInventory();
 	}
 }
 //intro game selction inquery to user
 void gameScenarioSelections()
 {
-	cout << "Enter The Direction you would like to explore (N, S, E, W), \nInput (H) to view Health, or (I) to view Inventory items: " << endl;
+	cout << "\nEnter The Direction you would like to explore (N, S, E, W), \nInput (H) to view Health, or (I) to view Inventory items: " << endl;
 	cin >> input;
 	if (input == "Q" || input == "q") {
 		cout << "\nGood Bye come again!!\n" << endl;		//end game
@@ -180,28 +186,28 @@ void gameScenarioSelections()
 void gameScenarioSouth()
 {
 	ymap--;
-	cout << "You have chosen to head South," << endl;
+	cout << "\nYou have chosen to head South," << endl;
 	checkMap();
 	system("pause");
 }
 void gameScenarioWest()
 {
 	xmap--;
-	cout << "You have chosen to head West," << endl;
+	cout << "\nYou have chosen to head West," << endl;
 	checkMap();
 	system("pause");
 }
 void gameScenarioEast()
 {
 	xmap++;
-	cout << "You have chosen to head East," << endl;
+	cout << "\nYou have chosen to head East," << endl;
 	checkMap();
 	system("pause");
 }
 void gameScenarioNorth()
 {
 	ymap++;
-	cout << "You have chosen to head North," << endl;
+	cout << "\nYou have chosen to head North," << endl;
 	checkMap();
 	system("pause");
 }
@@ -308,19 +314,82 @@ void getHealth()
 //this function serves as a way to give a help section to the user.
 void getHelp()
 {
-	SetConsoleTextAttribute(hConsole, 11); //color changing
-	cout << "I see that you required some assistance player!" << endl;
-	cout << "To play the game, insert directions such as N,S,E,W (North,South,East,West) to control yourself and explore!" << endl;
-	cout << "You can also use H and I to view your Health and Inventory respectively!" << endl;
-	cout << "To successfully progress, it may serve useful to collect some items you find throughout your adventure. " << endl << "You never know what might come in handy." << endl;
-	cout << "Be careful of your surroundings, there are many dangerous creatures in Jungle so you best be prepared to fight!" << endl;
-	cout << "Please remember to quit game is to enter Q and to summon the help section type in help." << endl;
-	cout << "Only a limited amount of movement can happen in one day, so be careful when retracing your steps. " << endl << "Nightime may come quicker than you think!" << endl;
-	cout << "Again, be aware that the night will come eventually. " << endl << "So be prepared for when that time comes so you don't have a terrible fate!" << endl;
-	cout << "Well, Good Luck out there Survivor!!!" << endl;
-	SetConsoleTextAttribute(hConsole, 7); //color changes back to white
-	system("pause");
-	gameScenarioSelections(); //recalls the initial method for selections
+	int selection;
+	SetConsoleTextAttribute(hConsole, 11);
+	cout << "======================================================================================================================" << endl;
+	cout << "\t\t\t\t\t HELP MENU" << endl;
+	cout << "======================================================================================================================" << endl;
+	cout << "\t\t\t\t\t Select which aspect of the game you need help with:" << endl;
+	cout << "\t\t\t\t\t 1. How to Move." << endl;
+	cout << "\t\t\t\t\t 2. How to see Health." << endl;
+	cout << "\t\t\t\t\t 3. How to see Inventory." << endl;
+	cout << "\t\t\t\t\t 4. Any Advice?" << endl;
+	cout << "\t\t\t\t\t 0. Quit Help" << endl;
+	cout << "\t\t\t\t\t Enter Selection: ";
+	cin >> selection;
+	if (cin.fail())
+	{
+		SetConsoleTextAttribute(hConsole, 7);
+		cout << "\t\t\t Invalid input for Help Selection, please try again." << endl;
+		system("pause");
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		getHelp();
+	}
+	if (selection == 0)
+	{
+		cout << endl;
+		cout << "\t\t\t Selected Exit." << endl;
+		cout << "\t\t\t Use Help to come back if you ever need!" << endl;
+		SetConsoleTextAttribute(hConsole, 7);
+		system("pause");
+		gameScenarioSelections();
+	}
+	if (selection == 1)
+	{
+		cout << endl;
+		cout << "\t\t\t Selected Movement Help." << endl;
+		cout << "\t\t\t To move in game use N , S , E , W corresponding to the direction you want to travel." << endl;
+		cout << "\t\t\t Going too far in one direction will cause you to eventually turn back so be careful." << endl;
+		SetConsoleTextAttribute(hConsole, 7);
+		system("pause");
+		getHelp();
+	}
+	if (selection == 2)
+	{
+		cout << endl;
+		cout << "\t\t\t Selected Health Help." << endl;
+		cout << "\t\t\t To view your health , simply type H to be able to view it." << endl;
+		SetConsoleTextAttribute(hConsole, 7);
+		system("pause");
+		getHelp();
+	}
+	if (selection == 3)
+	{
+		cout << endl;
+		cout << "\t\t\t Selected Inventory Help." << endl;
+		cout << "\t\t\t To view your inventory , simply type I to be able to view it." << endl;
+		SetConsoleTextAttribute(hConsole, 7);
+		system("pause");
+		getHelp();
+	}
+	if (selection == 4)
+	{
+		cout << endl;
+		cout << "\t\t\t Selected Advice." << endl;
+		cout << "\t\t\t Survivor, there are creatures lurking in the jungle. Tread carefully." << endl;
+		cout << "\t\t\t Be on the lookout for possible item pickups that may be handy later." << endl;
+		SetConsoleTextAttribute(hConsole, 7);
+		system("pause");
+		getHelp();
+	}
+	else
+	{
+		SetConsoleTextAttribute(hConsole, 7);
+		cout << "\t\t\t Invalid input for Help Selection, please try again." << endl;
+		system("pause");
+		getHelp();
+	}
 }
 //this function serves as a way to access the inventory 
 void getInventory()
