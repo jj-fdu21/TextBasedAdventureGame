@@ -9,7 +9,8 @@
 #include <algorithm>
 #define NOMINMAX
 #include <Windows.h>
-using namespace std;
+using std::cout;
+using std::endl;
 
 string version = "2.0.0", input, input1;
 int health = 90, temp;
