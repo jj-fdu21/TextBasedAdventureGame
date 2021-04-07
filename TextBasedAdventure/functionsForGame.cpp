@@ -47,7 +47,9 @@ void mainMenu() {
 }
 void gameStartInventory()
 {
-	cout << "You have in your backpack: A Pocket Knife , A Water Canteen." << endl;
+
+	cout << "You have in your backpack: A Pocket Knife , A Water Canteen, A Map." << endl;
+
 	system("pause");
 }
 void gameIntro(int startingMode) {
@@ -58,11 +60,13 @@ void gameIntro(int startingMode) {
 		Sleep(1000);
 		cout << "One of the items being a map showing\nthe nearest settlement being about 500 miles from your location\nand a backpack to carry some items.";
 		Sleep(1000);
-		cout << "Unfortunately, some important items\nto your survival were scattered across the jungle during the crash.\nThe jungle is a dangerous place to travel, beware of day and night\ncreatures lurking.";
+		cout << "Unfortunately, Your Batteries, Flashlight, Fuel and Jetpack\nwere scattered across the jungle during the crash.\nThe jungle is a dangerous place to travel, beware of day and night\ncreatures lurking.";
 		Sleep(1000);
 		cout << "You need to recover most of the scattered items\nto make the journey to safety. \nApproximately 3 days to get to your destination.";
 		Sleep(1000);
-		cout << "\nChoose your items and path wisely, Survivor, and good luck.\n(Type help for assistance)" << endl << endl;
+
+		cout << "\nGood Luck Survivor! You'll need it.\n(Type help for assistance)" << endl << endl;
+
 		gameStartInventory();
 	}
 }
@@ -289,6 +293,10 @@ later be used to tell if user is alive or not
 */
 void getHealth()
 {
+	if (health > 100)
+	{
+		health = 100;
+	}
 	if (100 >= health && health >= 76)
 	{
 		SetConsoleTextAttribute(hConsole, 2);
@@ -351,6 +359,9 @@ void getHelp()
 		cout << "\t\t\t Selected Movement Help." << endl;
 		cout << "\t\t\t To move in game use N , S , E , W corresponding to the direction you want to travel." << endl;
 		cout << "\t\t\t Going too far in one direction will cause you to eventually turn back so be careful." << endl;
+
+		cout << "\t\t\t To be able to travel during the night, you will need a Flashlight and some Batteries." << endl;
+
 		SetConsoleTextAttribute(hConsole, 7);
 		system("pause");
 		getHelp();
@@ -395,7 +406,7 @@ void getHelp()
 void getInventory()
 {
 	SetConsoleTextAttribute(hConsole, 11);//color changing 
-	cout << "Your Inventory: (1) Pocket Knife , (2) Water Canteen" << endl;
+	cout << "Your Inventory: (1) Pocket Knife , (2) Water Canteen , (3) Map" << endl;
 	SetConsoleTextAttribute(hConsole, 7);
 	system("pause");
 }
