@@ -47,7 +47,9 @@ void mainMenu() {
 }
 void gameStartInventory()
 {
+
 	cout << "You have in your backpack: A Pocket Knife , A Water Canteen, A Map." << endl;
+
 	system("pause");
 }
 void gameIntro(int startingMode) {
@@ -62,7 +64,9 @@ void gameIntro(int startingMode) {
 		Sleep(1000);
 		cout << "You need to recover most of the scattered items\nto make the journey to safety. \nApproximately 3 days to get to your destination.";
 		Sleep(1000);
+
 		cout << "\nGood Luck Survivor! You'll need it.\n(Type help for assistance)" << endl << endl;
+
 		gameStartInventory();
 	}
 }
@@ -355,7 +359,9 @@ void getHelp()
 		cout << "\t\t\t Selected Movement Help." << endl;
 		cout << "\t\t\t To move in game use N , S , E , W corresponding to the direction you want to travel." << endl;
 		cout << "\t\t\t Going too far in one direction will cause you to eventually turn back so be careful." << endl;
+
 		cout << "\t\t\t To be able to travel during the night, you will need a Flashlight and some Batteries." << endl;
+
 		SetConsoleTextAttribute(hConsole, 7);
 		system("pause");
 		getHelp();
