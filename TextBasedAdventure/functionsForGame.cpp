@@ -52,7 +52,7 @@ void gameStartInventory()
 	cout << "Starting ";
 	itemChecks[0] = 1;
 	itemChecks[1] = 1;
-	itemChecks[2] = 1;
+	itemChecks[4] = 1;
 	durabilities[0] = 50;
 	durabilities[1] = 100;
 	getInventory();
@@ -101,18 +101,14 @@ void gameScenarioSelections()
 	}
 	if (input == "R" || input == "r")
 	{
-		cout << "You have selected Restore Health" << endl;
-		cout << "Enter the amount of health you would like to restore: ";
-		cin >> temp;
-		setHeal(temp);
+		cout << "You have selected Restore Durability" << endl;
+		durabilityIncrease();
 		gameScenarioSelections();
 	}
 	if (input == "D" || input == "d")
 	{
-		cout << "You have selected Damage Health" << endl;
-		cout << "Enter the amount of health you would like to take away: ";
-		cin >> temp;
-		setDamage(temp);
+		cout << "You have selected Decrease Durability" << endl;
+		durabilityDecrease();
 		gameScenarioSelections();
 	}
 	if (input == "W" || input == "w")
@@ -416,13 +412,13 @@ void durabilityIncrease()
 	int durabilityIncrease, durability;
 	cout << "Enter the amount you would like to increase the Pocket Knife's durability by: ";
 	cin >> durabilityIncrease;
-	durability = durabilities[1] - durabilityIncrease;
+	durability = durabilities[1] + durabilityIncrease;
 	durabilities[1] = durability;
 }
 //this function serves as a way to access the inventory 
 void getInventory()
 {
-	cout << "Inventory: ";
+	cout << "Inventory: " << endl;
 	for (int i = 0; i < sizeof(itemChecks); i++)
 	{
 		if (itemChecks[i] == 1)
@@ -437,28 +433,32 @@ void getInventory()
 				if (100 >= durabilities[i] && durabilities[i] >= 76)
 				{
 					SetConsoleTextAttribute(hConsole, 2);
-					cout << " [" << durabilities[i] << "]";
+					cout << " [" << durabilities[i] << "]" << endl;
 					SetConsoleTextAttribute(hConsole, 7);
 				}
 				if (56 <= durabilities[i] && durabilities[i] <= 75)
 				{
 					SetConsoleTextAttribute(hConsole, 6);//color changing 
-					cout << " [" << durabilities[i] << "]";
+					cout << " [" << durabilities[i] << "]" << endl;
 					SetConsoleTextAttribute(hConsole, 7);
 				}
 				if (1 <= durabilities[i] && durabilities[i] <= 55)
 				{
-					SetConsoleTextAttribute(hConsole, 14);//color changing 
-					cout << " [" << durabilities[i] << "]";
+					SetConsoleTextAttribute(hConsole, 4);//color changing 
+					cout << " [" << durabilities[i] << "]" << endl;
 					SetConsoleTextAttribute(hConsole, 7);
 				}
 				if (durabilities[i] < 1)
 				{
-					cout << " [Destroyed]";
+					SetConsoleTextAttribute(hConsole, 15);
+					cout << " [Destroyed]" << endl;
+					SetConsoleTextAttribute(hConsole, 7);
+					durabilities[i] = 0;
 				}
 			}
 		}
 	}
+	cout << endl;
 	//SetConsoleTextAttribute(hConsole, 11);//color changing 
 	//cout << "Your Inventory: (1) Pocket Knife , (2) Water Canteen , (3) Map" << endl;
 	//SetConsoleTextAttribute(hConsole, 7);

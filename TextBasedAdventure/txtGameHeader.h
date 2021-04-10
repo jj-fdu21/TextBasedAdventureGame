@@ -36,3 +36,5 @@ void enemyDamage();
 void getHelp();
 void timeProgress();
 void checkMap();
+void durabilityDecrease();
+void durabilityIncrease();
