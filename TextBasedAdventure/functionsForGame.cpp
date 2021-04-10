@@ -403,7 +403,22 @@ void getHelp()
 		getHelp();
 	}
 }
-void 
+void durabilityDecrease()
+{
+	int durabilityDecrease, durability;
+	cout << "Enter the amount you would like to decrease the Pocket Knife's durability by: ";
+	cin >> durabilityDecrease;
+	durability = durabilities[1] - durabilityDecrease;
+	durabilities[1] = durability;
+}
+void durabilityIncrease()
+{
+	int durabilityIncrease, durability;
+	cout << "Enter the amount you would like to increase the Pocket Knife's durability by: ";
+	cin >> durabilityIncrease;
+	durability = durabilities[1] - durabilityIncrease;
+	durabilities[1] = durability;
+}
 //this function serves as a way to access the inventory 
 void getInventory()
 {
