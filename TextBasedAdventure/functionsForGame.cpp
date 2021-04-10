@@ -19,7 +19,9 @@ int selections = 0;
 
 int a[5][5] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 };
 int xmap = 1; int ymap = 3; int maplocation = a[ymap][xmap];//map coordination creation
-
+string items[] = { "Water Canteen", "Pocket Knife", "Flashlight", "Jetpack", "Map", "Batteries", "Fuel" };
+int itemChecks[] = { 0,0,0,0,0,0,0 };
+int durabilities[] = { 0,0,0,0 };
 void mainMenu() {
 	//starting menu of choices
 	string menuChoice;
@@ -47,8 +49,13 @@ void mainMenu() {
 }
 void gameStartInventory()
 {
-	cout << "You have in your backpack: A Pocket Knife , A Water Canteen, A Map." << endl;
-	system("pause");
+	cout << "Starting ";
+	itemChecks[0] = 1;
+	itemChecks[1] = 1;
+	itemChecks[2] = 1;
+	durabilities[0] = 50;
+	durabilities[1] = 100;
+	getInventory();
 }
 void gameIntro(int startingMode) {
 	if (startingMode == 1) {		//intro
@@ -396,13 +403,51 @@ void getHelp()
 		getHelp();
 	}
 }
+void 
 //this function serves as a way to access the inventory 
 void getInventory()
 {
-	SetConsoleTextAttribute(hConsole, 11);//color changing 
-	cout << "Your Inventory: (1) Pocket Knife , (2) Water Canteen , (3) Map" << endl;
-	SetConsoleTextAttribute(hConsole, 7);
-	system("pause");
+	cout << "Inventory: ";
+	for (int i = 0; i < sizeof(itemChecks); i++)
+	{
+		if (itemChecks[i] == 1)
+		{
+			cout << items[i];
+			if (i < 4)
+			{
+				if (durabilities[i] > 100)
+				{
+					durabilities[i] = 100;
+				}
+				if (100 >= durabilities[i] && durabilities[i] >= 76)
+				{
+					SetConsoleTextAttribute(hConsole, 2);
+					cout << " [" << durabilities[i] << "]";
+					SetConsoleTextAttribute(hConsole, 7);
+				}
+				if (56 <= durabilities[i] && durabilities[i] <= 75)
+				{
+					SetConsoleTextAttribute(hConsole, 6);//color changing 
+					cout << " [" << durabilities[i] << "]";
+					SetConsoleTextAttribute(hConsole, 7);
+				}
+				if (1 <= durabilities[i] && durabilities[i] <= 55)
+				{
+					SetConsoleTextAttribute(hConsole, 14);//color changing 
+					cout << " [" << durabilities[i] << "]";
+					SetConsoleTextAttribute(hConsole, 7);
+				}
+				if (durabilities[i] < 1)
+				{
+					cout << " [Destroyed]";
+				}
+			}
+		}
+	}
+	//SetConsoleTextAttribute(hConsole, 11);//color changing 
+	//cout << "Your Inventory: (1) Pocket Knife , (2) Water Canteen , (3) Map" << endl;
+	//SetConsoleTextAttribute(hConsole, 7);
+	//system("pause");
 }
 //This fcn serves to randomly give a user an enemy to face after every game 
 void enemyEncounter()
