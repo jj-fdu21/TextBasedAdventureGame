@@ -12,11 +12,9 @@
 using namespace std;
 
 string version = "2.0.0", input, input1;
-int health = 90, temp;
+int health = 90, selections = 0, temp;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 enum direction { N, S, E, W, I, H, Q, n, s, e, w, h, i, q, R, r, D, d , Help, help};
-int selections = 0;
-
 int a[5][5] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 };
 int xmap = 1; int ymap = 3; int maplocation = a[ymap][xmap];//map coordination creation
 
