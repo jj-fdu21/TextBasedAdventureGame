@@ -9,8 +9,9 @@
 #include <algorithm>
 #define NOMINMAX
 #include <Windows.h>
-using std::cout;
-using std::endl;
+
+using namespace std;
+
 
 string version = "2.0.0", input, input1;
 int health = 90, temp;
@@ -20,7 +21,9 @@ int selections = 0;
 
 int a[5][5] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 };
 int xmap = 1; int ymap = 3; int maplocation = a[ymap][xmap];//map coordination creation
-
+string items[] = { "Water Canteen", "Pocket Knife", "Flashlight", "Jetpack", "Map", "Batteries", "Fuel" };
+int itemChecks[] = { 0,0,0,0,0,0,0 };
+int durabilities[] = { 0,0,0,0 };
 void mainMenu() {
 	//starting menu of choices
 	string menuChoice;
@@ -49,9 +52,16 @@ void mainMenu() {
 void gameStartInventory()
 {
 
-	cout << "You have in your backpack: A Pocket Knife , A Water Canteen, A Map." << endl;
+	itemChecks[0] = 1;
+	itemChecks[1] = 1;
+	itemChecks[4] = 1;
+	durabilities[0] = 50;
+	durabilities[1] = 100;
+	getInventory();
+
 
 	system("pause");
+
 }
 void gameIntro(int startingMode) {
 	if (startingMode == 1) {		//intro
@@ -99,18 +109,14 @@ void gameScenarioSelections()
 	}
 	if (input == "R" || input == "r")
 	{
-		cout << "You have selected Restore Health" << endl;
-		cout << "Enter the amount of health you would like to restore: ";
-		cin >> temp;
-		setHeal(temp);
+		cout << "You have selected Restore Durability" << endl;
+		durabilityIncrease();
 		gameScenarioSelections();
 	}
 	if (input == "D" || input == "d")
 	{
-		cout << "You have selected Damage Health" << endl;
-		cout << "Enter the amount of health you would like to take away: ";
-		cin >> temp;
-		setDamage(temp);
+		cout << "You have selected Decrease Durability" << endl;
+		durabilityDecrease();
 		gameScenarioSelections();
 	}
 	if (input == "W" || input == "w")
@@ -402,14 +408,95 @@ void getHelp()
 		system("pause");
 		getHelp();
 	}
+
+}
+void durabilityDecrease()
+{
+	int durabilityDecreaseValue, durability;
+	cout << "Enter the amount you would like to decrease the Pocket Knife's durability by: ";
+	cin >> durabilityDecreaseValue;
+	if (cin.fail() || durabilityDecreaseValue < 0)
+	{
+		SetConsoleTextAttribute(hConsole, 7);
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Invalid input for durability decrease, please re-enter your value." << endl;
+		system("pause");
+		durabilityIncrease();
+	}
+	durability = durabilities[1] - durabilityDecreaseValue;
+	durabilities[1] = durability;
+}
+void durabilityIncrease()
+{
+	int durabilityIncreaseValue, durability;
+	cout << "Enter the amount you would like to increase the Pocket Knife's durability by: ";
+	cin >> durabilityIncreaseValue;
+	if (cin.fail() || durabilityIncreaseValue < 0)
+	{
+		SetConsoleTextAttribute(hConsole, 7);
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Invalid input for durability decrease, please re-enter your value." << endl;
+		system("pause");
+		durabilityIncrease();
+	}
+	durability = durabilities[1] + durabilityIncreaseValue;
+	durabilities[1] = durability;
+
 }
 //this function serves as a way to access the inventory 
 void getInventory()
 {
-	SetConsoleTextAttribute(hConsole, 11);//color changing 
-	cout << "Your Inventory: (1) Pocket Knife , (2) Water Canteen , (3) Map" << endl;
-	SetConsoleTextAttribute(hConsole, 7);
-	system("pause");
+
+	cout << "======================================================================================================================" << endl;
+	cout << "\t\t\t\t\t\t INVENTORY" << endl;
+	cout << "======================================================================================================================" << endl;
+	for (int i = 0; i < sizeof(itemChecks); i++)
+	{
+		if (itemChecks[i] == 1)
+		{
+			cout << "\t\t\t\t\t\t" << items[i];
+			if (i < 4)
+			{
+				if (durabilities[i] > 100)
+				{
+					durabilities[i] = 100;
+				}
+				if (100 >= durabilities[i] && durabilities[i] >= 76)
+				{
+					SetConsoleTextAttribute(hConsole, 2);
+					cout << " [" << durabilities[i] << "]" << endl;
+					SetConsoleTextAttribute(hConsole, 7);
+				}
+				if (56 <= durabilities[i] && durabilities[i] <= 75)
+				{
+					SetConsoleTextAttribute(hConsole, 6);//color changing 
+					cout << " [" << durabilities[i] << "]" << endl;
+					SetConsoleTextAttribute(hConsole, 7);
+				}
+				if (1 <= durabilities[i] && durabilities[i] <= 55)
+				{
+					SetConsoleTextAttribute(hConsole, 4);//color changing 
+					cout << " [" << durabilities[i] << "]" << endl;
+					SetConsoleTextAttribute(hConsole, 7);
+				}
+				if (durabilities[i] < 1)
+				{
+					SetConsoleTextAttribute(hConsole, 15);
+					cout << " [Destroyed]" << endl;
+					SetConsoleTextAttribute(hConsole, 7);
+					durabilities[i] = 0;
+				}
+			}
+		}
+	}
+	cout << endl;
+	//SetConsoleTextAttribute(hConsole, 11);//color changing 
+	//cout << "Your Inventory: (1) Pocket Knife , (2) Water Canteen , (3) Map" << endl;
+	//SetConsoleTextAttribute(hConsole, 7);
+	//system("pause");
+
 }
 //This fcn serves to randomly give a user an enemy to face after every game 
 void enemyEncounter()
