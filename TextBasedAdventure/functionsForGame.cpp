@@ -552,108 +552,161 @@ void checkMap()
 	int maplocation = a[ymap][xmap];
 	if (maplocation = 0)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 0, what will you do?" << endl;
+		findFlashlight();
 	}
 	else if (maplocation = 1)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 1, what will you do?" << endl;
+		findBatteries();
+
 	}
 	else if (maplocation = 2)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 2, what will you do?" << endl;
+		findJetpack();
+
 	}
 	else if (maplocation = 3)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 3, what will you do?" << endl;
+		findFuel();
+
 	}
 	else if (maplocation = 4)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 4, what will you do?" << endl;
 	}
 	else if (maplocation = 5)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 5, what will you do?" << endl;
+
 	}
 	else if (maplocation = 6)
 	{
 		cout << "You have arrived at the Camouflaged Cove," << "almost impossible to spot at first glance you distinguish" << endl << "the different fauna covering the opening from the cavern itself," << endl << "what will you do?" << endl;
+
 	}
 	else if (maplocation = 7)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 7, what will you do?" << endl;
+		findJetpack();
 	}
 	else if (maplocation = 8)
 	{
 		cout << "You have arrived at the Soggy Sinkhole, what will you do?" << endl;
+
 	}
 	else if (maplocation = 9)
 	{
 		cout << "You have arrived at the Rugged River, what will you do?" << endl;
+
 	}
 	else if (maplocation = 10)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 10, what will you do?" << endl;
+
 	}
 	else if (maplocation = 11)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 11, what will you do?" << endl;
+
 	}
 	else if (maplocation = 12)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 12, what will you do?" << endl;
+
 	}
 	else if (maplocation = 13)
 	{
 		cout << "You have arrived at the Treasure Chest, what will you do?" << endl;
+
 	}
 	else if (maplocation = 14)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 14, what will you do?" << endl;
+
 	}
 	else if (maplocation = 15)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 15, what will you do?" << endl;
+		findJetpack();
 	}
 	else if (maplocation = 16)
 	{
 		cout << "You have arrived at the Crash Site," << endl << "reminants of machines as well as the hole are laid before you," << endl << "what will you do?" << endl;
+		findJetpack();
 	}
 	else if (maplocation = 17)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 17, what will you do?" << endl;
+		findJetpack();
 	}
 	else if (maplocation = 18)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 18, what will you do?" << endl;
+		findJetpack();
 	}
 	else if (maplocation = 19)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 19, what will you do?" << endl;
+		findJetpack();
 	}
 	else if (maplocation = 20)
 	{
 		cout << "You have arrived at the Cosmic Cave, what will you do?" << endl;
+		findFuel();
 	}
 	else if (maplocation = 21)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 21, what will you do?" << endl;
+		findFuel();
 	}
 	else if (maplocation = 22)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 22, what will you do?" << endl;
+		findFuel();
 	}
 	else if (maplocation = 23)
 	{
 		cout << "You have arrived at the Fatal Forest, what will you do?" << endl;
+		findFuel();
 	}
 	else if (maplocation = 24)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 24, what will you do?" << endl;
+		findFuel();
 	}
 	else
 	{
-	    cout << "Location cannot be found, location reseting to crash site, please wait..." << endl;
+		cout << "Location cannot be found, location reseting to crash site, please wait..." << endl;
 		xmap = 1; ymap = 3; maplocation = a[ymap][xmap];
 		checkMap();
-    }
+	}
+}
+void findFlashlight()
+{
+	cout << "You have found a flashlight on the ground." << endl;
+	itemChecks[2] = 1;
+	durabilities[2] = 100;
+	cout << "Flashlight has been added to your inventory." << endl;
+}
+void findJetpack()
+{
+	cout << "You have found a jetpack on the ground." << endl;
+	itemChecks[3] = 1;
+	durabilities[3] = 100;
+	cout << "Jetpack has been added to your inventory." << endl;
+}
+void findBatteries()
+{
+	cout << "You have found batteries for a flashlight on the ground." << endl;
+	itemChecks[5] = 1;
+	cout << "Flashlight batteries has been added to your inventory." << endl;
+}
+void findFuel()
+{
+	cout << "You have found some jetpack fuel." << endl;
+	itemChecks[6] = 1;
+	cout << "Jetpack fuel has been added to your inventory." << endl;
 }

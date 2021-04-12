@@ -28,3 +28,7 @@ void timeProgress();
 void checkMap();
 void durabilityDecrease();
 void durabilityIncrease();
+void findFlashlight();
+void findJetpack();
+void findBatteries();
+void findFuel();
