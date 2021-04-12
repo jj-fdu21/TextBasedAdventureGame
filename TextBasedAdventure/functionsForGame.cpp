@@ -49,7 +49,6 @@ void mainMenu() {
 }
 void gameStartInventory()
 {
-	cout << "Starting ";
 	itemChecks[0] = 1;
 	itemChecks[1] = 1;
 	itemChecks[4] = 1;
@@ -401,29 +400,49 @@ void getHelp()
 }
 void durabilityDecrease()
 {
-	int durabilityDecrease, durability;
+	int durabilityDecreaseValue, durability;
 	cout << "Enter the amount you would like to decrease the Pocket Knife's durability by: ";
-	cin >> durabilityDecrease;
-	durability = durabilities[1] - durabilityDecrease;
+	cin >> durabilityDecreaseValue;
+	if (cin.fail() || durabilityDecreaseValue < 0)
+	{
+		SetConsoleTextAttribute(hConsole, 7);
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Invalid input for durability decrease, please re-enter your value." << endl;
+		system("pause");
+		durabilityIncrease();
+	}
+	durability = durabilities[1] - durabilityDecreaseValue;
 	durabilities[1] = durability;
 }
 void durabilityIncrease()
 {
-	int durabilityIncrease, durability;
+	int durabilityIncreaseValue, durability;
 	cout << "Enter the amount you would like to increase the Pocket Knife's durability by: ";
-	cin >> durabilityIncrease;
-	durability = durabilities[1] + durabilityIncrease;
+	cin >> durabilityIncreaseValue;
+	if (cin.fail() || durabilityIncreaseValue < 0)
+	{
+		SetConsoleTextAttribute(hConsole, 7);
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Invalid input for durability decrease, please re-enter your value." << endl;
+		system("pause");
+		durabilityIncrease();
+	}
+	durability = durabilities[1] + durabilityIncreaseValue;
 	durabilities[1] = durability;
 }
 //this function serves as a way to access the inventory 
 void getInventory()
 {
-	cout << "Inventory: " << endl;
+	cout << "======================================================================================================================" << endl;
+	cout << "\t\t\t\t\t\t INVENTORY" << endl;
+	cout << "======================================================================================================================" << endl;
 	for (int i = 0; i < sizeof(itemChecks); i++)
 	{
 		if (itemChecks[i] == 1)
 		{
-			cout << items[i];
+			cout << "\t\t\t\t\t\t" << items[i];
 			if (i < 4)
 			{
 				if (durabilities[i] > 100)
