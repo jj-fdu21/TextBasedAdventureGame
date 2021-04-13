@@ -9,12 +9,14 @@
 #include <algorithm>
 #define NOMINMAX
 #include <Windows.h>
+
 using namespace std;
 
+
 string version = "2.0.0", input, input1;
-int health = 90, temp;
+int health = 90, temp, flashlightOnOffCheck = 0;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-enum direction { N, S, E, W, I, H, Q, n, s, e, w, h, i, q, R, r, D, d , Help, help};
+enum direction { N, S, E, W, I, H, Q, n, s, e, w, h, i, q, R, r, D, d, Help, help };
 int selections = 0;
 
 int a[5][5] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 };
@@ -49,12 +51,17 @@ void mainMenu() {
 }
 void gameStartInventory()
 {
+
 	itemChecks[0] = 1;
 	itemChecks[1] = 1;
 	itemChecks[4] = 1;
 	durabilities[0] = 50;
 	durabilities[1] = 100;
 	getInventory();
+
+
+	system("pause");
+
 }
 void gameIntro(int startingMode) {
 	if (startingMode == 1) {		//intro
@@ -68,7 +75,9 @@ void gameIntro(int startingMode) {
 		Sleep(1000);
 		cout << "You need to recover most of the scattered items\nto make the journey to safety. \nApproximately 3 days to get to your destination.";
 		Sleep(1000);
+
 		cout << "\nGood Luck Survivor! You'll need it.\n(Type help for assistance)" << endl << endl;
+
 		gameStartInventory();
 	}
 }
@@ -170,8 +179,18 @@ void gameScenarioSelections()
 	}
 	if (input == "X" || input == "x")
 	{
-		enemyEncounter();
+		findFlashlight();
+		findBatteries();
+		findJetpack();
+		findFuel();
 		gameScenarioSelections();
+	}
+	if (input == "On" || input == "on")
+	{
+		if (durabilities[2] >= 1)
+		{
+			cout << "The Flashlight has been turned on" << endl;
+		}
 	}
 	if (input == "Help" || input == "help")
 	{
@@ -213,7 +232,26 @@ void gameScenarioNorth()
 	checkMap();
 	system("pause");
 }
-
+void flashlightOnOff()
+{
+	if (durabilities[2] >= 1 && flashlightOnOffCheck == 0)
+	{
+		cout << "The Flashlight is now turned on" << endl;
+		flashlightOnOffCheck = 1;
+		gameScenarioSelections();
+	}
+	if (durabilities[2] >= 1 && flashlightOnOffCheck == 1)
+	{
+		cout << "The Flashlight is now turned off" << endl;
+		durabilities[2] = durabilities[2] - 5;
+		flashlightOnOffCheck = 0;
+		gameScenarioSelections();
+	}
+	if (durabilities[2] <= 1)
+	{
+		cout << "Unfortunately, the flashlight doesn't seem to have enough battery power" << endl;
+	}
+}
 int convertToInt(string input)
 {
 	/* checks if input is a number, and converts it to an int */
@@ -357,7 +395,9 @@ void getHelp()
 		cout << "\t\t\t Selected Movement Help." << endl;
 		cout << "\t\t\t To move in game use N , S , E , W corresponding to the direction you want to travel." << endl;
 		cout << "\t\t\t Going too far in one direction will cause you to eventually turn back so be careful." << endl;
+
 		cout << "\t\t\t To be able to travel during the night, you will need a Flashlight and some Batteries." << endl;
+
 		SetConsoleTextAttribute(hConsole, 7);
 		system("pause");
 		getHelp();
@@ -397,6 +437,7 @@ void getHelp()
 		system("pause");
 		getHelp();
 	}
+
 }
 void durabilityDecrease()
 {
@@ -431,10 +472,12 @@ void durabilityIncrease()
 	}
 	durability = durabilities[1] + durabilityIncreaseValue;
 	durabilities[1] = durability;
+
 }
 //this function serves as a way to access the inventory 
 void getInventory()
 {
+
 	cout << "======================================================================================================================" << endl;
 	cout << "\t\t\t\t\t\t INVENTORY" << endl;
 	cout << "======================================================================================================================" << endl;
@@ -442,6 +485,7 @@ void getInventory()
 	{
 		if (itemChecks[i] == 1)
 		{
+			cout << endl;
 			cout << "\t\t\t\t\t\t" << items[i];
 			if (i < 4)
 			{
@@ -452,19 +496,19 @@ void getInventory()
 				if (100 >= durabilities[i] && durabilities[i] >= 76)
 				{
 					SetConsoleTextAttribute(hConsole, 2);
-					cout << " [" << durabilities[i] << "%]" << endl;
+					cout << " [" << durabilities[i] << "]" << endl;
 					SetConsoleTextAttribute(hConsole, 7);
 				}
 				if (56 <= durabilities[i] && durabilities[i] <= 75)
 				{
 					SetConsoleTextAttribute(hConsole, 6);//color changing 
-					cout << " [" << durabilities[i] << "%]" << endl;
+					cout << " [" << durabilities[i] << "]" << endl;
 					SetConsoleTextAttribute(hConsole, 7);
 				}
 				if (1 <= durabilities[i] && durabilities[i] <= 55)
 				{
 					SetConsoleTextAttribute(hConsole, 4);//color changing 
-					cout << " [" << durabilities[i] << "%]" << endl;
+					cout << " [" << durabilities[i] << "]" << endl;
 					SetConsoleTextAttribute(hConsole, 7);
 				}
 				if (durabilities[i] < 1)
@@ -478,10 +522,55 @@ void getInventory()
 		}
 	}
 	cout << endl;
+	if (itemChecks[2] == 1 && itemChecks[5] == 1)
+	{
+		string selection;
+		cout << endl << "It seems you have Batteries for that Flashlight, Would you like to put them in the Flashlight?" << endl;
+		cin >> selection;
+		if (selection == "yes" || selection == "Yes")
+		{
+			cout << "Batteries have been inserted into the Flashlight. It seems to be able to give off light now.";
+			durabilities[2] = 100;
+			itemChecks[5] = 0;
+		}
+	}
+	if (itemChecks[3] == 1 && itemChecks[6] == 1)
+	{
+		string selection;
+		cout << endl << "It seems you have Fuel for that Jetpack, Would you like to put it in the Jetpack?" << endl;
+		cin >> selection;
+		if (selection == "yes" || selection == "Yes")
+		{
+			cout << "Fuel have been inserted into the Jetpack. It seems to be able to be used now";
+			durabilities[3] = 100;
+			itemChecks[6] = 0;
+		}
+	}
+	if (itemChecks[2] == 1 && itemChecks[5] == 0 && flashlightOnOffCheck == 0)
+	{
+		string selection;
+		cout << "Would you like to turn On your Flashlight?" << endl;
+		cin >> selection;
+		if (selection == "yes" || selection == "Yes")
+		{
+			flashlightOnOff();
+		}
+	}
+	if (itemChecks[2] == 1 && itemChecks[5] == 0 && flashlightOnOffCheck == 1)
+	{
+		string selection;
+		cout << "Would you like to turn Off your Flashlight?" << endl;
+		cin >> selection;
+		if (selection == "yes" || selection == "Yes")
+		{
+			flashlightOnOff();
+		}
+	}
 	//SetConsoleTextAttribute(hConsole, 11);//color changing 
 	//cout << "Your Inventory: (1) Pocket Knife , (2) Water Canteen , (3) Map" << endl;
 	//SetConsoleTextAttribute(hConsole, 7);
 	//system("pause");
+
 }
 //This fcn serves to randomly give a user an enemy to face after every game 
 void enemyEncounter()
@@ -535,110 +624,136 @@ void timeProgress()
 void checkMap()
 {
 	int maplocation = a[ymap][xmap];
-	if (maplocation = 0)
+	if (maplocation == 0)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 0, what will you do?" << endl;
 	}
-	else if (maplocation = 1)
+	else if (maplocation == 1)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 1, what will you do?" << endl;
 	}
-	else if (maplocation = 2)
+	else if (maplocation == 2)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 2, what will you do?" << endl;
 	}
-	else if (maplocation = 3)
+	else if (maplocation == 3)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 3, what will you do?" << endl;
 	}
-	else if (maplocation = 4)
+	else if (maplocation == 4)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 4, what will you do?" << endl;
 	}
-	else if (maplocation = 5)
+	else if (maplocation == 5)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 5, what will you do?" << endl;
 	}
-	else if (maplocation = 6)
+	else if (maplocation == 6)
 	{
 		cout << "You have arrived at the Camouflaged Cove," << "almost impossible to spot at first glance you distinguish" << endl << "the different fauna covering the opening from the cavern itself," << endl << "what will you do?" << endl;
 	}
-	else if (maplocation = 7)
+	else if (maplocation == 7)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 7, what will you do?" << endl;
 	}
-	else if (maplocation = 8)
+	else if (maplocation == 8)
 	{
 		cout << "You have arrived at the Soggy Sinkhole, what will you do?" << endl;
 	}
-	else if (maplocation = 9)
+	else if (maplocation == 9)
 	{
 		cout << "You have arrived at the Rugged River, what will you do?" << endl;
 	}
-	else if (maplocation = 10)
+	else if (maplocation == 10)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 10, what will you do?" << endl;
 	}
-	else if (maplocation = 11)
+	else if (maplocation == 11)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 11, what will you do?" << endl;
 	}
-	else if (maplocation = 12)
+	else if (maplocation == 12)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 12, what will you do?" << endl;
 	}
-	else if (maplocation = 13)
+	else if (maplocation == 13)
 	{
 		cout << "You have arrived at the Treasure Chest, what will you do?" << endl;
 	}
-	else if (maplocation = 14)
+	else if (maplocation == 14)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 14, what will you do?" << endl;
 	}
-	else if (maplocation = 15)
+	else if (maplocation == 15)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 15, what will you do?" << endl;
 	}
-	else if (maplocation = 16)
+	else if (maplocation == 16)
 	{
 		cout << "You have arrived at the Crash Site," << endl << "reminants of machines as well as the hole are laid before you," << endl << "what will you do?" << endl;
 	}
-	else if (maplocation = 17)
+	else if (maplocation == 17)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 17, what will you do?" << endl;
 	}
-	else if (maplocation = 18)
+	else if (maplocation == 18)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 18, what will you do?" << endl;
 	}
-	else if (maplocation = 19)
+	else if (maplocation == 19)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 19, what will you do?" << endl;
 	}
-	else if (maplocation = 20)
+	else if (maplocation == 20)
 	{
 		cout << "You have arrived at the Cosmic Cave, what will you do?" << endl;
 	}
-	else if (maplocation = 21)
+	else if (maplocation == 21)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 21, what will you do?" << endl;
 	}
-	else if (maplocation = 22)
+	else if (maplocation == 22)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 22, what will you do?" << endl;
 	}
-	else if (maplocation = 23)
+	else if (maplocation == 23)
 	{
 		cout << "You have arrived at the Fatal Forest, what will you do?" << endl;
 	}
-	else if (maplocation = 24)
+	else if (maplocation == 24)
 	{
-		cout << "You have arrived at the _, what will you do?" << endl;
+		cout << "You have arrived at the 24, what will you do?" << endl;
 	}
 	else
 	{
-	    cout << "Location cannot be found, location reseting to crash site, please wait..." << endl;
+		cout << "Location cannot be found, location reseting to crash site, please wait..." << endl;
 		xmap = 1; ymap = 3; maplocation = a[ymap][xmap];
 		checkMap();
-    }
+	}
+}
+void findFlashlight()
+{
+	cout << "You have found a flashlight on the ground." << endl;
+	itemChecks[2] = 1;
+	//durabilities[2] = 100;
+	cout << "Flashlight has been added to your inventory." << endl;
+}
+void findJetpack()
+{
+	cout << "You have found a jetpack on the ground." << endl;
+	itemChecks[3] = 1;
+	//durabilities[3] = 100;
+	cout << "Jetpack has been added to your inventory." << endl;
+}
+void findBatteries()
+{
+	cout << "You have found batteries for a flashlight on the ground." << endl;
+	itemChecks[5] = 1;
+	cout << "Flashlight batteries has been added to your inventory." << endl;
+}
+void findFuel()
+{
+	cout << "You have found some jetpack fuel." << endl;
+	itemChecks[6] = 1;
+	cout << "Jetpack fuel has been added to your inventory." << endl;
 }
