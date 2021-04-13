@@ -757,3 +757,4 @@ void findFuel()
 	itemChecks[6] = 1;
 	cout << "Jetpack fuel has been added to your inventory." << endl;
 }
+//Please Fix
