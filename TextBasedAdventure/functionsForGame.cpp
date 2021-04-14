@@ -13,14 +13,11 @@
 using namespace std;
 
 
-string version = "2.0.0", input, input1;
-int health = 90, temp, flashlightOnOffCheck = 0;
+string version = "3.0.0", input;
+int a[5][5] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 };
+int health = 90, flashlightOnOffCheck = 0, selections = 0, xmap = 1, ymap = 3, maplocation = a[ymap][xmap];;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 enum direction { N, S, E, W, I, H, Q, n, s, e, w, h, i, q, R, r, D, d, Help, help };
-int selections = 0;
-
-int a[5][5] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 };
-int xmap = 1; int ymap = 3; int maplocation = a[ymap][xmap];//map coordination creation
 string items[] = { "Water Canteen", "Pocket Knife", "Flashlight", "Jetpack", "Map", "Batteries", "Fuel" };
 int itemChecks[] = { 0,0,0,0,0,0,0 };
 int durabilities[] = { 0,0,0,0 };
@@ -495,25 +492,25 @@ void getInventory()
 				if (100 >= durabilities[i] && durabilities[i] >= 76)
 				{
 					SetConsoleTextAttribute(hConsole, 2);
-					cout << " [" << durabilities[i] << "]" << endl;
+					cout << " [" << durabilities[i] << "%]";
 					SetConsoleTextAttribute(hConsole, 7);
 				}
 				if (56 <= durabilities[i] && durabilities[i] <= 75)
 				{
 					SetConsoleTextAttribute(hConsole, 6);//color changing 
-					cout << " [" << durabilities[i] << "]" << endl;
+					cout << " [" << durabilities[i] << "%]";
 					SetConsoleTextAttribute(hConsole, 7);
 				}
 				if (1 <= durabilities[i] && durabilities[i] <= 55)
 				{
 					SetConsoleTextAttribute(hConsole, 4);//color changing 
-					cout << " [" << durabilities[i] << "]" << endl;
+					cout << " [" << durabilities[i] << "%]";
 					SetConsoleTextAttribute(hConsole, 7);
 				}
-				if (durabilities[i] < 1)
+				if (durabilities[i] < 1 && itemChecks[i] < 2)
 				{
 					SetConsoleTextAttribute(hConsole, 15);
-					cout << " [Destroyed]" << endl;
+					cout << " [Destroyed]";
 					SetConsoleTextAttribute(hConsole, 7);
 					durabilities[i] = 0;
 				}
