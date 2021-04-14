@@ -671,10 +671,12 @@ void checkMap()
 	else if (maplocation == 11)
 	{
 		cout << "You have arrived at the 11, what will you do?" << endl;
+		findFlashlight();
 	}
 	else if (maplocation == 12)
 	{
 		cout << "You have arrived at the 12, what will you do?" << endl;
+		findBatteries();
 	}
 	else if (maplocation == 13)
 	{
@@ -683,10 +685,12 @@ void checkMap()
 	else if (maplocation == 14)
 	{
 		cout << "You have arrived at the 14, what will you do?" << endl;
+		findFlashlight();
 	}
 	else if (maplocation == 15)
 	{
 		cout << "You have arrived at the 15, what will you do?" << endl;
+		findBatteries();
 		
 	}
 	else if (maplocation == 16)
@@ -700,11 +704,13 @@ void checkMap()
 	else if (maplocation == 18)
 	{
 		cout << "You have arrived at the 18, what will you do?" << endl;
+		findJetpack();
 		
 	}
 	else if (maplocation == 19)
 	{
 		cout << "You have arrived at the 19, what will you do?" << endl;
+		findFuel();
 	}
 	else if (maplocation == 20)
 	{
@@ -718,6 +724,7 @@ void checkMap()
 	else if (maplocation == 22)
 	{
 		cout << "You have arrived at the 22, what will you do?" << endl;
+		findFuel();
 		
 	}
 	else if (maplocation == 23)
