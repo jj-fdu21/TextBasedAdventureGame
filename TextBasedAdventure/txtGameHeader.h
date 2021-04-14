@@ -32,3 +32,4 @@ void findJetpack();
 void findBatteries();
 void findFuel();
 void checkMap();
+void collapsedCave();
