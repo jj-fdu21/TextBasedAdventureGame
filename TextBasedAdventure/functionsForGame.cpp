@@ -687,6 +687,7 @@ void checkMap()
 	else if (maplocation == 15)
 	{
 		cout << "You have arrived at the 15, what will you do?" << endl;
+		
 	}
 	else if (maplocation == 16)
 	{
@@ -699,6 +700,7 @@ void checkMap()
 	else if (maplocation == 18)
 	{
 		cout << "You have arrived at the 18, what will you do?" << endl;
+		
 	}
 	else if (maplocation == 19)
 	{
@@ -711,10 +713,12 @@ void checkMap()
 	else if (maplocation == 21)
 	{
 		cout << "You have arrived at the 21, what will you do?" << endl;
+		findJetpack();
 	}
 	else if (maplocation == 22)
 	{
 		cout << "You have arrived at the 22, what will you do?" << endl;
+		
 	}
 	else if (maplocation == 23)
 	{
