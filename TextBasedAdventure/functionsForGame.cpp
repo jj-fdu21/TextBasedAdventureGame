@@ -516,31 +516,31 @@ void timeProgress()
 void checkMap()
 {
 	int maplocation = a[ymap][xmap];
-	if (maplocation = 0)
+	if (maplocation == 0)
 	{
 		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if (maplocation = 1)
+	else if (maplocation == 1)
 	{
 		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if (maplocation = 2)
+	else if (maplocation == 2)
 	{
 		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if (maplocation = 3)
+	else if (maplocation == 3)
 	{
 		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if (maplocation = 4)
+	else if (maplocation == 4)
 	{
 		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if (maplocation = 5)
+	else if (maplocation == 5)
 	{
 		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if (maplocation = 6)
+	else if (maplocation == 6)
 	{
 		cout << endl << "After walking in the jungle, your feet begin to drag and you are thirsty."
 			<< endl << "As you begin to hallucinate you trip over a large green vine,"
@@ -554,75 +554,75 @@ void checkMap()
 			<< endl << "Press 1 to enter the cove or press 2 to keep moving." << endl;
 		camoCave();
 	}
-	else if (maplocation = 7)
+	else if (maplocation == 7)
 	{
 		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if (maplocation = 8)
+	else if (maplocation == 8)
 	{
 		cout << "You have arrived at the Soggy Sinkhole, what will you do?" << endl;
 	}
-	else if (maplocation = 9)
+	else if (maplocation == 9)
 	{
 		cout << "You have arrived at the Rugged River, what will you do?" << endl;
 	}
-	else if (maplocation = 10)
+	else if (maplocation == 10)
 	{
 		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if (maplocation = 11)
+	else if (maplocation == 11)
 	{
 		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if (maplocation = 12)
+	else if (maplocation == 12)
 	{
 		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if (maplocation = 13)
+	else if (maplocation == 13)
 	{
 		cout << "You have arrived at the Treasure Chest, what will you do?" << endl;
 	}
-	else if (maplocation = 14)
+	else if (maplocation == 14)
 	{
 		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if (maplocation = 15)
+	else if (maplocation == 15)
 	{
 		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if (maplocation = 16)
+	else if (maplocation == 16)
 	{
 		cout << "You have arrived at the Crash Site," << endl << "reminants of machines as well as the hole are laid before you," << endl << "what will you do?" << endl;
 	}
-	else if (maplocation = 17)
+	else if (maplocation == 17)
 	{
 		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if (maplocation = 18)
+	else if (maplocation == 18)
 	{
 		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if (maplocation = 19)
+	else if (maplocation == 19)
 	{
 		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if (maplocation = 20)
+	else if (maplocation == 20)
 	{
 		cout << "You have arrived at the Cosmic Cave, what will you do?" << endl;
 	}
-	else if (maplocation = 21)
+	else if (maplocation == 21)
 	{
 		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if (maplocation = 22)
+	else if (maplocation == 22)
 	{
 		cout << "You have arrived at the _, what will you do?" << endl;
 	}
-	else if (maplocation = 23)
+	else if (maplocation == 23)
 	{
 		cout << "You have arrived at the Fatal Forest, what will you do?" << endl;
 	}
-	else if (maplocation = 24)
+	else if (maplocation == 24)
 	{
 		cout << "You have arrived at the _, what will you do?" << endl;
 	}
@@ -656,8 +656,31 @@ void camoCave() //built in choices for camoflauge cove
 		{
 			cout << endl << "A invalid input was given, you have deviced not to drink the water, you continue to look around the cove." << endl;
 		}
-		//check for a flashlight and see if they want to use it, another choice to see
-		//if flashlight then show waterfall and ask if they want to fill a water bottle if they have it
+		cout << endl << "As the cove continues deeper in, it gets to dark to continue, a flashlight would be perfect for the situation" << endl;
+		cout << "Press 1 to try to use a flashlight, and press 2 to rather leave." << endl; cin >> choice;
+		if (choice = '1')
+		{
+			//this is where it would check to see if you have a flashlight
+			if (choice = '1')
+			{
+				//player choses to use flashlight
+				//if flashlight
+				//uses durability
+				cout << endl << "Your flashlight has proven to be valuable because as you shine it towards the back of the cave," << endl << " you see a small natural waterfall. Please refill your water bottle if you have it." << endl;
+				//checks for waterbottle
+				//refills waterbottle here if you have it
+			}
+			if (choice = '2')
+			{
+				cout << endl << "Being unable to see, you stumble back out, scraping your legs as you continue." << endl;
+				health = -10;
+			}
+			else
+			{
+				cout << endl << "Being unable to choose, you stubmel back out, scraping your legs as you escape." << endl;
+				health = -15;
+			}
+		}
 		//https://docs.google.com/document/d/12YF7y6Zu3Pec7W31ud7z_o7h-pdKRW4LNAiOogTrAOE/edit
 	}
 	else if (choice = '2')
