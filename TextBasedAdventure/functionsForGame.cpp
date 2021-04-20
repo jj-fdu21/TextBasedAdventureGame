@@ -645,7 +645,7 @@ void camoCave() //built in choices for camoflauge cove
 		cin >> choice;
 		if (choice = '1')
 		{
-			cout << endl << "You begin to drink all of the water and then continue to look around the cove." << endl;
+			cout << endl << "You begin to drink the water and then continue to look around the cove." << endl;
 			health =+ 10;
 		}
 		else if (choice = '2')
@@ -660,15 +660,13 @@ void camoCave() //built in choices for camoflauge cove
 		cout << "Press 1 to try to use a flashlight, and press 2 to rather leave." << endl; cin >> choice;
 		if (choice = '1')
 		{
-			//this is where it would check to see if you have a flashlight
-			if (choice = '1')
+			if (choice = '1' /*|| flaslighttrue?*/)
 			{
-				//player choses to use flashlight
-				//if flashlight
-				//uses durability
-				cout << endl << "Your flashlight has proven to be valuable because as you shine it towards the back of the cave," << endl << " you see a small natural waterfall. Please refill your water bottle if you have it." << endl;
-				//checks for waterbottle
-				//refills waterbottle here if you have it
+				//uses durability of flashlight
+				cout << endl << "Your flashlight has proven to be valuable because as you shine it towards the back of the cave," << endl << " you see a small natural waterfall." << endl;
+				// if (waterbottletrue)
+				//refills waterbottle here if you have it, full durability restored
+				// cout << endl << "You refilled your waterbottle using the waterfall" << endl;
 			}
 			if (choice = '2')
 			{
@@ -677,11 +675,20 @@ void camoCave() //built in choices for camoflauge cove
 			}
 			else
 			{
-				cout << endl << "Being unable to choose, you stubmel back out, scraping your legs as you escape." << endl;
+				cout << endl << "Being unable to choose, you stubmle back out, scraping your legs as you escape." << endl;
 				health = -15;
 			}
 		}
-		//https://docs.google.com/document/d/12YF7y6Zu3Pec7W31ud7z_o7h-pdKRW4LNAiOogTrAOE/edit
+		if (choice = '2')
+		{
+			cout << endl << "You chose not to continue further in, going back out you choose where to go next." << endl;
+			health = -10;
+		}
+		else
+		{
+			cout << endl << "You did not go further in, going back out you choose where to go next." << endl;
+			health = -15;
+		}
 	}
 	else if (choice = '2')
 	{
