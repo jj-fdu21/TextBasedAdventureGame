@@ -33,3 +33,4 @@ void findBatteries();
 void findFuel();
 void checkMap();
 void collapsedCave();
+void findTrailMix();
