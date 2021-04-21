@@ -641,7 +641,17 @@ void checkMap()
 	}
 	else if (maplocation == 6)
 	{
-		cout << "You have arrived at the Camouflaged Cove," << "almost impossible to spot at first glance you distinguish" << endl << "the different fauna covering the opening from the cavern itself," << endl << "what will you do?" << endl;
+		cout << endl << "After walking in the jungle, your feet begin to drag and you are thirsty."
+			<< endl << "As you begin to hallucinate you trip over a large green vine,"
+			<< endl << "and your head smashes against the moist dirt."
+			<< endl << "As you pick your head up you see that there is a small hole,"
+			<< endl << "slightly bigger than your body length that you would be able to fit in."
+			<< endl << "You are now sitting at the entrance to the Camouflaged Cove."
+			<< endl << "Entering the cove may prove to be deadly,"
+			<< endl << "but may also provide you with various survival necessities."
+			<< endl << "Don�t forget to check you inventory for items to help you."
+			<< endl << "Press 1 to enter the cove or press 2 to keep moving." << endl;
+		camoCave();
 	}
 	else if (maplocation == 7)
 	{
@@ -734,6 +744,77 @@ void checkMap()
 		cout << "Location cannot be found, location reseting to crash site, please wait..." << endl;
 		xmap = 1; ymap = 3; maplocation = a[ymap][xmap];
 		checkMap();
+    }
+}
+
+void camoCave() //built in choices for camoflauge cove
+{
+	char choice;
+	cin >> choice;
+	if (choice = '1')
+	{
+		cout << endl << "After entering the cave, there is just enough sunlight for you to see a puddle of fresh water,likely from the last big rain."
+			<< endl << "Do you wish to drink it? 1 for yes, 2 for no." << endl;
+		cin >> choice;
+		if (choice = '1')
+		{
+			cout << endl << "You begin to drink the water and then continue to look around the cove." << endl;
+			health =+ 10;
+		}
+		else if (choice = '2')
+		{
+			cout << endl << "You have chosen not to drink the water, you continue to look around the cove." << endl;
+		}
+		else
+		{
+			cout << endl << "A invalid input was given, you have deviced not to drink the water, you continue to look around the cove." << endl;
+		}
+		cout << endl << "As the cove continues deeper in, it gets to dark to continue, a flashlight would be perfect for the situation" << endl;
+		cout << "Press 1 to try to use a flashlight, and press 2 to rather leave." << endl; cin >> choice;
+		if (choice = '1')
+		{
+			if (choice = '1' /*|| flaslighttrue?*/)
+			{
+				//uses durability of flashlight
+				cout << endl << "Your flashlight has proven to be valuable because as you shine it towards the back of the cave," << endl << " you see a small natural waterfall." << endl;
+				// if (waterbottletrue)
+				//refills waterbottle here if you have it, full durability restored
+				// cout << endl << "You refilled your waterbottle using the waterfall" << endl;
+			}
+			if (choice = '2')
+			{
+				cout << endl << "Being unable to see, you stumble back out, scraping your legs as you continue." << endl;
+				health = -10;
+			}
+			else
+			{
+				cout << endl << "Being unable to choose, you stubmle back out, scraping your legs as you escape." << endl;
+				health = -15;
+			}
+		}
+		if (choice = '2')
+		{
+			cout << endl << "You chose not to continue further in, going back out you choose where to go next." << endl;
+			health = -10;
+		}
+		else
+		{
+			cout << endl << "You did not go further in, going back out you choose where to go next." << endl;
+			health = -15;
+		}
+	}
+	else if (choice = '2')
+	{
+		cout << endl << "Although searching the cave could have been dangerous, it may have had much needed supplies. Just remember that where there is risk there is reward." << endl;
+		health =- 15;
+	}
+	else
+	{
+		cout << endl << "a invalid input was given, please try again." << endl;
+		camoCave();
+	}
+}
+
 	}
 }
 //This function allows the player to find the flashlight and add it to their inventory
@@ -823,3 +904,4 @@ void collapsedCave()
 
 }
 //Please Fix
+
