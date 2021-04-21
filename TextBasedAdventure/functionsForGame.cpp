@@ -815,8 +815,6 @@ void camoCave() //built in choices for camoflauge cove
 	}
 }
 
-	}
-}
 //This function allows the player to find the flashlight and add it to their inventory
 void findFlashlight()
 {
