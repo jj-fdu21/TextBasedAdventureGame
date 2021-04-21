@@ -649,7 +649,7 @@ void checkMap()
 			<< endl << "You are now sitting at the entrance to the Camouflaged Cove."
 			<< endl << "Entering the cove may prove to be deadly,"
 			<< endl << "but may also provide you with various survival necessities."
-			<< endl << "Don�t forget to check you inventory for items to help you."
+			<< endl << "Don't forget to check you inventory for items to help you."
 			<< endl << "Press 1 to enter the cove or press 2 to keep moving." << endl;
 		camoCave();
 	}
