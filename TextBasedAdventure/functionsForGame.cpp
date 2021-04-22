@@ -15,7 +15,7 @@ using namespace std;
 
 string version = "3.0.0", input, username;
 int a[5][5] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 };
-int health = 90, flashlightOnOffCheck = 0, selections = 0, xmap = 1, ymap = 3, maplocation = a[ymap][xmap];;
+int health = 90, flashlightOnOffCheck = 0, selections = 0, position, xmap = 1, ymap = 3, maplocation = a[ymap][xmap];
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 enum direction { N, S, E, W, I, H, Q, n, s, e, w, h, i, q, R, r, D, d, Help, help };
 string items[] = { "Water Canteen", "Pocket Knife", "Flashlight", "Jetpack", "Trail Mix", "Map", "Batteries", "Fuel" };
@@ -702,7 +702,6 @@ void checkMap()
 	{
 		cout << "You have arrived at the 15, what will you do?" << endl;
 		findBatteries();
-		
 	}
 	else if (maplocation == 16)
 	{
@@ -711,12 +710,12 @@ void checkMap()
 	else if (maplocation == 17)
 	{
 		cout << "You have arrived at the 17, what will you do?" << endl;
+		elephantCombat();
 	}
 	else if (maplocation == 18)
 	{
 		cout << "You have arrived at the 18, what will you do?" << endl;
 		findJetpack();
-		
 	}
 	else if (maplocation == 19)
 	{
@@ -739,7 +738,6 @@ void checkMap()
 	{
 		cout << "You have arrived at the 22, what will you do?" << endl;
 		findFuel();
-		
 	}
 	else if (maplocation == 23)
 	{
@@ -798,6 +796,49 @@ void useTrailMix()
 	health = health + 15;
 	cout << "You have lost a trail mix in your inventory. " << endl;
 	durabilities[4] = durabilities[4] - 1;
+}
+void elephantCombat()
+{
+	int selection;
+	cout << "You have encountered an Elephant!!! What are you going to do?" << endl;
+	cout << "It doesn't seem to be hostile (at first)" << endl;
+	cout << "1. Threaten the Elephant To Have It Leave" << endl;
+	cout << "2. Walk Away" << endl;
+	cin >> selection;
+	if (cin.fail())
+	{
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Invalid input for Combat Selection, the game will re-prompt you." << endl;
+		system("pause");
+		elephantCombat();
+	}
+	if (selection == 1)
+	{
+		int damage = rand() % 25 + 30;
+		cout << "The Elephant seems unthreatened but is now angry, it decides to hurl a tree at you." << endl;
+		cout << "The Elephant deals " << damage << " damage to you" << endl;
+		health -= damage;
+		checkDeath();
+		gameScenarioSelections();
+	}
+	if (selection == 2)
+	{
+		int outcome = rand() % 2 + 1;
+		if (outcome == 1)
+		{
+			cout << "You decide to walk around away from the Elephant, was probably the best decision since it didn't notice" << endl;
+			gameScenarioSelections();
+		}
+		if (outcome == 2)
+		{
+			cout << "The Elephant notices you trying to sneak around, and it doesn't like that." << endl;
+			cout << "The Elephant rages into a stomping tantrum, you have been crushed." << endl;
+			health = 0;
+			Sleep(2000);
+			checkDeath();
+		}
+	}
 }
 //This function simulates the collapsed cave scenario
 void collapsedCave()
