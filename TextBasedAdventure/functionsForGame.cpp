@@ -485,7 +485,7 @@ void getInventory()
 		{
 			cout << endl;
 			cout << "\t\t\t\t\t\t" << items[i];
-			if (i < 5)
+			if (i <= 4)
 			{
 				if (durabilities[i] > 100)
 				{
@@ -503,7 +503,7 @@ void getInventory()
 					cout << " [" << durabilities[i] << "%]";
 					SetConsoleTextAttribute(hConsole, 7);
 				}
-				if (1 <= durabilities[i] && durabilities[i] <= 55 && items[i] != "Trail Mix")
+				if (1 <= durabilities[i] && durabilities[i] <= 55)
 				{
 					SetConsoleTextAttribute(hConsole, 4);//color changing 
 					cout << " [" << durabilities[i] << "%]";
@@ -523,19 +523,18 @@ void getInventory()
 					SetConsoleTextAttribute(hConsole, 7);
 					durabilities[i] = 0;
 				}
-				if (durabilities[4] > -1 && items[i] == "Trail Mix")
-				{
-					SetConsoleTextAttribute(hConsole, 2);
-					cout << " [" << durabilities[4] << "]";
-					SetConsoleTextAttribute(hConsole, 7);
-				}
-			
+				//if (durabilities[i] >= 0 && items[i] == "Trail Mix")
+				//{
+				//	SetConsoleTextAttribute(hConsole, 2);
+				//	cout << " [" << durabilities[i] << "]";
+				//	SetConsoleTextAttribute(hConsole, 7);
+				//}
 			}
 		}
 	}
 	
 	cout << endl;
-	if (itemChecks[2] == 1 && itemChecks[5] == 1)
+	if (itemChecks[2] == 1 && itemChecks[6] == 1)
 	{
 		string selection;
 		cout << endl << "It seems you have Batteries for that Flashlight, Would you like to put them in the Flashlight? (Yes/No)" << endl;
@@ -544,10 +543,10 @@ void getInventory()
 		{
 			cout << "Batteries have been inserted into the Flashlight. It seems to be able to give off light now." << endl;
 			durabilities[2] = 100;
-			itemChecks[5] = 0;
+			itemChecks[6] = 0;
 		}
 	}
-	if (itemChecks[3] == 1 && itemChecks[6] == 1)
+	if (itemChecks[3] == 1 && itemChecks[7] == 1)
 	{
 		string selection;
 		cout << "It seems you have Fuel for that Jetpack, Would you like to put it in the Jetpack? (Yes/No)" << endl;
@@ -556,7 +555,7 @@ void getInventory()
 		{
 			cout << "Fuel have been inserted into the Jetpack. It seems to be able to be used now" << endl;
 			durabilities[3] = 100;
-			itemChecks[6] = 0;
+			itemChecks[7] = 0;
 		}
 	}
 	if (itemChecks[2] == 1 && itemChecks[5] == 0 && flashlightOnOffCheck == 0)
