@@ -15,12 +15,12 @@ using namespace std;
 
 string version = "3.0.0", input;
 int a[5][5] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 };
-int health = 90, flashlightOnOffCheck = 0, selections = 0, xmap = 1, ymap = 3, maplocation = a[ymap][xmap];;
+int health = 90, amountOfMix = 0, flashlightOnOffCheck = 0, selections = 0, xmap = 1, ymap = 3, maplocation = a[ymap][xmap];;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 enum direction { N, S, E, W, I, H, Q, n, s, e, w, h, i, q, R, r, D, d, Help, help };
-string items[] = { "Water Canteen", "Pocket Knife", "Flashlight", "Jetpack", "Trail Mix", "Map", "Batteries", "Fuel" };
+string items[] = { "Water Canteen", "Pocket Knife", "Flashlight", "Jetpack", "Map", "Batteries", "Fuel", "Trail Mix" };
 int itemChecks[] = { 0,0,0,0,0,0,0,0 };
-int durabilities[] = { 0,0,0,0,0 };
+int durabilities[] = { 0,0,0,0 };
 void mainMenu() {
 	//starting menu of choices
 	string menuChoice;
@@ -483,6 +483,10 @@ void getInventory()
 		{
 			cout << endl;
 			cout << "\t\t\t\t\t\t" << items[i];
+			if (items[i] == "Trail Mix")
+			{
+				cout << " [" << amountOfMix << "]";
+			}
 			if (i < 5)
 			{
 				if (durabilities[i] > 100)
@@ -521,12 +525,12 @@ void getInventory()
 					SetConsoleTextAttribute(hConsole, 7);
 					durabilities[i] = 0;
 				}
-				if (durabilities[4] > -1 && items[i] == "Trail Mix")
-				{
-					SetConsoleTextAttribute(hConsole, 2);
-					cout << " [" << durabilities[4] << "]";
-					SetConsoleTextAttribute(hConsole, 7);
-				}
+				//if (durabilities[4] > -1 && items[i] == "Trail Mix")
+				//{
+				//	SetConsoleTextAttribute(hConsole, 2);
+				//	cout << " [" << durabilities[4] << "]";
+				//	SetConsoleTextAttribute(hConsole, 7);
+				//}
 			
 			}
 		}
@@ -772,8 +776,10 @@ void findJetpack()
 void findTrailMix()
 {
 	cout << "You have found some trail mix on the ground." << endl;
-	itemChecks[4] = itemChecks[4] + 1;
-	durabilities[4] = durabilities[4] + 1;
+	itemChecks[7] = 1;
+	amountOfMix += 1;
+	//itemChecks[4] =  1;
+	//durabilities[4] = durabilities[4] + 1;
 	cout << "Trail Mix has been added to your inventory." << endl;
 }
 //This function allows the player to find the flashlight batteries and add it to their inventory.
@@ -795,7 +801,8 @@ void useTrailMix()
 	cout << "You have consumed some trail mix. " << endl;
 	health = health + 15;
 	cout << "You have lost a trail mix in your inventory. " << endl;
-	durabilities[4] = durabilities[4] - 1;
+	amountOfMix -= 1;
+	//durabilities[4] = durabilities[4] - 1;
 }
 //This function simulates the collapsed cave scenario
 void collapsedCave()
