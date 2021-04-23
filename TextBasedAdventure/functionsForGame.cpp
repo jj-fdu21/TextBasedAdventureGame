@@ -747,41 +747,51 @@ void checkMap()
     }
 }
 
-void camoCave() //built in choices for camoflauge cove
+void camoCave() //built in choices for camoflauge cove //repush
 {
 	char choice;
 	cin >> choice;
-	if (choice = '1')
+	if (choice == '1')
 	{
-		cout << endl << "After entering the cave, there is just enough sunlight for you to see a puddle of fresh water,likely from the last big rain."
+		cout << endl << "After entering the cave, there is just enough sunlight for you to see a puddle of fresh water," << endl << " likely from the last big rain."
 			<< endl << "Do you wish to drink it? 1 for yes, 2 for no." << endl;
 		cin >> choice;
-		if (choice = '1')
+		if (choice == '1')
 		{
 			cout << endl << "You begin to drink the water and then continue to look around the cove." << endl;
 			health =+ 10;
 		}
-		else if (choice = '2')
+		else if (choice == '2')
 		{
 			cout << endl << "You have chosen not to drink the water, you continue to look around the cove." << endl;
 		}
 		else
 		{
-			cout << endl << "A invalid input was given, you have deviced not to drink the water, you continue to look around the cove." << endl;
+			cout << endl << "A invalid input was given, you have decided not to drink the water, you continue to look around the cove." << endl;
 		}
 		cout << endl << "As the cove continues deeper in, it gets to dark to continue, a flashlight would be perfect for the situation" << endl;
 		cout << "Press 1 to try to use a flashlight, and press 2 to rather leave." << endl; cin >> choice;
-		if (choice = '1')
+		if (choice == '1')
 		{
-			if (choice = '1' /*|| flaslighttrue?*/)
+			if (choice == '1' && itemChecks[2] == 1 && durabilities[2] >= 5)
 			{
-				//uses durability of flashlight
+				durabilities[2] =- 5;
 				cout << endl << "Your flashlight has proven to be valuable because as you shine it towards the back of the cave," << endl << " you see a small natural waterfall." << endl;
-				// if (waterbottletrue)
-				//refills waterbottle here if you have it, full durability restored
-				// cout << endl << "You refilled your waterbottle using the waterfall" << endl;
+				if (itemChecks[1] == 1)
+				{
+					durabilities[1] = 100;
+					cout << endl << "You refilled your waterbottle using the waterfall." << endl;
+				}
 			}
-			if (choice = '2')
+			if (choice == '1' && itemChecks[2] == 1 && durabilities[2] < 5)
+			{
+				cout << endl << "Although you have a flashlight, you do not have enough" << endl << " power to continue down the cove, you turn back.";
+			}
+			if (choice == '1' && itemChecks[2] == 0)
+			{
+				cout << endl << "Missing a flashlight, you are unable to proceed further" << endl << " so you leave the cove.";
+			}
+			if (choice == '2')
 			{
 				cout << endl << "Being unable to see, you stumble back out, scraping your legs as you continue." << endl;
 				health = -10;
@@ -792,7 +802,7 @@ void camoCave() //built in choices for camoflauge cove
 				health = -15;
 			}
 		}
-		if (choice = '2')
+		if (choice == '2')
 		{
 			cout << endl << "You chose not to continue further in, going back out you choose where to go next." << endl;
 			health = -10;
@@ -803,7 +813,7 @@ void camoCave() //built in choices for camoflauge cove
 			health = -15;
 		}
 	}
-	else if (choice = '2')
+	else if (choice == '2')
 	{
 		cout << endl << "Although searching the cave could have been dangerous, it may have had much needed supplies. Just remember that where there is risk there is reward." << endl;
 		health =- 15;
