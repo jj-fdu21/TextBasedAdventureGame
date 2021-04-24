@@ -15,7 +15,7 @@ using namespace std;
 
 string version = "3.0.0", input;
 int a[5][5] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 };
-int health = 90, amountOfMix = 0, flashlightOnOffCheck = 0, selections = 0, xmap = 1, ymap = 3, maplocation = a[ymap][xmap];;
+int health = 90, amountOfMix = 0, flashlightOnOffCheck = -1, selections = 0, xmap = 1, ymap = 3, maplocation = a[ymap][xmap];;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 enum direction { N, S, E, W, I, H, Q, n, s, e, w, h, i, q, R, r, D, d, Help, help };
 string items[] = { "Water Canteen", "Pocket Knife", "Flashlight", "Jetpack", "Map", "Batteries", "Fuel", "Trail Mix" };
@@ -48,17 +48,13 @@ void mainMenu() {
 }
 void gameStartInventory()
 {
-
 	itemChecks[0] = 1;
 	itemChecks[1] = 1;
-	itemChecks[5] = 1;
+	itemChecks[4] = 1;
 	durabilities[0] = 50;
 	durabilities[1] = 100;
 	getInventory();
-
-
 	system("pause");
-
 }
 void gameIntro(int startingMode) {
 	if (startingMode == 1) {		//intro
@@ -487,7 +483,7 @@ void getInventory()
 			{
 				cout << " [" << amountOfMix << "]";
 			}
-			if (i < 5)
+			if (i < 4)
 			{
 				if (durabilities[i] > 100)
 				{
@@ -505,7 +501,7 @@ void getInventory()
 					cout << " [" << durabilities[i] << "%]";
 					SetConsoleTextAttribute(hConsole, 7);
 				}
-				if (1 <= durabilities[i] && durabilities[i] <= 55 && items[i] != "Trail Mix")
+				if (1 <= durabilities[i] && durabilities[i] <= 55)
 				{
 					SetConsoleTextAttribute(hConsole, 4);//color changing 
 					cout << " [" << durabilities[i] << "%]";
@@ -547,6 +543,7 @@ void getInventory()
 			cout << "Batteries have been inserted into the Flashlight. It seems to be able to give off light now." << endl;
 			durabilities[2] = 100;
 			itemChecks[5] = 0;
+			flashlightOnOffCheck = 0;
 		}
 	}
 	if (itemChecks[3] == 1 && itemChecks[6] == 1)
@@ -559,6 +556,16 @@ void getInventory()
 			cout << "Fuel have been inserted into the Jetpack. It seems to be able to be used now" << endl;
 			durabilities[3] = 100;
 			itemChecks[6] = 0;
+		}
+	}
+	if (amountOfMix > 0)
+	{
+		string selection;
+		cout << "Would you like to eat some trail mix to regenerate some health? (Yes/No)" << endl;
+		cin >> selection;
+		if (selection == "yes" || selection == "Yes")
+		{
+			useTrailMix();
 		}
 	}
 	if (itemChecks[2] == 1 && itemChecks[5] == 0 && flashlightOnOffCheck == 0)
@@ -786,23 +793,27 @@ void findTrailMix()
 void findBatteries()
 {
 	cout << "You have found batteries for a flashlight on the ground." << endl;
-	itemChecks[6] = 1;
+	itemChecks[5] = 1;
 	cout << "Flashlight batteries has been added to your inventory." << endl;
 }
 //This function allows the player to find the jetpack fuel and add it to their inventory.
 void findFuel()
 {
 	cout << "You have found some jetpack fuel." << endl;
-	itemChecks[7] = 1;
+	itemChecks[6] = 1;
 	cout << "Jetpack fuel has been added to your inventory." << endl;
 }
 void useTrailMix()
 {
+	if (health == 100)
+	{
+		cout << "Your health is already full, eating the trail mix will serve no purpose." << endl;
+		gameScenarioSelections();
+	}
 	cout << "You have consumed some trail mix. " << endl;
 	health = health + 15;
 	cout << "You have lost a trail mix in your inventory. " << endl;
 	amountOfMix -= 1;
-	//durabilities[4] = durabilities[4] - 1;
 }
 //This function simulates the collapsed cave scenario
 void collapsedCave()
