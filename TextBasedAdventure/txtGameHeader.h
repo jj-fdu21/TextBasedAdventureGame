@@ -34,4 +34,5 @@ void findFuel();
 void checkMap();
 void collapsedCave();
 void findTrailMix();
+void useTrailMix();
 void elephantCombat();
