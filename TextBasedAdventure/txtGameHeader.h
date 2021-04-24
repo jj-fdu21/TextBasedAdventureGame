@@ -36,3 +36,4 @@ void collapsedCave();
 void findTrailMix();
 void useTrailMix();
 void elephantCombat();
+void soggySinkhole();
