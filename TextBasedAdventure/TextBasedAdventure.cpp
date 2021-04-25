@@ -1,6 +1,7 @@
 /*
 * Textbased Game Theme Jungle Escape
-* Version:1.0
+* Version:4.0
+* 4/25/2021
 * Authors:JiraJocks
 *
 */

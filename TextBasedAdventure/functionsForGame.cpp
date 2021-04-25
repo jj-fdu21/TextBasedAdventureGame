@@ -682,7 +682,8 @@ void checkMap()
 			<< endl << "but may also provide you with various survival necessities."
 			<< endl << "Don't forget to check you inventory for items to help you."
 			<< endl << "Press 1 to enter the cove or press 2 to keep moving." << endl;
-		camoCave();
+		//camoCave(); 
+		//commented out due to error in trailmix branch can be placed back afterwards 
 	}
 	else if (maplocation == 7)
 	{
