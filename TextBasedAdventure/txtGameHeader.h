@@ -1,4 +1,3 @@
-
 #pragma once
 #include <iostream>
 #include <string>
@@ -34,8 +33,4 @@ void findBatteries();
 void findFuel();
 void checkMap();
 void collapsedCave();
-void findTrailMix();
-void useTrailMix();
-void elephantCombat();
 void camoCave();
-
