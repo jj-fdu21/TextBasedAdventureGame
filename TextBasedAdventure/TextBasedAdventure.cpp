@@ -18,5 +18,9 @@ int main() {
 	mainMenu();
 	playerOne();
 	gameScenarioSelections();
+	//setDamage(30);
+	//getHealth();
+	//setHeal(99);
+	//getHealth();
 	return 0;
 }
