@@ -15,11 +15,11 @@ using namespace std;
 
 string version = "3.0.0", input;
 int a[5][5] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 };
-int health = 90, flashlightOnOffCheck = 0, selections = 0, xmap = 1, ymap = 3, maplocation = a[ymap][xmap];;
+int health = 90, amountOfMix = 0, flashlightOnOffCheck = -1, selections = 0, xmap = 1, ymap = 3, maplocation = a[ymap][xmap];;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 enum direction { N, S, E, W, I, H, Q, n, s, e, w, h, i, q, R, r, D, d, Help, help };
-string items[] = { "Water Canteen", "Pocket Knife", "Flashlight", "Jetpack", "Map", "Batteries", "Fuel" };
-int itemChecks[] = { 0,0,0,0,0,0,0 };
+string items[] = { "Water Canteen", "Pocket Knife", "Flashlight", "Jetpack", "Map", "Batteries", "Fuel", "Trail Mix" };
+int itemChecks[] = { 0,0,0,0,0,0,0,0 };
 int durabilities[] = { 0,0,0,0 };
 void mainMenu() {
 	//starting menu of choices
@@ -48,17 +48,13 @@ void mainMenu() {
 }
 void gameStartInventory()
 {
-
 	itemChecks[0] = 1;
 	itemChecks[1] = 1;
 	itemChecks[4] = 1;
 	durabilities[0] = 50;
 	durabilities[1] = 100;
 	getInventory();
-
-
 	system("pause");
-
 }
 void gameIntro(int startingMode) {
 	if (startingMode == 1) {		//intro
@@ -483,6 +479,10 @@ void getInventory()
 		{
 			cout << endl;
 			cout << "\t\t\t\t\t\t" << items[i];
+			if (items[i] == "Trail Mix")
+			{
+				cout << " [" << amountOfMix << "]";
+			}
 			if (i < 4)
 			{
 				if (durabilities[i] > 100)
@@ -507,33 +507,49 @@ void getInventory()
 					cout << " [" << durabilities[i] << "%]";
 					SetConsoleTextAttribute(hConsole, 7);
 				}
-				if (durabilities[i] < 1 && itemChecks[i] < 2)
+				if (durabilities[i] < 1 && (items[i] == "Flashlight" || items[i] == "Jetpack"))
+				{
+					SetConsoleTextAttribute(hConsole, 15);
+					cout << " [Missing Component]";
+					SetConsoleTextAttribute(hConsole, 7);
+					durabilities[i] = 0;
+				}
+				if (durabilities[i] < 1 && (items[i] == "Water Canteen" || items[i] == "Pocket Knife"))
 				{
 					SetConsoleTextAttribute(hConsole, 15);
 					cout << " [Destroyed]";
 					SetConsoleTextAttribute(hConsole, 7);
 					durabilities[i] = 0;
 				}
+				//if (durabilities[4] > -1 && items[i] == "Trail Mix")
+				//{
+				//	SetConsoleTextAttribute(hConsole, 2);
+				//	cout << " [" << durabilities[4] << "]";
+				//	SetConsoleTextAttribute(hConsole, 7);
+				//}
+
 			}
 		}
 	}
+
 	cout << endl;
 	if (itemChecks[2] == 1 && itemChecks[5] == 1)
 	{
 		string selection;
-		cout << endl << "It seems you have Batteries for that Flashlight, Would you like to put them in the Flashlight?" << endl;
+		cout << endl << "It seems you have Batteries for that Flashlight, Would you like to put them in the Flashlight? (Yes/No)" << endl;
 		cin >> selection;
 		if (selection == "yes" || selection == "Yes")
 		{
 			cout << "Batteries have been inserted into the Flashlight. It seems to be able to give off light now." << endl;
 			durabilities[2] = 100;
 			itemChecks[5] = 0;
+			flashlightOnOffCheck = 0;
 		}
 	}
 	if (itemChecks[3] == 1 && itemChecks[6] == 1)
 	{
 		string selection;
-		cout << "It seems you have Fuel for that Jetpack, Would you like to put it in the Jetpack?" << endl;
+		cout << "It seems you have Fuel for that Jetpack, Would you like to put it in the Jetpack? (Yes/No)" << endl;
 		cin >> selection;
 		if (selection == "yes" || selection == "Yes")
 		{
@@ -542,10 +558,20 @@ void getInventory()
 			itemChecks[6] = 0;
 		}
 	}
+	if (amountOfMix > 0)
+	{
+		string selection;
+		cout << "Would you like to eat some trail mix to regenerate some health? (Yes/No)" << endl;
+		cin >> selection;
+		if (selection == "yes" || selection == "Yes")
+		{
+			useTrailMix();
+		}
+	}
 	if (itemChecks[2] == 1 && itemChecks[5] == 0 && flashlightOnOffCheck == 0)
 	{
 		string selection;
-		cout << "Would you like to turn On your Flashlight?" << endl;
+		cout << "Would you like to turn On your Flashlight? (Yes/No)" << endl;
 		cin >> selection;
 		if (selection == "yes" || selection == "Yes")
 		{
@@ -555,7 +581,7 @@ void getInventory()
 	if (itemChecks[2] == 1 && itemChecks[5] == 0 && flashlightOnOffCheck == 1)
 	{
 		string selection;
-		cout << "Would you like to turn Off your Flashlight?" << endl;
+		cout << "Would you like to turn Off your Flashlight? (Yes/No)" << endl;
 		cin >> selection;
 		if (selection == "yes" || selection == "Yes")
 		{
@@ -626,6 +652,7 @@ void checkMap()
 	else if (maplocation == 2)
 	{
 		cout << "You have arrived at the 2, what will you do?" << endl;
+		findTrailMix();
 	}
 	else if (maplocation == 3)
 	{
@@ -634,6 +661,7 @@ void checkMap()
 	else if (maplocation == 4)
 	{
 		cout << "You have arrived at the 4, what will you do?" << endl;
+		findTrailMix();
 	}
 	else if (maplocation == 5)
 	{
@@ -641,17 +669,7 @@ void checkMap()
 	}
 	else if (maplocation == 6)
 	{
-		cout << endl << "After walking in the jungle, your feet begin to drag and you are thirsty."
-			<< endl << "As you begin to hallucinate you trip over a large green vine,"
-			<< endl << "and your head smashes against the moist dirt."
-			<< endl << "As you pick your head up you see that there is a small hole,"
-			<< endl << "slightly bigger than your body length that you would be able to fit in."
-			<< endl << "You are now sitting at the entrance to the Camouflaged Cove."
-			<< endl << "Entering the cove may prove to be deadly,"
-			<< endl << "but may also provide you with various survival necessities."
-			<< endl << "Don't forget to check you inventory for items to help you."
-			<< endl << "Press 1 to enter the cove or press 2 to keep moving." << endl;
-		camoCave();
+		cout << "You have arrived at the Camouflaged Cove," << "almost impossible to spot at first glance you distinguish" << endl << "the different fauna covering the opening from the cavern itself," << endl << "what will you do?" << endl;
 	}
 	else if (maplocation == 7)
 	{
@@ -668,6 +686,7 @@ void checkMap()
 	else if (maplocation == 10)
 	{
 		cout << "You have arrived at the 10, what will you do?" << endl;
+		findTrailMix();
 	}
 	else if (maplocation == 11)
 	{
@@ -692,7 +711,7 @@ void checkMap()
 	{
 		cout << "You have arrived at the 15, what will you do?" << endl;
 		findBatteries();
-		
+
 	}
 	else if (maplocation == 16)
 	{
@@ -706,7 +725,7 @@ void checkMap()
 	{
 		cout << "You have arrived at the 18, what will you do?" << endl;
 		findJetpack();
-		
+
 	}
 	else if (maplocation == 19)
 	{
@@ -729,7 +748,7 @@ void checkMap()
 	{
 		cout << "You have arrived at the 22, what will you do?" << endl;
 		findFuel();
-		
+
 	}
 	else if (maplocation == 23)
 	{
@@ -738,89 +757,20 @@ void checkMap()
 	else if (maplocation == 24)
 	{
 		cout << "You have arrived at the 24, what will you do?" << endl;
+		findTrailMix();
 	}
 	else
 	{
 		cout << "Location cannot be found, location reseting to crash site, please wait..." << endl;
 		xmap = 1; ymap = 3; maplocation = a[ymap][xmap];
 		checkMap();
-    }
-}
-
-void camoCave() //built in choices for camoflauge cove
-{
-	char choice;
-	cin >> choice;
-	if (choice = '1')
-	{
-		cout << endl << "After entering the cave, there is just enough sunlight for you to see a puddle of fresh water,likely from the last big rain."
-			<< endl << "Do you wish to drink it? 1 for yes, 2 for no." << endl;
-		cin >> choice;
-		if (choice = '1')
-		{
-			cout << endl << "You begin to drink the water and then continue to look around the cove." << endl;
-			health =+ 10;
-		}
-		else if (choice = '2')
-		{
-			cout << endl << "You have chosen not to drink the water, you continue to look around the cove." << endl;
-		}
-		else
-		{
-			cout << endl << "A invalid input was given, you have deviced not to drink the water, you continue to look around the cove." << endl;
-		}
-		cout << endl << "As the cove continues deeper in, it gets to dark to continue, a flashlight would be perfect for the situation" << endl;
-		cout << "Press 1 to try to use a flashlight, and press 2 to rather leave." << endl; cin >> choice;
-		if (choice = '1')
-		{
-			if (choice = '1' /*|| flaslighttrue?*/)
-			{
-				//uses durability of flashlight
-				cout << endl << "Your flashlight has proven to be valuable because as you shine it towards the back of the cave," << endl << " you see a small natural waterfall." << endl;
-				// if (waterbottletrue)
-				//refills waterbottle here if you have it, full durability restored
-				// cout << endl << "You refilled your waterbottle using the waterfall" << endl;
-			}
-			if (choice = '2')
-			{
-				cout << endl << "Being unable to see, you stumble back out, scraping your legs as you continue." << endl;
-				health = -10;
-			}
-			else
-			{
-				cout << endl << "Being unable to choose, you stubmle back out, scraping your legs as you escape." << endl;
-				health = -15;
-			}
-		}
-		if (choice = '2')
-		{
-			cout << endl << "You chose not to continue further in, going back out you choose where to go next." << endl;
-			health = -10;
-		}
-		else
-		{
-			cout << endl << "You did not go further in, going back out you choose where to go next." << endl;
-			health = -15;
-		}
-	}
-	else if (choice = '2')
-	{
-		cout << endl << "Although searching the cave could have been dangerous, it may have had much needed supplies. Just remember that where there is risk there is reward." << endl;
-		health =- 15;
-	}
-	else
-	{
-		cout << endl << "a invalid input was given, please try again." << endl;
-		camoCave();
 	}
 }
-
 //This function allows the player to find the flashlight and add it to their inventory
 void findFlashlight()
 {
 	cout << "You have found a flashlight on the ground." << endl;
 	itemChecks[2] = 1;
-	//durabilities[2] = 100;
 	cout << "Flashlight has been added to your inventory." << endl;
 }
 //This function allows the player to find the jetpack and add it to their inventory
@@ -828,8 +778,16 @@ void findJetpack()
 {
 	cout << "You have found a jetpack on the ground." << endl;
 	itemChecks[3] = 1;
-	//durabilities[3] = 100;
 	cout << "Jetpack has been added to your inventory." << endl;
+}
+void findTrailMix()
+{
+	cout << "You have found some trail mix on the ground." << endl;
+	itemChecks[7] = 1;
+	amountOfMix += 1;
+	//itemChecks[4] =  1;
+	//durabilities[4] = durabilities[4] + 1;
+	cout << "Trail Mix has been added to your inventory." << endl;
 }
 //This function allows the player to find the flashlight batteries and add it to their inventory.
 void findBatteries()
@@ -844,6 +802,18 @@ void findFuel()
 	cout << "You have found some jetpack fuel." << endl;
 	itemChecks[6] = 1;
 	cout << "Jetpack fuel has been added to your inventory." << endl;
+}
+void useTrailMix()
+{
+	if (health == 100)
+	{
+		cout << "Your health is already full, eating the trail mix will serve no purpose." << endl;
+		gameScenarioSelections();
+	}
+	cout << "You have consumed some trail mix. " << endl;
+	health = health + 15;
+	cout << "You have lost a trail mix in your inventory. " << endl;
+	amountOfMix -= 1;
 }
 //This function simulates the collapsed cave scenario
 void collapsedCave()
@@ -881,10 +851,24 @@ void collapsedCave()
 	{
 		cout << "You have decided to walk the path around the gap. Although safer than flying across, you have lost 15%" << endl << " of your health due to the longevity of the path." << endl;
 		health = health - 15;
+		if (health < 50 && durabilities[4] > 0)
+		{
+			string selection;
+			cout << "Your health seems to be low, would you like to consume some trail mix? (Yes/No)" << endl;
+			cin >> selection;
+			if (selection == "Yes" || selection == "yes")
+			{
+				useTrailMix();
+			}
+			if (selection == "No" || selection == "no")
+			{
+				cout << "You decide to save your trail mix for later, but your health is looking dangerous." << endl;
+			}
+			gameScenarioSelections();
+		}
 		if (health < 50)
 		{
-			cout << "Your health seems to be low, you decide to rest to regenerate some health" << endl;
-			health = health + 15;
+			cout << "Your health seems to be low, but you have no food. You should search for some so you can stay alive." << endl;
 			gameScenarioSelections();
 		}
 		else
@@ -893,7 +877,7 @@ void collapsedCave()
 			gameScenarioSelections();
 		}
 	}
-	if(selection != 1 && selection != 2)
+	if (selection != 1 && selection != 2)
 	{
 		cout << "You entered an invalid selection. The game will re-prompt you." << endl;
 		system("pause");
@@ -902,4 +886,3 @@ void collapsedCave()
 
 }
 //Please Fix
-
