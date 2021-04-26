@@ -831,12 +831,19 @@ void collapsedCave()
 		system("pause");
 		collapsedCave();
 	}
-	if (selection == 1 && itemChecks[3] == 1 && durabilities[3] > 0)
+	if ((selection == 1 && itemChecks[3] == 1) && durabilities[3] > 15)
 	{
 		cout << "You have decided to fly over the gap. Although, you have used 15% of your Jetpacks fuel" << endl;
 		durabilities[3] = durabilities[3] - 15;
 	}
-	if (selection == 1 && itemChecks[3] == 0 && durabilities[3] == 0)
+	if ((selection == 1 && itemChecks[3] == 1) && durabilities[3] < 15)
+	{
+		cout << "You have decided to fly over the gap. However, you don't have enough fuel to fully cross." << endl;
+		cout << "You fall into the gap and die tragically." << endl;
+		health = 0;
+		checkDeath();
+	}
+	if (selection == 1 && itemChecks[3] == 0)
 	{
 		cout << "You don't have a way to fly across. You'll have to walk around." << endl;
 		system("pause");
@@ -906,18 +913,26 @@ void soggySinkhole()
 	if (selection == 1)
 	{
 		cout << "You've decided to cross the sinkhole." << endl;
-		if (itemChecks[3] == 1 && durabilities[3] > 0)
+		if (itemChecks[3] == 1 && durabilities[3] >= 0)
 		{
 			string selection;
 			cout << "Seems like you have fuel in your jetpack, would you like to do that? (Yes/No)" << endl;
 			cin >> selection;
-			if (selection == "yes" || selection == "Yes")
+			if ((selection == "yes" || selection == "Yes") && durabilities[3] > 15)
 			{
 				cout << "You have decided to safely fly over the sinkhole, avoiding all possible dangers. However, you lost some jetpack fuel." << endl;
 				cout << "You did also find some trail mix on the other side." << endl;
 				durabilities[3] -= 15;
 				findTrailMix();
 				gameScenarioSelections();
+			}
+			if ((selection == "yes" || selection == "Yes") && durabilities[3] < 15)
+			{
+				cout << "You have decided to safely fly over the sinkhole, avoiding all possible dangers. " << endl << "However, you didn't have enough fuel to cross." << endl;
+				cout << "About halfway to cross over the sinkhole you fell and were consumed by the sinkhole becoming the 6th victim of it." << endl;
+				cout << "Your journey comes to an end as you failed to escape the jungle." << endl;
+				health = 0;
+				checkDeath();
 			}
 			else
 			{
