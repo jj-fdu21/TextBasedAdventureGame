@@ -868,6 +868,18 @@ void elephantCombat()
 			Sleep(2000);
 			checkDeath();
 		}
+		if (outcome != 1 && outcome != 2)
+		{
+			cout << "Invalid input for Combat Selection, the game will re-prompt you." << endl;
+			system("pause");
+			elephantCombat();
+		}
+	}
+	if (selection != 1 && selection != 2)
+	{
+		cout << "Invalid input for Combat Selection, the game will re-prompt you." << endl;
+		system("pause");
+		elephantCombat();
 	}
 
 }
@@ -907,7 +919,7 @@ void collapsedCave()
 	{
 		cout << "You have decided to walk the path around the gap. Although safer than flying across, you have lost 15%" << endl << " of your health due to the longevity of the path." << endl;
 		health = health - 15;
-		if (health < 50 && durabilities[4] > 0)
+		if (health < 50 && amountOfMix > 0)
 		{
 			string selection;
 			cout << "Your health seems to be low, would you like to consume some trail mix? (Yes/No)" << endl;
