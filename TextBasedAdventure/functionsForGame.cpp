@@ -13,7 +13,7 @@
 using namespace std;
 
 
-string version = "3.0.0", input;
+string version = "3.0.0", input, username;
 int a[5][5] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 };
 int health = 90, amountOfMix = 0, flashlightOnOffCheck = -1, selections = 0, xmap = 1, ymap = 3, maplocation = a[ymap][xmap];;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -39,6 +39,8 @@ void mainMenu() {
 	input = inputValidation(input, 0, 1);
 	if (input == 1) {
 		cout << "Player chosen to start new game" << endl;
+		cout << "Player enter Username: ";
+		cin >> username;
 	}
 	else if (input == 0) {
 		cout << "\nGood Bye come again!!\n" << endl;		//end game
@@ -58,18 +60,18 @@ void gameStartInventory()
 }
 void gameIntro(int startingMode) {
 	if (startingMode == 1) {		//intro
-		cout << "Greetings Survivor, ";
+		cout << "Greetings " << username << ", ";
 		Sleep(1000);
 		cout << "You are the only Survivor of a plane crash and \nthe environment around you is a jungle. You managed to recover some\nitems from the plane's wreckage. ";
 		Sleep(1000);
 		cout << "One of the items being a map showing\nthe nearest settlement being about 500 miles from your location\nand a backpack to carry some items.";
 		Sleep(1000);
-		cout << "Unfortunately, Your Batteries, Flashlight, Fuel and Jetpack\nwere scattered across the jungle during the crash.\nThe jungle is a dangerous place to travel, beware of day and night\ncreatures lurking.";
+		cout << " Unfortunately, Your Batteries, Flashlight, Fuel and Jetpack\nwere scattered across the jungle during the crash.\nThe jungle is a dangerous place to travel, beware of day and night\ncreatures lurking.";
 		Sleep(1000);
 		cout << "You need to recover most of the scattered items\nto make the journey to safety. \nApproximately 3 days to get to your destination.";
 		Sleep(1000);
 
-		cout << "\nGood Luck Survivor! You'll need it.\n(Type help for assistance)" << endl << endl;
+		cout << "\nGood Luck " << username << "!" << " You'll need it.\n(Type help for assistance)" << endl << endl;
 
 		gameStartInventory();
 		checkMap();
@@ -414,7 +416,7 @@ void getHelp()
 	{
 		cout << endl;
 		cout << "\t\t\t Selected Advice." << endl;
-		cout << "\t\t\t Survivor, there are creatures lurking in the jungle. Tread carefully." << endl;
+		cout << "\t\t\t " << username << ", there are creatures lurking in the jungle. Tread carefully." << endl;
 		cout << "\t\t\t Be on the lookout for possible item pickups that may be handy later." << endl;
 		SetConsoleTextAttribute(hConsole, 7);
 		system("pause");
