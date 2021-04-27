@@ -651,25 +651,45 @@ void checkMap()
 	}
 	else if (maplocation == 2)
 	{
+		static bool itemFlag = false;
 		cout << "You have arrived at the 2, what will you do?" << endl;
-		findTrailMix();
+		if (!itemFlag)
+		{
+			findTrailMix();
+		}		
 	}
 	else if (maplocation == 3)
 	{
+		static bool itemFlag = false;
 		cout << "You have arrived at the 3, what will you do?" << endl;
+		if (!itemFlag)
+		{
+			findBatteries();
+			itemFlag = true;
+		}
 	}
 	else if (maplocation == 4)
 	{
+		static bool itemFlag = false;
 		cout << "You have arrived at the 4, what will you do?" << endl;
-		findTrailMix();
+		if (!itemFlag)
+		{
+			findTrailMix();
+		}
 	}
 	else if (maplocation == 5)
 	{
+		static bool itemFlag = false;
 		cout << "You have arrived at the 5, what will you do?" << endl;
+		if (!itemFlag)
+		{
+			findFuel();
+			itemFlag = true;
+		}
 	}
 	else if (maplocation == 6)
 	{
-		cout << endl << "After walking in the jungle, your feet begin to drag and you are thirsty."
+	   cout << endl << "After walking in the jungle, your feet begin to drag and you are thirsty."
 			<< endl << "As you begin to hallucinate you trip over a large green vine,"
 			<< endl << "and your head smashes against the moist dirt."
 			<< endl << "As you pick your head up you see that there is a small hole,"
@@ -684,7 +704,13 @@ void checkMap()
 	}
 	else if (maplocation == 7)
 	{
+		static bool itemFlag = false;
 		cout << "You have arrived at the 7, what will you do?" << endl;
+		if (!itemFlag)
+		{
+			findBatteries();
+			itemFlag = true;
+		}
 	}
 	else if (maplocation == 8)
 	{
@@ -696,18 +722,27 @@ void checkMap()
 	}
 	else if (maplocation == 10)
 	{
+		static bool itemFlag = false;
 		cout << "You have arrived at the 10, what will you do?" << endl;
-		findTrailMix();
+		if (!itemFlag)
+		{
+			findTrailMix();
+		}
 	}
 	else if (maplocation == 11)
 	{
+		static bool itemFlag = false;
 		cout << "You have arrived at the 11, what will you do?" << endl;
-		findFlashlight();
+		if (!itemFlag)
+		{
+			findFlashlight();
+			itemFlag = true;
+		}
 	}
 	else if (maplocation == 12)
 	{
 		cout << "You have arrived at the 12, what will you do?" << endl;
-		findBatteries();
+		
 	}
 	else if (maplocation == 13)
 	{
@@ -715,13 +750,22 @@ void checkMap()
 	}
 	else if (maplocation == 14)
 	{
+		static bool itemFlag = false;
 		cout << "You have arrived at the 14, what will you do?" << endl;
-		findFlashlight();
+		if (!itemFlag)
+		{
+			findTrailMix();
+		}
 	}
 	else if (maplocation == 15)
 	{
+		static bool itemFlag = false;
 		cout << "You have arrived at the 15, what will you do?" << endl;
-		findBatteries();
+		if (!itemFlag)
+		{
+			findBatteries();
+			itemFlag = true;
+		}
 
 	}
 	else if (maplocation == 16)
@@ -730,18 +774,33 @@ void checkMap()
 	}
 	else if (maplocation == 17)
 	{
+		static bool combatFlag = false;
 		cout << "You have arrived at the 17, what will you do?" << endl;
-		elephantCombat();
+		if (!combatFlag)
+		{
+			combatFlag = true;
+			elephantCombat();			
+		}
 	}
 	else if (maplocation == 18)
 	{
+		static bool itemFlag = false;
 		cout << "You have arrived at the 18, what will you do?" << endl;
-		findJetpack();
+		if (!itemFlag)
+		{
+			findJetpack();
+			itemFlag = true;
+		}
 	}
 	else if (maplocation == 19)
 	{
+		static bool itemFlag = false;
 		cout << "You have arrived at the 19, what will you do?" << endl;
-		findFuel();
+		if (!itemFlag)
+		{
+			findFuel();
+			itemFlag = true;
+		}
 	}
 	else if (maplocation == 20)
 	{
@@ -753,12 +812,16 @@ void checkMap()
 	else if (maplocation == 21)
 	{
 		cout << "You have arrived at the 21, what will you do?" << endl;
-		findJetpack();
 	}
 	else if (maplocation == 22)
 	{
+		static bool itemFlag = false;
 		cout << "You have arrived at the 22, what will you do?" << endl;
-		findFuel();
+		if (!itemFlag)
+		{
+			findFuel();
+			itemFlag = true;
+		}
 
 	}
 	else if (maplocation == 23)
@@ -767,8 +830,13 @@ void checkMap()
 	}
 	else if (maplocation == 24)
 	{
+		static bool combatFlag = false;
 		cout << "You have arrived at the 24, what will you do?" << endl;
-		findTrailMix();
+		if (!combatFlag)
+		{
+			combatFlag = true;
+			monkeyCombat();
+		}
 	}
 	else
 	{
@@ -880,6 +948,59 @@ void elephantCombat()
 		cout << "Invalid input for Combat Selection, the game will re-prompt you." << endl;
 		system("pause");
 		elephantCombat();
+	}
+
+}
+void monkeyCombat()
+{
+	int selection;
+	cout << "You have encountered a Monkey!!!" << endl;
+	cout << "It seems like it wants to steal your backpack. What are you going to do?" << endl;
+	cout << "1. Splash the Monkey with water to scare him off" << endl;
+	cout << "2. Sneak past" << endl;
+	cin >> selection;
+	if (cin.fail())
+	{
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Invalid input for Combat Selection, the game will re-prompt you." << endl;
+		system("pause");
+		monkeyCombat();
+	}
+	if (selection == 1 && durabilities[0] >= 10)
+	{
+		cout << "You have splashed the Monkey with water from your canteen. It ran away back into the trees." << endl;
+		cout << "You suffered no damage, but you did lose some of your remaining water." << endl;
+		durabilities[0] -= 10;
+		gameScenarioSelections();
+	}
+	if (selection == 1 && durabilities[0] <= 10)
+	{
+		cout << "You look into your canteen and it seems like you don't have enough water to pose any threat." << endl;
+		cout << "It leaves you with no other option except sneaking around." << endl;
+		cout << "You decide to try and sneak by the monkey carefully navigating through leaves and twigs." << endl;
+		cout << "A twig snaps and the Monkey notices you, and it aggressively attacks you" << endl;
+		cout << "You sprint but the Monkey is too fast and it grabs your water canteen during your fight and runs off." << endl;
+		cout << "You have lost your water canteen and also have taken some damage to your health." << endl;
+		itemChecks[0] = 0;
+		health -= 10;
+		gameScenarioSelections();
+	}
+	if (selection == 2)
+	{
+			cout << "You decide to try and sneak by the monkey carefully navigating through leaves and twigs." << endl;
+			cout << "A twig snaps and the Monkey notices you, and it aggressively attacks you" << endl;
+			cout << "You sprint but the Monkey is too fast and it grabs your water canteen during your fight and runs off." << endl;
+			cout << "You have lost your water canteen and also have taken some damage to your health." << endl;
+			itemChecks[0] = 0;
+			health -= 10;
+			gameScenarioSelections();
+	}
+	if (selection != 1 && selection != 2)
+	{
+		cout << "Invalid input for Combat Selection, the game will re-prompt you." << endl;
+		system("pause");
+		monkeyCombat();
 	}
 
 }
