@@ -16,8 +16,9 @@
 using namespace std;
 
 int main() {
-	mainMenu();
-	playerOne();
-	gameScenarioSelections();
+	//mainMenu();
+	MapDisplay();
+	//playerOne();
+	//gameScenarioSelections();
 	return 0;
 }
