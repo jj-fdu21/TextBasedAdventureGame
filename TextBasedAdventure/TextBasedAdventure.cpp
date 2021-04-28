@@ -1,6 +1,7 @@
 /*
 * Textbased Game Theme Jungle Escape
-* Version:1.0
+* Version:4.0
+* 4/25/2021
 * Authors:JiraJocks
 *
 */
@@ -15,7 +16,7 @@
 using namespace std;
 
 int main() {
-	mainMenu();
+    mainMenu();
 	playerOne();
 	gameScenarioSelections();
 	return 0;
