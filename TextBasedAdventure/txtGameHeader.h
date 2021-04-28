@@ -41,6 +41,8 @@ void fatalForest();
 void monkeyCombat();
 void elephantCombat();
 void camoCave();
+void gorillaCombat();
+void snakeCombat();
 //commented out due to error in trailmix branch can be placed back afterwards 
 void mapDisplay();
 
