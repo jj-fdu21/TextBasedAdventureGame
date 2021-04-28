@@ -13,7 +13,7 @@
 using namespace std;
 
 
-string version = "3.0.0", input, username;
+string version = "4.0.0", input, username;
 int a[5][5] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 };
 int health = 90, amountOfMix = 0, flashlightOnOffCheck = -1, selections = 0, xmap = 1, ymap = 3, maplocation = a[ymap][xmap];;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
