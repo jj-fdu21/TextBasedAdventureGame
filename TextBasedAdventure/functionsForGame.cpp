@@ -885,7 +885,7 @@ void checkMap()
 	}
 	else if (maplocation == 21)
 	{
-		cout << "You have arrived at the FWOG, what will you do?" << endl;
+	poisonFrogCombat();
 	}
 	else if (maplocation == 22)
 	{
