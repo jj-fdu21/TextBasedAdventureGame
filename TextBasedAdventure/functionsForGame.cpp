@@ -1245,6 +1245,53 @@ void snakeCombat()
 		checkDeath();
 		gameScenarioSelections();
 	}
+	if (selection != 1 && selection != 2)
+	{
+		cout << "You entered an invalid selection. The game will re-prompt you." << endl;
+		system("pause");
+		snakeCombat();
+	}
+}
+void poisonFrogCombat()
+{
+	int selection;
+	cout << "You come across a small outcove of water that seems good to rest at" << endl;
+	cout << "However in the distance you notice a bright colorful frog, and on a closer look" << endl;
+	cout << "you see many more of these frogs. You know that they are poisonous and will not be fun" << endl;
+	cout << "One ends up directly next to you on a leaf. Act fast or else it's not gonna be good." << endl;
+	cout << "What action will you take against the Poisonous Frog? " << endl;
+	cout << "1. Choose to attack the Frog" << endl;
+	cout << "2. Run Away from the area" << endl;
+	cin >> selection;
+	if (cin.fail())
+	{
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Invalid input for Combat Selection, the game will re-prompt you." << endl;
+		system("pause");
+		snakeCombat();
+	}
+	if (selection == 1)
+	{
+		cout << "You decided to lunge at the frog with your knife, but the frog was too fast." << endl;
+		cout << "The Frog jumps onto your arm and poisons you very fast without any time to do anything." << endl;
+		cout << "Poisoned, you get away from the area but suffer lots of damage from the lasting effects." << endl;
+		health -= 35;
+		checkDeath();
+		gameScenarioSelections();
+	}
+	if (selection == 2)
+	{
+		cout << "You decide to run away from the poisonous frog infested area" << endl;
+		cout << "Luckily you get away unscathed, but you should avoid going back there" << endl;
+		gameScenarioSelections();
+	}
+	if (selection != 1 && selection != 2)
+	{
+		cout << "You entered an invalid selection. The game will re-prompt you." << endl;
+		system("pause");
+		poisonFrogCombat();
+	}
 }
 //This function simulates the collapsed cave scenario
 void collapsedCave()
