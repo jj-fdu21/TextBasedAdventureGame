@@ -841,7 +841,10 @@ void checkMap()
 	}
 	else if (maplocation == 23)
 	{
-		cout << "You have arrived at the Fatal Forest, what will you do?" << endl;
+		cout << "You have arrived at the Fatal Forest, It seems to be a huge forest with a dreaded storm over top." << endl;
+		cout << "You could trek through the storm all the way through or attempt to find some shelter deep in the forest" << endl;
+		cout << "What would you like to do? " << endl;
+		fatalForest();
 	}
 	else if (maplocation == 24)
 	{
@@ -957,6 +960,55 @@ void elephantCombat()
 		cout << "Invalid input for Combat Selection, the game will re-prompt you." << endl;
 		system("pause");
 		elephantCombat();
+	}
+}
+void fatalForest()
+{
+	cout << "1. Seek shelter" << endl;
+	cout << "2. Continue walking" << endl;
+	int selection;
+	cin >> selection;
+	if (cin.fail())
+	{
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Invalid input for Scenario Selection, the game will re-prompt you." << endl;
+		system("pause");
+		fatalForest();
+	}
+	if (selection == 1)
+	{
+		cout << "You have chosen to seek shelter." << endl;
+		cout << "You found a small cave that gives you enough shelter from the coming storm. You decide to rest here. This will give you the strength to move forward." << endl;
+		if (health < 50 && amountOfMix > 0)
+		{
+			string selection;
+			cout << "Your health seems to be low, would you like to consume some trail mix? (Yes/No)" << endl;
+			cin >> selection;
+			if (selection == "Yes" || selection == "yes")
+			{
+				useTrailMix();
+			}
+			if (selection != "Yes" && selection != "yes")
+			{
+				cout << "You decide to save your trail mix for later, but your health is looking dangerous." << endl;
+			}
+			gameScenarioSelections();
+		}
+		gameScenarioSelections();
+	}
+	else if (selection == 2)
+	{
+		cout << "You have decided to continue walking." << endl;
+		cout << "The storm is very heavy and the inclimate weather has a very bad effect on your health." << endl;
+		health -= 15;
+		gameScenarioSelections();
+	}
+	if (selection != 1 && selection != 2)
+	{
+		cout << "Invalid input for Scenario Selection, the game will re-prompt you." << endl;
+		system("pause");
+		fatalForest();
 	}
 }
 //This function simulates the collapsed cave scenario
