@@ -37,6 +37,8 @@ void collapsedCave();
 void findTrailMix();
 void useTrailMix();
 
+void fatalForest();
+
 void monkeyCombat();
 
 void elephantCombat();
