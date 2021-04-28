@@ -885,7 +885,7 @@ void checkMap()
 	}
 	else if (maplocation == 21)
 	{
-	poisonFrogCombat();
+		poisonFrogCombat();
 	}
 	else if (maplocation == 22)
 	{
@@ -1170,7 +1170,7 @@ void gorillaCombat()
 	}
 	if (selection == 2)
 	{
-		int selection;
+		int selectiontoo;
 		cout << "You decided to play dead, you lie down and the Gorilla moves towards you." << endl;
 		cout << "It slightly wacks you because it doesn't buy your act, you lose some health." << endl;
 		cout << "What will you do now?" << endl;
@@ -1179,13 +1179,14 @@ void gorillaCombat()
 		cout << "1. Continue playing dead";
 		cout << "2. Get up and attempt to run";
 		cout << "What do you choose?: ";
-		if (selection == 1)
+		cin >> selectiontoo;
+		if (selectiontoo == 1)
 		{
 			cout << "Smart choice, since you didn't react to getting hit the Gorilla buys it." << endl;
 			cout << "The Gorilla goes away and you then make your escape." << endl;
 			gameScenarioSelections();
 		}
-		if (selection == 2)
+		if (selectiontoo == 2)
 		{
 			cout << "You decide to get up and attempt to run." << endl;
 			cout << "The Gorilla easily catches you without challenge and throws you into a river." << endl;
@@ -1194,7 +1195,7 @@ void gorillaCombat()
 			checkDeath();
 			gameScenarioSelections();
 		}
-		if (selection != 1 && selection != 2)
+		if (selectiontoo != 1 && selectiontoo != 2)
 		{
 			cout << "You entered an invalid selection. The game will re-prompt you." << endl;
 			system("pause");
