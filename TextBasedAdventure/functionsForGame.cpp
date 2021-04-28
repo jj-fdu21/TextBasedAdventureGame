@@ -1070,6 +1070,7 @@ void fatalForest()
 		cout << "You have decided to continue walking." << endl;
 		cout << "The storm is very heavy and the inclimate weather has a very bad effect on your health." << endl;
 		health -= 15;
+		checkDeath();
 		gameScenarioSelections();
 	}
 	if (selection != 1 && selection != 2)
@@ -1115,6 +1116,7 @@ void monkeyCombat()
 		cout << "You have lost your water canteen and also have taken some damage to your health." << endl;
 		itemChecks[0] = 0;
 		health -= 10;
+		checkDeath();
 		gameScenarioSelections();
 	}
 	if (selection == 2)
@@ -1125,6 +1127,7 @@ void monkeyCombat()
 			cout << "You have lost your water canteen and also have taken some damage to your health." << endl;
 			itemChecks[0] = 0;
 			health -= 10;
+			checkDeath();
 			gameScenarioSelections();
 	}
 	if (selection != 1 && selection != 2)
@@ -1299,6 +1302,7 @@ void soggySinkhole()
 			cout << "and of course the used trail mix." << endl;
 			health -= 5;
 			amountOfMix -= 1;
+			checkDeath();
 			gameScenarioSelections();
 		}
 		if (selection == 2 && amountOfMix == 0)
