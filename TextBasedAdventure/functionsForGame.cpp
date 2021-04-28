@@ -80,7 +80,7 @@ void gameIntro(int startingMode) {
 //intro game selction inquery to user
 void gameScenarioSelections()
 {
-	cout << "\nEnter The Direction you would like to explore (N, S, E, W), \nInput (H) to view Health, or (I) to view Inventory items: " << endl;
+	cout << "\nEnter The Direction you would like to explore (N, S, E, W), \nInput (H) to view Health, (M) to display your Map \nor (I) to view Inventory items: " << endl;
 	cin >> input;
 	if (input == "Q" || input == "q") {
 		cout << "\nGood Bye come again!!\n" << endl;		//end game
@@ -102,16 +102,9 @@ void gameScenarioSelections()
 			gameScenarioSelections();
 		}
 	}
-	if (input == "R" || input == "r")
+	if (input == "M" || input == "m")
 	{
-		cout << "You have selected Restore Durability" << endl;
-		durabilityIncrease();
-		gameScenarioSelections();
-	}
-	if (input == "D" || input == "d")
-	{
-		cout << "You have selected Decrease Durability" << endl;
-		durabilityDecrease();
+		mapDisplay();
 		gameScenarioSelections();
 	}
 	if (input == "W" || input == "w")
@@ -1029,3 +1022,56 @@ void collapsedCave()
 	}
 
 }
+
+//Map display 
+void mapDisplay() {
+	cout << "________________________________________________________________________" << endl;
+	cout << "\t\t\t\tMAP" << endl;
+	cout << "________________________________________________________________________	" << endl;
+	cout << "|| \\  ^  ~\\  ^  ~\\  ^  ~\\  ^ ~\\ ^   ~\\ ^   ~\\  ^  ~\\ ^  ~\\ ^    ~\\ ||" << endl;
+	cout << "||	                                                           ||" << endl;
+	cout << "||            ------                                       ~^~^~^~^||" << endl;
+	cout << "||  ^       /  -----  \\                                      ~^~^~^||" << endl;
+	cout << "||^   ^    /  /      \\ \\                                   ~^~^~^~^||" << endl;
+	cout << "||                                        ^ ^ ^   ^ ^ ^    ~^~^~^~^||" << endl;
+	cout << "||                                       ^|^|^|^ ^|^|^|^   ~^~^~^~^||" << endl;
+	cout << "||  ^                                                        ~^~^~^||" << endl;
+	cout << "||^   ^                                                      ~^~^~^||" << endl;
+	cout << "||  ^                   Crash Site                           ~^~^~^||" << endl;
+	cout << "||^   ^                    \\`\\                             ~^~^~^~^||" << endl;
+	cout << "||                   |\\ ____\\_\\__                          ~^~^~^~^||" << endl;
+	cout << "||  ^                \\c`\"\"\"\"\"\"\" \"`)                          ~^~^~^||" << endl;
+	cout << "||^   ^              `~~~~~/ /~~`                          ~^~^~^~^||" << endl;
+	cout << "||                         -'                              ~^~^~^~^||" << endl;
+	cout << "||          /=========\\                                      ~^~^~^||" << endl;
+	cout << "||  ^      //~*~~*~~*~\\\\                                   ~^~^~^~^||" << endl;
+	cout << "||^   ^    \\\\ *~~*~~* //                   ========          ~^~^~^||" << endl;
+	cout << "||                                         //              ~^~^~^~^||" << endl;
+	cout << "||              ---                                          ~^~^~^||" << endl;
+	cout << "||  ^          ||*||                                       ~^~^~^~^||" << endl;
+	cout << "||^    ^        ---                                          ~^~^~^||" << endl;
+	cout << "||           (`  ).  (`  ).   (`  ).    (`  ).                     ||" << endl;
+	cout << "||(   ).  .:(`  )`.(   ).  .:(`  )`.(   ).  .:(`  )`.(   ).  .:(`  ||" << endl;
+	cout << "___________________________________________________________________" << endl;
+	cout << "___________________________________________________________________" << endl;
+	cout << "\t\tMAP KEY:" << endl;
+	cout << "Cosmic Cave:   -------            Mountain:" << endl;
+	cout << "             /  -----  \\                             ^" << endl;
+	cout << "            /  /     \\  \\                          ^   ^" << endl;
+	cout << "Rugged River:                     Fatal Forest: " << endl;
+	cout<<  "\\ ~ ^ \\ ~                                 "<<"    ^ ^ ^" << endl;
+	cout << "     \\ ~ ^ \\ ~                               ^|^|^|^"<<endl;
+	cout<<"Camouflaged Cove:                   Fog:" << endl;
+	cout << "     /=========\\                        (`  )." << endl;
+	cout << "    //~*~~*~~*~\\\\                   (  ).  .:(`  )`." << endl;
+	cout << "    \\\\ *~~*~~* //													" << endl;
+	cout << "Ocean:                         Collapsing Cliff:		" << endl;
+	cout << " ~^~^~^~^                          =====" << endl;
+	cout << " ^~^~^~^                          //" << endl;
+	cout << "Treasure Chest" << endl;
+	cout << "    ___" << endl;
+	cout << "   ||*||" << endl;
+	cout << "    ---" << endl;
+	cout << "______________________________________________________________________________" << endl;
+}
+

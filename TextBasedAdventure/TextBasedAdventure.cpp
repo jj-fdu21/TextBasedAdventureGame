@@ -16,7 +16,7 @@
 using namespace std;
 
 int main() {
-	mainMenu();
+    mainMenu();
 	playerOne();
 	gameScenarioSelections();
 	return 0;
