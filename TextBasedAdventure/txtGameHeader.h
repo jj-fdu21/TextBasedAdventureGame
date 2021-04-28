@@ -36,8 +36,11 @@ void checkMap();
 void collapsedCave();
 void findTrailMix();
 void useTrailMix();
+
 void monkeyCombat();
+
 void elephantCombat();
-//void camoCave();
+void camoCave();
 //commented out due to error in trailmix branch can be placed back afterwards 
+void mapDisplay();
 
