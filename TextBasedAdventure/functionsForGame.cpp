@@ -296,6 +296,7 @@ bool checkDeath()
 		cout << "You have died! Please play again!" << endl;
 		SetConsoleTextAttribute(hConsole, 7);
 		Sleep(2000);
+		system("pause");
 		_Exit(0);
 	}
 	return false;
@@ -711,9 +712,6 @@ void checkMap()
 	int maplocation = a[ymap][xmap];
 	if (maplocation == 0)
 	{
-
-		cout << "You have arrived at the 0, what will you do?" << endl;
-
 		static bool itemFlag = false;
 		if (!itemFlag)
 		{
@@ -802,8 +800,7 @@ void checkMap()
 	}
 	else if (maplocation == 12)
 	{
-		cout << "You have arrived at the 12, what will you do?" << endl;
-		
+		cout << "You have arrived at the 12, what will you do?" << endl;	
 	}
 	else if (maplocation == 13)
 	{
@@ -842,9 +839,6 @@ void checkMap()
 	else if (maplocation == 18)
 	{
 		static bool itemFlag = false;
-    
-		cout << "You have arrived at the 19, what will you do?" << endl;
-
 		if (!itemFlag)
 		{
 			findFuel();
@@ -854,8 +848,6 @@ void checkMap()
 	else if (maplocation == 19)
 	{
 		static bool combatFlag = false;
-		cout << "You have arrived at the 24, what will you do?" << endl;
-
 		if (!combatFlag)
 		{
 			combatFlag = true;
@@ -893,9 +885,6 @@ void checkMap()
 	else if (maplocation == 24)
 	{
 		static bool itemFlag = false;
-
-		cout << "You have arrived at the 18, what will you do?" << endl;
-
 		if (!itemFlag)
 		{
 			findJetpack();
@@ -1544,7 +1533,7 @@ void victoryScenario()
 		SetConsoleTextAttribute(hConsole, 7);
 		cout << endl << endl << "Be sure to play again!!!" << endl;
 		cout << "Goodbye!!" << endl;
-		Sleep(5000);
+		system("pause");
 		_Exit(10);
 	}
 	if (durabilities[2] == 0)
