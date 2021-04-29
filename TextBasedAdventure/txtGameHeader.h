@@ -44,6 +44,8 @@ void camoCave();
 void gorillaCombat();
 void snakeCombat();
 void poisonFrogCombat();
+void ruggedRiver();
+void victoryScenario();
 //commented out due to error in trailmix branch can be placed back afterwards 
 void mapDisplay();
 
