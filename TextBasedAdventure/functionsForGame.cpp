@@ -672,28 +672,32 @@ void camoCave() //built in choices for camoflauge cove
 			{
 				cout << endl << "Being unable to see, you stumble back out, scraping your legs as you continue." << endl;
 				health =- 10;
+				checkDeath();
 			}
 			else
 			{
 				cout << endl << "Being unable to see, you stumble back out, scraping your legs as you continue." << endl;
 				health =- 15;
+				checkDeath();
 			}
 		}
 		if (choice == '2')
 		{
 			cout << endl << "You chose not to continue further in, going back out you choose where to go next." << endl;
 			health =- 10;
+			checkDeath();
 		}
 		else
 		{
 			cout << endl << "You did not go further in, going back out you choose where to go next." << endl;
 			health =- 15;
+			checkDeath();
 		}
 	}
 	else if (choice == '2')
 	{
 		cout << endl << "Although searching the cave could have been dangerous, it may have had much needed supplies. Just remember that where there is risk there is reward." << endl;
-		health =- 15;
+		//health =- 15;
 	}
 	else
 	{
@@ -707,6 +711,9 @@ void checkMap()
 	int maplocation = a[ymap][xmap];
 	if (maplocation == 0)
 	{
+
+		cout << "You have arrived at the 0, what will you do?" << endl;
+
 		static bool itemFlag = false;
 		if (!itemFlag)
 		{
@@ -757,6 +764,7 @@ void checkMap()
 			<< endl << "Don't forget to check you inventory for items to help you."
 			<< endl << "Press 1 to enter the cove or press 2 to keep moving." << endl;
 		camoCave();
+		
 	}
 	else if (maplocation == 7)
 	{
@@ -834,6 +842,9 @@ void checkMap()
 	else if (maplocation == 18)
 	{
 		static bool itemFlag = false;
+    
+		cout << "You have arrived at the 19, what will you do?" << endl;
+
 		if (!itemFlag)
 		{
 			findFuel();
@@ -843,6 +854,8 @@ void checkMap()
 	else if (maplocation == 19)
 	{
 		static bool combatFlag = false;
+		cout << "You have arrived at the 24, what will you do?" << endl;
+
 		if (!combatFlag)
 		{
 			combatFlag = true;
@@ -880,6 +893,9 @@ void checkMap()
 	else if (maplocation == 24)
 	{
 		static bool itemFlag = false;
+
+		cout << "You have arrived at the 18, what will you do?" << endl;
+
 		if (!itemFlag)
 		{
 			findJetpack();
@@ -1146,8 +1162,10 @@ void gorillaCombat()
 		cout << "What will you do now?" << endl;
 		health -= 15;
 		checkDeath();
+
 		cout << "1. Continue playing dead" << endl;
 		cout << "2. Get up and attempt to run" << endl;;
+
 		cout << "What do you choose?: ";
 		cin >> selectiontoo;
 		if (selectiontoo == 1)
@@ -1240,7 +1258,8 @@ void poisonFrogCombat()
 		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		cout << "Invalid input for Combat Selection, the game will re-prompt you." << endl;
 		system("pause");
-		snakeCombat();
+		poisonFrogCombat();
+
 	}
 	if (selection == 1)
 	{
