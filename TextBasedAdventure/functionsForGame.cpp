@@ -785,7 +785,8 @@ void checkMap()
 	}
 	else if (maplocation == 8)
 	{
-		cout << "You have arrived at the Soggy Sinkhole, what will you do?" << endl;
+		cout << "You have arrived at the Soggy Sinkhole" << endl;
+		soggySinkhole();
 	}
 	else if (maplocation == 9)
 	{
@@ -901,7 +902,10 @@ void checkMap()
 	}
 	else if (maplocation == 23)
 	{
-		cout << "You have arrived at the Fatal Forest, what will you do?" << endl;
+		cout << "You have arrived at the Fatal Forest, It seems to be a huge forest with a dreaded storm over top." << endl;
+		cout << "You could trek through the storm all the way through or attempt to find some shelter deep in the forest" << endl;
+		cout << "What would you like to do? " << endl;
+		fatalForest();
 	}
 	else if (maplocation == 24)
 	{
@@ -968,6 +972,7 @@ void useTrailMix()
 	health = health + 15;
 	cout << "You have lost a trail mix in your inventory. " << endl;
 	amountOfMix -= 1;
+
 }
 void elephantCombat()
 {
@@ -1024,6 +1029,59 @@ void elephantCombat()
 		elephantCombat();
 	}
 }
+
+void fatalForest()
+{
+	cout << "1. Seek shelter" << endl;
+	cout << "2. Continue walking" << endl;
+	int selection;
+  	cin >> selection;
+	if (cin.fail())
+	{
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+  cout << "Invalid input for Scenario Selection, the game will re-prompt you." << endl;
+		system("pause");
+		fatalForest();
+	}
+	if (selection == 1)
+	{
+		cout << "You have chosen to seek shelter." << endl;
+		cout << "You found a small cave that gives you enough shelter from the coming storm. You decide to rest here. This will give you the strength to move forward." << endl;
+		if (health < 50 && amountOfMix > 0)
+		{
+			string selection;
+			cout << "Your health seems to be low, would you like to consume some trail mix? (Yes/No)" << endl;
+			cin >> selection;
+			if (selection == "Yes" || selection == "yes")
+			{
+				useTrailMix();
+			}
+			if (selection != "Yes" && selection != "yes")
+			{
+				cout << "You decide to save your trail mix for later, but your health is looking dangerous." << endl;
+			}
+			gameScenarioSelections();
+		}
+		gameScenarioSelections();
+	}
+	else if (selection == 2)
+	{
+		cout << "You have decided to continue walking." << endl;
+		cout << "The storm is very heavy and the inclimate weather has a very bad effect on your health." << endl;
+		health -= 15;
+		checkDeath();
+		gameScenarioSelections();
+	}
+	if (selection != 1 && selection != 2)
+	{
+		cout << "Invalid input for Scenario Selection, the game will re-prompt you." << endl;
+		system("pause");
+		fatalForest();
+	}
+}
+
+
 void monkeyCombat()
 {
 	int selection;
@@ -1031,6 +1089,7 @@ void monkeyCombat()
 	cout << "It seems like it wants to steal your backpack. What are you going to do?" << endl;
 	cout << "1. Splash the Monkey with water to scare him off" << endl;
 	cout << "2. Sneak past" << endl;
+
 	cin >> selection;
 	if (cin.fail())
 	{
@@ -1057,6 +1116,7 @@ void monkeyCombat()
 		cout << "You have lost your water canteen and also have taken some damage to your health." << endl;
 		itemChecks[0] = 0;
 		health -= 10;
+		checkDeath();
 		gameScenarioSelections();
 	}
 	if (selection == 2)
@@ -1067,6 +1127,7 @@ void monkeyCombat()
 			cout << "You have lost your water canteen and also have taken some damage to your health." << endl;
 			itemChecks[0] = 0;
 			health -= 10;
+			checkDeath();
 			gameScenarioSelections();
 	}
 	if (selection != 1 && selection != 2)
@@ -1092,12 +1153,19 @@ void collapsedCave()
 		system("pause");
 		collapsedCave();
 	}
-	if (selection == 1 && itemChecks[3] == 1 && durabilities[3] > 0)
+	if ((selection == 1 && itemChecks[3] == 1) && durabilities[3] > 15)
 	{
 		cout << "You have decided to fly over the gap. Although, you have used 15% of your Jetpacks fuel" << endl;
 		durabilities[3] = durabilities[3] - 15;
 	}
-	if (selection == 1 && itemChecks[3] == 0 && durabilities[3] == 0)
+	if ((selection == 1 && itemChecks[3] == 1) && durabilities[3] < 15)
+	{
+		cout << "You have decided to fly over the gap. However, you don't have enough fuel to fully cross." << endl;
+		cout << "You fall into the gap and die tragically." << endl;
+		health = 0;
+		checkDeath();
+	}
+	if (selection == 1 && itemChecks[3] == 0)
 	{
 		cout << "You don't have a way to fly across. You'll have to walk around." << endl;
 		system("pause");
@@ -1147,6 +1215,112 @@ void collapsedCave()
 	}
 
 }
+void soggySinkhole()
+{
+	int selection;
+	cout << "You come across a large area with bubbling sand that looks crossable, " << endl << "however, you also see a thick brush filled with mud" << endl;
+	cout << "Your options are thin, and consist of either attempting to cross the hole of bubbling sand " << endl << "or walk through the thick brush." << endl;
+	cout << "Choose your Way: " << endl;
+	cout << "1. Cross the Sinkhole" << endl;
+	cout << "2. Walk towards the thick brush" << endl;
+	cin >> selection;
+	if (cin.fail())
+	{
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Invalid input for Scenario Selection, the game will re-prompt you." << endl;
+		system("pause");
+		soggySinkhole();
+	}
+	if (selection == 1)
+	{
+		cout << "You've decided to cross the sinkhole." << endl;
+		if (itemChecks[3] == 1 && durabilities[3] >= 0)
+		{
+			string selection;
+			cout << "Seems like you have fuel in your jetpack, would you like to do that? (Yes/No)" << endl;
+			cin >> selection;
+			if ((selection == "yes" || selection == "Yes") && durabilities[3] > 15)
+			{
+				cout << "You have decided to safely fly over the sinkhole, avoiding all possible dangers. However, you lost some jetpack fuel." << endl;
+				cout << "You did also find some trail mix on the other side." << endl;
+				durabilities[3] -= 15;
+				findTrailMix();
+				gameScenarioSelections();
+			}
+			if ((selection == "yes" || selection == "Yes") && durabilities[3] < 15)
+			{
+				cout << "You have decided to safely fly over the sinkhole, avoiding all possible dangers. " << endl << "However, you didn't have enough fuel to cross." << endl;
+				cout << "About halfway to cross over the sinkhole you fell and were consumed by the sinkhole becoming the 6th victim of it." << endl;
+				cout << "Your journey comes to an end as you failed to escape the jungle." << endl;
+				health = 0;
+				checkDeath();
+			}
+			else
+			{
+				cout << "You have opted not to use the Jetpack, a fatal mistake." << endl;
+				cout << "About halfway to cross over the sinkhole you tripped and were consumed by the sinkhole becoming the 6th victim of it." << endl;
+				cout << "Your journey comes to an end as you failed to escape the jungle." << endl;
+				health = 0;
+				checkDeath();
+			}
+		}
+		cout << "You have opted not to use the Jetpack, a fatal mistake." << endl;
+		cout << "About halfway to cross over the sinkhole you tripped and were consumed by the sinkhole becoming the 6th victim of it." << endl;
+		cout << "Your journey comes to an end as you failed to escape the jungle." << endl;
+		health = 0;
+		checkDeath();
+	}
+	if (selection == 2)
+	{
+		selection = 0;
+		cout << "You have decided to walk around towards the thick brush to the side." << endl;
+		cout << "You begin to hear trees swaying and twigs breaking, and emerging from the brushes is a Zebra" << endl;
+		cout << "Your terrified and your fight or flight response kicks in, what is your decision?" << endl;
+		cout << "1. Fight the Zebra with your Pocket Knife." << endl;
+		cout << "2. Toss some Trail Mix to distract it while you run away." << endl;
+		cin >> selection;
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			cout << "Invalid input for Scenario Selection, the game will re-prompt you." << endl;
+			system("pause");
+			soggySinkhole();
+		}
+		if (selection == 1)
+		{
+			cout << "You fight the Zebra and overcome it after a long battle , however , you have taken some damage and your Pocket Knife suffered severe damage." << endl;
+			health -= 15;
+			checkDeath();
+			durabilities[1] -= 50;
+			gameScenarioSelections();
+		}
+		if (selection == 2 && amountOfMix > 0)
+		{
+			cout << "You've thrown trail mix into the brushes and run away as fast as you can, this costed minor health damages" << endl;
+			cout << "and of course the used trail mix." << endl;
+			health -= 5;
+			amountOfMix -= 1;
+			checkDeath();
+			gameScenarioSelections();
+		}
+		if (selection == 2 && amountOfMix == 0)
+		{
+			cout << "You've gone to throw trail mix to distract the Zebra, but you notice that you have none." << endl;
+			cout << "You are left with the decision to attempt to scare it off, and you yell as loud as you can at it." << endl;
+			cout << "The Zebra runs off back into the brushes and you continue off into the jungle with no damages or losses." << endl;
+			gameScenarioSelections();
+		}
+		else
+		{
+			cout << "Invalid input for Scenario Selection, the game will re-prompt you." << endl;
+			system("pause");
+			soggySinkhole();
+		}
+	}
+}
+
 
 //Map display 
 void mapDisplay() {
@@ -1199,4 +1373,5 @@ void mapDisplay() {
 	cout << "    ---" << endl;
 	cout << "______________________________________________________________________________" << endl;
 }
+
 
