@@ -1270,7 +1270,7 @@ void poisonFrogCombat()
 		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		cout << "Invalid input for Combat Selection, the game will re-prompt you." << endl;
 		system("pause");
-		snakeCombat();
+		poisonFrogCombat();
 	}
 	if (selection == 1)
 	{
