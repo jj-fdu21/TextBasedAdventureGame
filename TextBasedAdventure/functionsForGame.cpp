@@ -680,28 +680,32 @@ void camoCave() //built in choices for camoflauge cove
 			{
 				cout << endl << "Being unable to see, you stumble back out, scraping your legs as you continue." << endl;
 				health =- 10;
+				checkDeath();
 			}
 			else
 			{
 				cout << endl << "Being unable to see, you stumble back out, scraping your legs as you continue." << endl;
 				health =- 15;
+				checkDeath();
 			}
 		}
 		if (choice == '2')
 		{
 			cout << endl << "You chose not to continue further in, going back out you choose where to go next." << endl;
 			health =- 10;
+			checkDeath();
 		}
 		else
 		{
 			cout << endl << "You did not go further in, going back out you choose where to go next." << endl;
 			health =- 15;
+			checkDeath();
 		}
 	}
 	else if (choice == '2')
 	{
 		cout << endl << "Although searching the cave could have been dangerous, it may have had much needed supplies. Just remember that where there is risk there is reward." << endl;
-		health =- 15;
+		//health =- 15;
 	}
 	else
 	{
@@ -773,6 +777,7 @@ void checkMap()
 			<< endl << "Don't forget to check you inventory for items to help you."
 			<< endl << "Press 1 to enter the cove or press 2 to keep moving." << endl;
 		camoCave();
+		
 	}
 	else if (maplocation == 7)
 	{
