@@ -1181,8 +1181,8 @@ void gorillaCombat()
 		cout << "What will you do now?" << endl;
 		health -= 15;
 		checkDeath();
-		cout << "1. Continue playing dead";
-		cout << "2. Get up and attempt to run";
+		cout << "1. Continue playing dead ";
+		cout << "2. Get up and attempt to run ";
 		cout << "What do you choose?: ";
 		cin >> selectiontoo;
 		if (selectiontoo == 1)
