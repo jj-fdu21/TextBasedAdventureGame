@@ -162,14 +162,6 @@ void gameScenarioSelections()
 		getInventory();
 		gameScenarioSelections();
 	}
-	if (input == "X" || input == "x")
-	{
-		findFlashlight();
-		findBatteries();
-		findJetpack();
-		findFuel();
-		gameScenarioSelections();
-	}
 	if (input == "On" || input == "on")
 	{
 		if (durabilities[2] >= 1)
@@ -719,7 +711,9 @@ void checkMap()
 	int maplocation = a[ymap][xmap];
 	if (maplocation == 0)
 	{
+
 		cout << "You have arrived at the 0, what will you do?" << endl;
+
 		static bool itemFlag = false;
 		if (!itemFlag)
 		{
@@ -734,7 +728,6 @@ void checkMap()
 	else if (maplocation == 2)
 	{
 		static bool itemFlag = false;
-		cout << "You have arrived at the 2, what will you do?" << endl;
 		if (!itemFlag)
 		{
 			findTrailMix();
@@ -747,17 +740,11 @@ void checkMap()
 	}
 	else if (maplocation == 4)
 	{
-		static bool itemFlag = false;
-		cout << "You have arrived at the 4, what will you do?" << endl;
-		if (!itemFlag)
-		{
-			findTrailMix();
-		}
+		victoryScenario();
 	}
 	else if (maplocation == 5)
 	{
 		static bool itemFlag = false;
-		cout << "You have arrived at the 5, what will you do?" << endl;
 		if (!itemFlag)
 		{
 			findFuel();
@@ -782,7 +769,6 @@ void checkMap()
 	else if (maplocation == 7)
 	{
 		static bool itemFlag = false;
-		cout << "You have arrived at the 7, what will you do?" << endl;
 		if (!itemFlag)
 		{
 			findBatteries();
@@ -795,12 +781,11 @@ void checkMap()
 	}
 	else if (maplocation == 9)
 	{
-		cout << "You have arrived at the Rugged River, what will you do?" << endl;
+		ruggedRiver();
 	}
 	else if (maplocation == 10)
 	{
 		static bool itemFlag = false;
-		cout << "You have arrived at the 10, what will you do?" << endl;
 		if (!itemFlag)
 		{
 			findTrailMix();
@@ -809,7 +794,6 @@ void checkMap()
 	else if (maplocation == 11)
 	{
 		static bool itemFlag = false;
-		cout << "You have arrived at the 11, what will you do?" << endl;
 		if (!itemFlag)
 		{
 			findFlashlight();
@@ -828,7 +812,6 @@ void checkMap()
 	else if (maplocation == 14)
 	{
 		static bool itemFlag = false;
-		cout << "You have arrived at the 14, what will you do?" << endl;
 		if (!itemFlag)
 		{
 			findTrailMix();
@@ -836,16 +819,12 @@ void checkMap()
 	}
 	else if (maplocation == 15)
 	{
-		static bool itemFlag = false;
-		cout << "You have arrived at the 15, what will you do?" << endl;
-
+	static bool itemFlag = false;
 		if (!itemFlag)
 		{
 			findBatteries();
 			itemFlag = true;
 		}
-
-
 	}
 	else if (maplocation == 16)
 	{
@@ -854,7 +833,6 @@ void checkMap()
 	else if (maplocation == 17)
 	{
 		static bool combatFlag = false;
-		cout << "You have arrived at the 17, what will you do?" << endl;
 		if (!combatFlag)
 		{
 			combatFlag = true;
@@ -864,7 +842,9 @@ void checkMap()
 	else if (maplocation == 18)
 	{
 		static bool itemFlag = false;
+    
 		cout << "You have arrived at the 19, what will you do?" << endl;
+
 		if (!itemFlag)
 		{
 			findFuel();
@@ -875,6 +855,7 @@ void checkMap()
 	{
 		static bool combatFlag = false;
 		cout << "You have arrived at the 24, what will you do?" << endl;
+
 		if (!combatFlag)
 		{
 			combatFlag = true;
@@ -895,7 +876,6 @@ void checkMap()
 	else if (maplocation == 22)
 	{
 		static bool itemFlag = false;
-		cout << "You have arrived at the 22, what will you do?" << endl;
 		if (!itemFlag)
 		{
 			findFuel();
@@ -913,6 +893,7 @@ void checkMap()
 	else if (maplocation == 24)
 	{
 		static bool itemFlag = false;
+
 		cout << "You have arrived at the 18, what will you do?" << endl;
 
 		if (!itemFlag)
@@ -1181,8 +1162,10 @@ void gorillaCombat()
 		cout << "What will you do now?" << endl;
 		health -= 15;
 		checkDeath();
-		cout << "1. Continue playing dead ";
-		cout << "2. Get up and attempt to run ";
+
+		cout << "1. Continue playing dead" << endl;
+		cout << "2. Get up and attempt to run" << endl;;
+
 		cout << "What do you choose?: ";
 		cin >> selectiontoo;
 		if (selectiontoo == 1)
@@ -1276,6 +1259,7 @@ void poisonFrogCombat()
 		cout << "Invalid input for Combat Selection, the game will re-prompt you." << endl;
 		system("pause");
 		poisonFrogCombat();
+
 	}
 	if (selection == 1)
 	{
@@ -1481,7 +1465,96 @@ void soggySinkhole()
 		}
 	}
 }
-
+void ruggedRiver()
+{
+	int selection;
+	cout << "As you continue on your journey you stumble across a large river with an unstable bridge" << endl;
+	cout << "It seems like it's the only way to cross, you decide whether to cross the bridge or create another way" << endl;
+	cout << "What would you like to do?: " << endl;
+	cout << "1. Use some nearby trees and twigs to create a raft." << endl;
+	cout << "2. Attempt to cross the bridge" << endl;
+	cout << "Choose your decision: ";
+	cin >> selection;
+	if (cin.fail())
+	{
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Invalid input for Scenario Selection, the game will re-prompt you." << endl;
+		system("pause");
+		ruggedRiver();
+	}
+	if (selection == 1)
+	{
+		cout << "You spend a long time building a raft and it takes some Pocket Knife Durability and some Health." << endl;
+		cout << "You spent your time well since you were able to cross the river safely and without any real issues." << endl;
+		health -= 15;
+		checkDeath();
+		durabilities[1] -= 25;
+		gameScenarioSelections();
+	}
+	if (selection == 2)
+	{
+		cout << "You decide to cross the bridge, about halfway across the bridge snaps and breaks." << endl;
+		cout << "You begin falling down and you think to yourself this is the end." << endl;
+		if (durabilities[3] > 15)
+		{
+			cout << "You reach for your back and you remember your Jetpack, you use it and manage to fly back up." << endl;
+			cout << "You had a huge scare but you managed to make it through suffering no injuries... Except for some mental damage." << endl;
+			durabilities[3] -= 25;
+			gameScenarioSelections();
+		}
+		if (durabilities[3] < 15 && durabilities[3] > 0)
+		{
+			cout << "You reach for your back and you remember your Jetpack and use it to fly back up." << endl << "However, you didn't have enough fuel to get all the way up." << endl;
+			cout << "About halfway back up your Jetpack runs out and you fall tragically into the Rugged River." << endl;
+			cout << "Your journey comes to an end as you failed to escape the jungle." << endl;
+			health = 0;
+			checkDeath();
+		}
+		if (durabilities[3] == 0)
+		{
+			cout << "You fall down and you have nothing to save you, you realize this is the end and nothing can stop it." << endl;
+			cout << "You fall into the Rugged River as it drifts along with your body." << endl;
+			cout << "Your journey comes to an end as you failed to escape the jungle." << endl;
+			health = 0;
+			checkDeath();
+		}
+	}
+	if (selection != 1 && selection != 2)
+	{
+		cout << "You entered an invalid selection. The game will re-prompt you." << endl;
+		system("pause");
+		ruggedRiver();
+	}
+}
+void victoryScenario()
+{
+	cout << "You breakthrough all the pain and manage to find yourself in an open field at the edge of the Jungle" << endl;
+	cout << "You see off into the distance but not too far a helicopter, must've heard of the crash." << endl;
+	cout << "You try and think of something that could help you signal it and you remember the plane having flashlights." << endl;
+	if (durabilities[2] > 0)
+	{
+		cout << "You reach into your bag and pull out the Flashlight you had, and shine it towards the helicopter." << endl;
+		cout << "The Helicopter notices and begins move towards the island you are on to rescue you" << endl;
+		cout << "The Helicopter lands in the open field and you run towards it to greet the pilot" << endl;
+		cout << "You explain tragically that there are no other survivors and you take off back home." << endl;
+		cout << "You are happy that you finally escaped the Jungle and that you can finally go back to your family." << endl;
+		SetConsoleTextAttribute(hConsole, 2);
+		cout << "CONGRATULATIONS YOU HAVE ESCAPED THE JUNGLE";
+		SetConsoleTextAttribute(hConsole, 7);
+		cout << endl << endl << "Be sure to play again!!!" << endl;
+		cout << "Goodbye!!" << endl;
+		Sleep(5000);
+		_Exit(10);
+	}
+	if (durabilities[2] == 0)
+	{
+		cout << "You reach into your bag and you don't have a Flashlight" << endl;
+		cout << "Your only choice is to trek back into the jungle to find it and some batteries." << endl;
+		cout << "Better be careful!" << endl;
+		gameScenarioSelections();
+	}
+}
 
 //Map display 
 void mapDisplay() {
