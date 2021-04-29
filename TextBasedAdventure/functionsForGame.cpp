@@ -680,28 +680,32 @@ void camoCave() //built in choices for camoflauge cove
 			{
 				cout << endl << "Being unable to see, you stumble back out, scraping your legs as you continue." << endl;
 				health =- 10;
+				checkDeath();
 			}
 			else
 			{
 				cout << endl << "Being unable to see, you stumble back out, scraping your legs as you continue." << endl;
 				health =- 15;
+				checkDeath();
 			}
 		}
 		if (choice == '2')
 		{
 			cout << endl << "You chose not to continue further in, going back out you choose where to go next." << endl;
 			health =- 10;
+			checkDeath();
 		}
 		else
 		{
 			cout << endl << "You did not go further in, going back out you choose where to go next." << endl;
 			health =- 15;
+			checkDeath();
 		}
 	}
 	else if (choice == '2')
 	{
 		cout << endl << "Although searching the cave could have been dangerous, it may have had much needed supplies. Just remember that where there is risk there is reward." << endl;
-		health =- 15;
+		//health =- 15;
 	}
 	else
 	{
@@ -716,10 +720,16 @@ void checkMap()
 	if (maplocation == 0)
 	{
 		cout << "You have arrived at the 0, what will you do?" << endl;
+		static bool itemFlag = false;
+		if (!itemFlag)
+		{
+			findBatteries();
+			itemFlag = true;
+		}
 	}
 	else if (maplocation == 1)
 	{
-		cout << "You have arrived at the 1, what will you do?" << endl;
+		snakeCombat();
 	}
 	else if (maplocation == 2)
 	{
@@ -732,13 +742,8 @@ void checkMap()
 	}
 	else if (maplocation == 3)
 	{
-		static bool itemFlag = false;
-		cout << "You have arrived at the 3, what will you do?" << endl;
-		if (!itemFlag)
-		{
-			findBatteries();
-			itemFlag = true;
-		}
+		cout << "You have arrived at the Soggy Sinkhole" << endl;
+		soggySinkhole();
 	}
 	else if (maplocation == 4)
 	{
@@ -772,6 +777,7 @@ void checkMap()
 			<< endl << "Don't forget to check you inventory for items to help you."
 			<< endl << "Press 1 to enter the cove or press 2 to keep moving." << endl;
 		camoCave();
+		
 	}
 	else if (maplocation == 7)
 	{
@@ -785,8 +791,7 @@ void checkMap()
 	}
 	else if (maplocation == 8)
 	{
-		cout << "You have arrived at the Soggy Sinkhole" << endl;
-		soggySinkhole();
+		gorillaCombat();
 	}
 	else if (maplocation == 9)
 	{
@@ -859,23 +864,21 @@ void checkMap()
 	else if (maplocation == 18)
 	{
 		static bool itemFlag = false;
-		cout << "You have arrived at the 18, what will you do?" << endl;
-
-		if (!itemFlag)
-		{
-			findJetpack();
-			itemFlag = true;
-		}
-
-	}
-	else if (maplocation == 19)
-	{
-		static bool itemFlag = false;
 		cout << "You have arrived at the 19, what will you do?" << endl;
 		if (!itemFlag)
 		{
 			findFuel();
 			itemFlag = true;
+		}
+	}
+	else if (maplocation == 19)
+	{
+		static bool combatFlag = false;
+		cout << "You have arrived at the 24, what will you do?" << endl;
+		if (!combatFlag)
+		{
+			combatFlag = true;
+			monkeyCombat();
 		}
 	}
 	else if (maplocation == 20)
@@ -887,7 +890,7 @@ void checkMap()
 	}
 	else if (maplocation == 21)
 	{
-		cout << "You have arrived at the 21, what will you do?" << endl;
+		poisonFrogCombat();
 	}
 	else if (maplocation == 22)
 	{
@@ -909,12 +912,13 @@ void checkMap()
 	}
 	else if (maplocation == 24)
 	{
-		static bool combatFlag = false;
-		cout << "You have arrived at the 24, what will you do?" << endl;
-		if (!combatFlag)
+		static bool itemFlag = false;
+		cout << "You have arrived at the 18, what will you do?" << endl;
+
+		if (!itemFlag)
 		{
-			combatFlag = true;
-			monkeyCombat();
+			findJetpack();
+			itemFlag = true;
 		}
 	}
 	else
@@ -1137,6 +1141,163 @@ void monkeyCombat()
 		monkeyCombat();
 	}
 
+}
+void gorillaCombat()
+{
+	int selection;
+	cout << "You keep moving and all of a sudden you hear banging and agressively yelling." << endl;
+	cout << "You wonder what it could possibly be and so you quietly advance towards the noise" << endl;
+	cout << "Upon getting closer you realize that it's a huge Gorilla and he notices you" << endl;
+	cout << "The Gorilla doesn't seem happy to see you and you couldn't be more scared" << endl; 
+	cout << "What action are you going to take against the Gorilla" << endl;
+	cout << "1. Fight the Gorilla with your Pocket Knife." << endl;
+	cout << "2. Play Dead" << endl;
+	cout << "What do you choose?: ";
+	cin >> selection;
+	if (cin.fail())
+	{
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Invalid input for Combat Selection, the game will re-prompt you." << endl;
+		system("pause");
+		gorillaCombat();
+	}
+	if (selection == 1)
+	{
+		cout << "You've decided to fight the Gorilla with your knife" << endl;
+		cout << "Not a very good idea...." << endl;
+		cout << "After a long intense fight, the Gorilla wins and deals some hefty damage to you." << endl;
+		cout << "Your Pocket Knife also suffers from the battle." << endl;
+		health -= 30;
+		durabilities[1] -= 40;
+		checkDeath();
+		gameScenarioSelections();
+	}
+	if (selection == 2)
+	{
+		int selectiontoo;
+		cout << "You decided to play dead, you lie down and the Gorilla moves towards you." << endl;
+		cout << "It slightly wacks you because it doesn't buy your act, you lose some health." << endl;
+		cout << "What will you do now?" << endl;
+		health -= 15;
+		checkDeath();
+		cout << "1. Continue playing dead ";
+		cout << "2. Get up and attempt to run ";
+		cout << "What do you choose?: ";
+		cin >> selectiontoo;
+		if (selectiontoo == 1)
+		{
+			cout << "Smart choice, since you didn't react to getting hit the Gorilla buys it." << endl;
+			cout << "The Gorilla goes away and you then make your escape." << endl;
+			gameScenarioSelections();
+		}
+		if (selectiontoo == 2)
+		{
+			cout << "You decide to get up and attempt to run." << endl;
+			cout << "The Gorilla easily catches you without challenge and throws you into a river." << endl;
+			cout << "You take hefty health damage, but at least the Gorilla is gone." << endl;
+			health -= 25;
+			checkDeath();
+			gameScenarioSelections();
+		}
+		if (selectiontoo != 1 && selectiontoo != 2)
+		{
+			cout << "You entered an invalid selection. The game will re-prompt you." << endl;
+			system("pause");
+			gorillaCombat();
+		}
+	}
+	if (selection != 1 && selection != 2)
+	{
+		cout << "You entered an invalid selection. The game will re-prompt you." << endl;
+		system("pause");
+		gorillaCombat();
+	}
+}
+void snakeCombat()
+{
+	int selection;
+	cout << "You are walking when all of a sudden you hear the movement of leaves very close" << endl;
+	cout << "You look down and you see a venomous snake, you gotta act fast" << endl;
+	cout << "What action will you take against the snake?" << endl;
+	cout << "1. Attack the Snake" << endl;
+	cout << "2. Run away from the Snake" << endl;
+	cin >> selection;
+	if (cin.fail())
+	{
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Invalid input for Combat Selection, the game will re-prompt you." << endl;
+		system("pause");
+		snakeCombat();
+	}
+	if (selection == 1)
+	{
+		cout << "You decide to pull out your Pocket Knife and lunge at the snake" << endl;
+		cout << "You manuver very carefully to avoid possible danger, but you get bit anyways." << endl;
+		cout << "You stab the snake in the head seizing it's movement, and luckily the bite wasn't all too bad" << endl;
+		cout << "The Pocket Knife seems fine, but it seems you took a bit a damage." << endl;
+		health -= 15;
+		checkDeath();
+		gameScenarioSelections();
+	}
+	if (selection == 2)
+	{
+		cout << "You try to escape the snake, but something you may not know." << endl;
+		cout << "Snakes are pretty fast, and so you barely get anywhere before you are caught and bit bad on your leg" << endl;
+		cout << "You are poisoned and are required to rest for a bit, taking major health damage from the venom before it" << endl;
+		cout << "wears off you." << endl;
+		health -= 75;
+		checkDeath();
+		gameScenarioSelections();
+	}
+	if (selection != 1 && selection != 2)
+	{
+		cout << "You entered an invalid selection. The game will re-prompt you." << endl;
+		system("pause");
+		snakeCombat();
+	}
+}
+void poisonFrogCombat()
+{
+	int selection;
+	cout << "You come across a small outcove of water that seems good to rest at" << endl;
+	cout << "However in the distance you notice a bright colorful frog, and on a closer look" << endl;
+	cout << "you see many more of these frogs. You know that they are poisonous and will not be fun" << endl;
+	cout << "One ends up directly next to you on a leaf. Act fast or else it's not gonna be good." << endl;
+	cout << "What action will you take against the Poisonous Frog? " << endl;
+	cout << "1. Choose to attack the Frog" << endl;
+	cout << "2. Run Away from the area" << endl;
+	cin >> selection;
+	if (cin.fail())
+	{
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Invalid input for Combat Selection, the game will re-prompt you." << endl;
+		system("pause");
+		poisonFrogCombat();
+	}
+	if (selection == 1)
+	{
+		cout << "You decided to lunge at the frog with your knife, but the frog was too fast." << endl;
+		cout << "The Frog jumps onto your arm and poisons you very fast without any time to do anything." << endl;
+		cout << "Poisoned, you get away from the area but suffer lots of damage from the lasting effects." << endl;
+		health -= 35;
+		checkDeath();
+		gameScenarioSelections();
+	}
+	if (selection == 2)
+	{
+		cout << "You decide to run away from the poisonous frog infested area" << endl;
+		cout << "Luckily you get away unscathed, but you should avoid going back there" << endl;
+		gameScenarioSelections();
+	}
+	if (selection != 1 && selection != 2)
+	{
+		cout << "You entered an invalid selection. The game will re-prompt you." << endl;
+		system("pause");
+		poisonFrogCombat();
+	}
 }
 //This function simulates the collapsed cave scenario
 void collapsedCave()
