@@ -1146,8 +1146,8 @@ void gorillaCombat()
 		cout << "What will you do now?" << endl;
 		health -= 15;
 		checkDeath();
-		cout << "1. Continue playing dead";
-		cout << "2. Get up and attempt to run";
+		cout << "1. Continue playing dead" << endl;
+		cout << "2. Get up and attempt to run" << endl;;
 		cout << "What do you choose?: ";
 		cin >> selectiontoo;
 		if (selectiontoo == 1)
@@ -1451,7 +1451,7 @@ void ruggedRiver()
 	int selection;
 	cout << "As you continue on your journey you stumble across a large river with an unstable bridge" << endl;
 	cout << "It seems like it's the only way to cross, you decide whether to cross the bridge or create another way" << endl;
-	cout << "What would you like to do?: ";
+	cout << "What would you like to do?: " << endl;
 	cout << "1. Use some nearby trees and twigs to create a raft." << endl;
 	cout << "2. Attempt to cross the bridge" << endl;
 	cout << "Choose your decision: ";
